@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PorLosJovenes</string>
+    <string name="login">Ingresar</string>
+    <string name="dont_have_account">¿No tienes una cuenta? Regístrate</string>
+    <string name="sign_up">Registrarse</string>
+
+    <string name="hint_user">Usuario</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_email">E-mail</string>
+
+</resources>
