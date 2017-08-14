@@ -3,6 +3,10 @@
     <string name="login">Ingresar</string>
     <string name="dont_have_account">¿No tienes una cuenta? Regístrate</string>
     <string name="sign_up">Registrarse</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_activity">Actividad</string>
+    <string name="nav_sponsors">Sponsors</string>
 
     <string name="hint_user">Usuario</string>
     <string name="hint_password">Contraseña</string>
