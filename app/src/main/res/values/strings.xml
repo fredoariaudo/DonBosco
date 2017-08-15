@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PorLosJovenes</string>
+    <string name="app_name">Por los jóvenes</string>
     <string name="login">Ingresar</string>
     <string name="dont_have_account">¿No tienes una cuenta? Regístrate</string>
     <string name="sign_up">Registrarse</string>
@@ -7,6 +7,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_activity">Actividad</string>
     <string name="nav_sponsors">Sponsors</string>
+    <string name="your_history">Tu historial</string>
+    <string name="distance_tracked">Distancia recorrida</string>
+    <string name="collected">Recaudado</string>
+    <string name="congratulations">Felicitaciones</string>
+    <string name="travel">Recorrido</string>
 
     <string name="hint_user">Usuario</string>
     <string name="hint_password">Contraseña</string>

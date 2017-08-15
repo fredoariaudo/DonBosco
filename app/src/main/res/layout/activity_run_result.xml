@@ -3,55 +3,54 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:padding="@dimen/activity_horizontal_margin"
-    android:background="@color/colorOrangeLight"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:text="@string/your_history"/>
+            android:text="@string/congratulations"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:text="@string/distance_tracked"/>
+            android:text="@string/travel"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:text="1,24 Km"/>
+            android:text="1,24 km"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:text="@string/collected"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:text="$ 10,24"/>
 
-    </android.support.v7.widget.LinearLayoutCompat>
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btn_activity_begin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Comenzar"/>
+        android:text="Donar más"/>
 
 </LinearLayout>
