@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:padding="@dimen/activity_horizontal_margin"
     android:background="@color/colorOrangeLight"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/AppTheme.Dark">
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -52,6 +53,6 @@
         android:id="@+id/btn_activity_begin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Comenzar"/>
+        android:text="@string/start"/>
 
 </LinearLayout>

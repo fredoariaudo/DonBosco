@@ -12,6 +12,7 @@
     <string name="collected">Recaudado</string>
     <string name="congratulations">Felicitaciones</string>
     <string name="travel">Recorrido</string>
+    <string name="start">Comenzar</string>
 
     <string name="hint_user">Usuario</string>
     <string name="hint_password">Contraseña</string>

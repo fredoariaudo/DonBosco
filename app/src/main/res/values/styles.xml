@@ -13,6 +13,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -34,7 +35,6 @@
 
     <!-- Login activity theme. -->
     <style name="LoginTheme" parent="SplashTheme">
-        <item name="colorButtonNormal">@color/colorAccent</item>
         <item name="colorControlActivated">@android:color/white</item>
     </style>
 
