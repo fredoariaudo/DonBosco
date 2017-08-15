@@ -17,6 +17,8 @@ import com.donbosco.android.porlosjovenes.fragments.SponsorsFragment;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
+    private NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -31,8 +33,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if(savedInstanceState == null)
+            selectNavItem(R.id.nav_activity);
     }
 
     @Override
@@ -75,5 +80,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void selectNavItem(int menuItemId)
+    {
+        navigationView.getMenu().findItem(menuItemId).setChecked(true);
+        onNavigationItemSelected(navigationView.getMenu().findItem(menuItemId));
     }
 }
