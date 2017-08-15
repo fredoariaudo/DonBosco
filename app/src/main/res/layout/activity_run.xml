@@ -39,8 +39,7 @@
         <android.support.v4.widget.NestedScrollView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:visibility="invisible">
+            android:layout_weight="1">
 
             <com.donbosco.android.porlosjovenes.components.logger.LogView
                 android:id="@+id/lv_run_log"
@@ -50,12 +49,18 @@
         </android.support.v4.widget.NestedScrollView>
 
         <TextView
+            android:id="@+id/tv_run_distance_debug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@android:color/white" />
+
+        <TextView
             android:id="@+id/tv_run_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-            android:textColor="@android:color/white"
-            android:text="1,24 km" />
+            android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/tv_run_collecting"

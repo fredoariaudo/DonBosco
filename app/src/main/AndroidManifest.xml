@@ -45,6 +45,8 @@
             android:name=".activities.RunResultActivity"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme" />
+        <service
+            android:name=".services.LocationService"/>
     </application>
 
 </manifest>

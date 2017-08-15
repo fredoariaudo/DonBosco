@@ -18,4 +18,6 @@
     <string name="hint_password">Contraseña</string>
     <string name="hint_email">E-mail</string>
 
+    <string name="distance_format">%.03f km</string>
+
 </resources>
