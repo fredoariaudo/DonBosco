@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.donbosco.android.porlosjovenes.data.UserSerializer;
+import com.donbosco.android.porlosjovenes.model.User;
+
 public class SplashActivity extends AppCompatActivity
 {
     @Override
@@ -11,12 +14,19 @@ public class SplashActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
 
-        startLogin();
+        checkUser();
     }
 
-    private void startLogin()
+    private void checkUser()
     {
-        Intent intent = new Intent(this, LoginActivity.class);
+        User user = UserSerializer.getInstance().load(this);
+        Intent intent;
+
+        if(user == null)
+            intent = new Intent(this, LoginActivity.class);
+        else
+            intent = new Intent(this, HomeActivity.class);
+
         startActivity(intent);
         finish();
     }

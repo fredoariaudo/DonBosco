@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.data.UserSerializer;
+import com.donbosco.android.porlosjovenes.model.User;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -44,6 +46,11 @@ public class LoginActivity extends AppCompatActivity
 
     private void login()
     {
+        User user = new User();
+        user.setUserName("aariaudo");
+        user.setPassword("1234");
+        UserSerializer.getInstance().save(this, user);
+
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
