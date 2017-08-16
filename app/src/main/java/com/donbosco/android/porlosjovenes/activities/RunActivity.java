@@ -3,6 +3,7 @@ package com.donbosco.android.porlosjovenes.activities;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -12,6 +13,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -47,7 +49,7 @@ public class RunActivity extends AppCompatActivity
     private final Handler mUIUpdateHandler = new UIUpdateHandler(this);
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    protected void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
@@ -172,6 +174,11 @@ public class RunActivity extends AppCompatActivity
     {
         mUIUpdateHandler.sendEmptyMessage(MESSAGE_UPDATE_UI);
         fabRunStartFinish.setImageResource(R.drawable.ic_stop_black_24dp);
+
+        //Set chronometer base time according if service is running or not
+        long chronoBase = SystemClock.elapsedRealtime() - (mLocationService.elapsedTime() * 1000);
+        crRunTime.setBase(chronoBase);
+        crRunTime.start();
     }
 
     private void updateStopRunUI()
@@ -195,24 +202,35 @@ public class RunActivity extends AppCompatActivity
 
     private void startFinishRun()
     {
-        //Intent intent = new Intent(this, RunResultActivity.class);
-        //startActivity(intent);
-
         if (isServiceBound && !mLocationService.isUserWalking())
         {
             initializeWalkService();
             updateStartRunUI();
-
-            crRunTime.start();
         }
         else if (isServiceBound && mLocationService.isUserWalking())
         {
-            stopWalkService();
-            updateStopRunUI();
-
-            crRunTime.setBase(SystemClock.elapsedRealtime());
-            crRunTime.stop();
+            showFinishAlert();
         }
+    }
+
+    private void showFinishAlert()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.want_finish_run);
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
+                stopWalkService();
+                updateStopRunUI();
+
+                Intent intent = new Intent(RunActivity.this, RunResultActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        builder.setNegativeButton(R.string.no, null);
+        builder.show();
     }
 
     private static class UIUpdateHandler extends Handler
