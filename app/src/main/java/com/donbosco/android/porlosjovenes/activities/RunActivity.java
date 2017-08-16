@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.LocalBroadcastManager;
@@ -21,10 +23,15 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.constants.IntentActions;
 import com.donbosco.android.porlosjovenes.services.LocationService;
-import com.donbosco.android.porlosjovenes.util.DistanceUtils;
+import com.donbosco.android.porlosjovenes.util.ConvertionUtils;
+
+import java.lang.ref.WeakReference;
 
 public class RunActivity extends AppCompatActivity
 {
+    private final static int MESSAGE_UPDATE_UI = 0;
+    private final static int UI_UPDATE_RATE = 1000; //1 second
+
     private LocationService mLocationService;
     private boolean isServiceBound;
 
@@ -32,8 +39,12 @@ public class RunActivity extends AppCompatActivity
     private BroadcastReceiver locationReceiver;
 
     private Chronometer crRunTime;
+    private FloatingActionButton fabRunStartFinish;
     private TextView tvRunDistanceDebug;
     private TextView tvRunDistance;
+    private TextView tvRunFoundsCollected;
+
+    private final Handler mUIUpdateHandler = new UIUpdateHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,16 +54,23 @@ public class RunActivity extends AppCompatActivity
 
         crRunTime = findViewById(R.id.cr_run_time);
 
+        //Distance traveled debug TextView
         tvRunDistanceDebug = findViewById(R.id.tv_run_distance_debug);
+
+        //Distance traveled TextView
         tvRunDistance = findViewById(R.id.tv_run_distance);
         tvRunDistance.setText(getString(R.string.distance_format, 0f));
 
-        FloatingActionButton fabRunFinish = findViewById(R.id.fab_run_finish);
-        fabRunFinish.setOnClickListener(new View.OnClickListener() {
+        //Founds collected TextView
+        tvRunFoundsCollected = findViewById(R.id.tv_run_founds_collected);
+        tvRunFoundsCollected.setText(getString(R.string.founds_collected_format, 0f));
+
+        fabRunStartFinish = findViewById(R.id.fab_run_finish);
+        fabRunStartFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                finishRun();
+                startFinishRun();
             }
         });
 
@@ -64,6 +82,11 @@ public class RunActivity extends AppCompatActivity
                 isServiceBound = true;
                 LocationService.LocalBinder localBinder = (LocationService.LocalBinder) binder;
                 mLocationService = localBinder.getService();
+
+                if(mLocationService.isUserWalking())
+                {
+                    updateStartRunUI();
+                }
             }
 
             @Override
@@ -83,7 +106,7 @@ public class RunActivity extends AppCompatActivity
                 if (resultCode == RESULT_OK)
                 {
                     Toast.makeText(RunActivity.this, "new location", Toast.LENGTH_SHORT).show();
-                    updateUI();
+                    ///updateUI();
                 }
             }
         };
@@ -114,6 +137,7 @@ public class RunActivity extends AppCompatActivity
                 stopLocationService();
             }
         }
+        updateStopRunUI();
         unbindService(mServiceConnection);
         isServiceBound = false;
     }
@@ -144,16 +168,30 @@ public class RunActivity extends AppCompatActivity
         mLocationService.stopNotification();
     }
 
+    private void updateStartRunUI()
+    {
+        mUIUpdateHandler.sendEmptyMessage(MESSAGE_UPDATE_UI);
+        fabRunStartFinish.setImageResource(R.drawable.ic_stop_black_24dp);
+    }
+
+    private void updateStopRunUI()
+    {
+        if(mUIUpdateHandler.hasMessages(MESSAGE_UPDATE_UI))
+        {
+            mUIUpdateHandler.removeMessages(MESSAGE_UPDATE_UI);
+        }
+    }
+
     private void updateUI()
     {
         if (isServiceBound)
         {
             tvRunDistanceDebug.setText("" + mLocationService.distanceCovered());
-            tvRunDistance.setText(getString(R.string.distance_format, DistanceUtils.meterToKm(mLocationService.distanceCovered())));
+            tvRunDistance.setText(getString(R.string.distance_format, ConvertionUtils.meterToKm(mLocationService.distanceCovered())));
         }
     }
 
-    private void finishRun()
+    private void startFinishRun()
     {
         //Intent intent = new Intent(this, RunResultActivity.class);
         //startActivity(intent);
@@ -161,13 +199,37 @@ public class RunActivity extends AppCompatActivity
         if (isServiceBound && !mLocationService.isUserWalking())
         {
             initializeWalkService();
+            updateStartRunUI();
+
             crRunTime.start();
         }
         else if (isServiceBound && mLocationService.isUserWalking())
         {
             stopWalkService();
+            updateStopRunUI();
+
             crRunTime.setBase(SystemClock.elapsedRealtime());
             crRunTime.stop();
+        }
+    }
+
+    private static class UIUpdateHandler extends Handler
+    {
+        private final WeakReference<RunActivity> activity;
+
+        public UIUpdateHandler(RunActivity activity)
+        {
+            this.activity = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message message)
+        {
+            if (MESSAGE_UPDATE_UI == message.what)
+            {
+                activity.get().updateUI();
+                sendEmptyMessageDelayed(MESSAGE_UPDATE_UI, UI_UPDATE_RATE);
+            }
         }
     }
 }

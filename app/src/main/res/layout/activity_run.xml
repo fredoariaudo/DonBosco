@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tint="@android:color/white"
-            android:src="@drawable/ic_stop_black_24dp"/>
+            android:src="@drawable/ic_play_arrow_black_24dp"/>
 
     </LinearLayout>
 
@@ -63,7 +63,7 @@
             android:textColor="@android:color/white" />
 
         <TextView
-            android:id="@+id/tv_run_collecting"
+            android:id="@+id/tv_run_founds_collected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Display3"

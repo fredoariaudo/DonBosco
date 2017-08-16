@@ -19,5 +19,6 @@
     <string name="hint_email">E-mail</string>
 
     <string name="distance_format">%.03f km</string>
+    <string name="founds_collected_format">$ %.02f</string>
 
 </resources>
