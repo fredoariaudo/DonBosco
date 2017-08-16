@@ -6,4 +6,10 @@ public class ConvertionUtils
     {
         return meters / 1000;
     }
+
+    public static float foundsFromDistance(float meters)
+    {
+        float km = meterToKm(meters);
+        return km * 100;
+    }
 }

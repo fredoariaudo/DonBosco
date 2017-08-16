@@ -186,8 +186,10 @@ public class RunActivity extends AppCompatActivity
     {
         if (isServiceBound)
         {
-            tvRunDistanceDebug.setText("" + mLocationService.distanceCovered());
-            tvRunDistance.setText(getString(R.string.distance_format, ConvertionUtils.meterToKm(mLocationService.distanceCovered())));
+            float distance = mLocationService.distanceCovered();
+            tvRunDistanceDebug.setText("" + distance);
+            tvRunDistance.setText(getString(R.string.distance_format, ConvertionUtils.meterToKm(distance)));
+            tvRunFoundsCollected.setText(getString(R.string.founds_collected_format, ConvertionUtils.foundsFromDistance(distance)));
         }
     }
 
