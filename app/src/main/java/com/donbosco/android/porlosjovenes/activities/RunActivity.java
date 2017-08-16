@@ -18,9 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
+import com.donbosco.android.porlosjovenes.constants.IntentActions;
 import com.donbosco.android.porlosjovenes.services.LocationService;
 import com.donbosco.android.porlosjovenes.util.DistanceUtils;
-import com.donbosco.android.porlosjovenes.util.Helper;
 
 public class RunActivity extends AppCompatActivity
 {
@@ -44,6 +45,7 @@ public class RunActivity extends AppCompatActivity
 
         tvRunDistanceDebug = findViewById(R.id.tv_run_distance_debug);
         tvRunDistance = findViewById(R.id.tv_run_distance);
+        tvRunDistance.setText(getString(R.string.distance_format, 0f));
 
         FloatingActionButton fabRunFinish = findViewById(R.id.fab_run_finish);
         fabRunFinish.setOnClickListener(new View.OnClickListener() {
@@ -62,11 +64,6 @@ public class RunActivity extends AppCompatActivity
                 isServiceBound = true;
                 LocationService.LocalBinder localBinder = (LocationService.LocalBinder) binder;
                 mLocationService = localBinder.getService();
-
-                /*if(mLocationService.isUserWalking())
-                {
-                    updateStartWalkUI();
-                }*/
             }
 
             @Override
@@ -76,19 +73,17 @@ public class RunActivity extends AppCompatActivity
             }
         };
 
-        locationReceiver = new BroadcastReceiver() {
+        locationReceiver = new BroadcastReceiver()
+        {
             @Override
             public void onReceive(Context context, Intent intent)
             {
-                int resultCode = intent.getIntExtra(Helper.INTENT_EXTRA_RESULT_CODE, RESULT_CANCELED);
+                int resultCode = intent.getIntExtra(ExtraKeys.LOCATION_SERVICE_RESULT_CODE, RESULT_CANCELED);
 
                 if (resultCode == RESULT_OK)
                 {
                     Toast.makeText(RunActivity.this, "new location", Toast.LENGTH_SHORT).show();
-                    updateUi();
-                    //Location userLocation = intent.getParcelableExtra(Helper.INTENT_USER_LAT_LNG);
-                    //LatLng latLng = getLatLng(userLocation);
-                    //updateUserMarkerLocation(latLng);
+                    updateUI();
                 }
             }
         };
@@ -99,7 +94,7 @@ public class RunActivity extends AppCompatActivity
     {
         super.onStart();
 
-        IntentFilter intentFilter = new IntentFilter(Helper.ACTION_NAME_SPACE);
+        IntentFilter intentFilter = new IntentFilter(IntentActions.LOCATION_UPDATED);
         LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, intentFilter);
         startLocationService();
     }
@@ -149,10 +144,13 @@ public class RunActivity extends AppCompatActivity
         mLocationService.stopNotification();
     }
 
-    private void updateUi()
+    private void updateUI()
     {
-        tvRunDistanceDebug.setText(""+mLocationService.distanceCovered());
-        tvRunDistance.setText(getString(R.string.distance_format, DistanceUtils.meterToKm(mLocationService.distanceCovered())));
+        if (isServiceBound)
+        {
+            tvRunDistanceDebug.setText("" + mLocationService.distanceCovered());
+            tvRunDistance.setText(getString(R.string.distance_format, DistanceUtils.meterToKm(mLocationService.distanceCovered())));
+        }
     }
 
     private void finishRun()
@@ -164,8 +162,6 @@ public class RunActivity extends AppCompatActivity
         {
             initializeWalkService();
             crRunTime.start();
-            //updateWalkPref(true);
-            //updateStartWalkUI();
         }
         else if (isServiceBound && mLocationService.isUserWalking())
         {

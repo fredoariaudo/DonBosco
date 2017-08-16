@@ -14,7 +14,8 @@ import android.support.v4.content.LocalBroadcastManager;
 
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.activities.RunActivity;
-import com.donbosco.android.porlosjovenes.util.Helper;
+import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
+import com.donbosco.android.porlosjovenes.constants.IntentActions;
 
 public class LocationService extends Service implements LocationProvider.LocationCallback
 {
@@ -115,9 +116,9 @@ public class LocationService extends Service implements LocationProvider.Locatio
 
     private void broadcastUserLocation(Location location)
     {
-        Intent intent = new Intent(Helper.ACTION_NAME_SPACE);
-        intent.putExtra(Helper.INTENT_EXTRA_RESULT_CODE, Activity.RESULT_OK);
-        intent.putExtra(Helper.INTENT_USER_LAT_LNG, location);
+        Intent intent = new Intent(IntentActions.LOCATION_UPDATED);
+        intent.putExtra(ExtraKeys.LOCATION_SERVICE_RESULT_CODE, Activity.RESULT_OK);
+        intent.putExtra(ExtraKeys.USER_POSITION, location);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
@@ -182,7 +183,7 @@ public class LocationService extends Service implements LocationProvider.Locatio
     private Notification createNotification()
     {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setContentTitle("Keep Walking")
+                .setContentTitle(getString(R.string.app_name))
                 .setContentText("Tap to return to walk activity")
                 .setSmallIcon(R.mipmap.ic_launcher);
 
