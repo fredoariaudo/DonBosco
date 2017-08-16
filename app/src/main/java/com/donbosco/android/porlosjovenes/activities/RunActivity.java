@@ -144,6 +144,34 @@ public class RunActivity extends AppCompatActivity
         isServiceBound = false;
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        if(isServiceBound && mLocationService.isUserWalking())
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.want_finish_run);
+            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+                    stopWalkService();
+                    updateStopRunUI();
+
+                    Intent intent = new Intent(RunActivity.this, RunResultActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+            builder.setNegativeButton(R.string.no, null);
+            builder.show();
+        }
+        else
+        {
+            super.onBackPressed();
+        }
+    }
+
     private void startLocationService()
     {
         Intent intent = new Intent(this, LocationService.class);
