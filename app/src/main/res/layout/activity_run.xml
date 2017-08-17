@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fr_run_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_horizontal_margin"
-    android:background="@drawable/sponsor">
+    android:background="@drawable/sponsor"
+    android:clipChildren="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -25,14 +26,17 @@
             android:id="@+id/fab_run_finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tint="@android:color/white"
-            android:src="@drawable/ic_play_arrow_black_24dp"/>
+            android:tint="@android:color/black"
+            android:src="@drawable/ic_play_arrow_black_24dp"
+            app:backgroundTint="@android:color/white"
+            app:borderWidth="0dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
         android:layout_gravity="bottom"
         android:gravity="bottom|right"
         android:orientation="vertical">

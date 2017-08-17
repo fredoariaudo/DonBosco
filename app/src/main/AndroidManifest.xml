@@ -39,7 +39,7 @@
         <activity
             android:name=".activities.RunActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/RunActivityTheme" />
         <activity
             android:name=".activities.RunResultActivity"
             android:screenOrientation="portrait"
