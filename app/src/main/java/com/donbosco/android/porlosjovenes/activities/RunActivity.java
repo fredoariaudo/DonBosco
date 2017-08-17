@@ -1,15 +1,22 @@
 package com.donbosco.android.porlosjovenes.activities;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.SystemClock;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +26,7 @@ import android.view.View;
 import android.widget.Chronometer;
 import android.widget.TextView;
 
+import com.donbosco.android.porlosjovenes.BuildConfig;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.model.Run;
@@ -29,6 +37,8 @@ import java.lang.ref.WeakReference;
 
 public class RunActivity extends AppCompatActivity
 {
+    private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
+
     private final static int MESSAGE_UPDATE_UI = 0;
     private final static int UI_UPDATE_RATE = 1000; //1 second
 
@@ -38,7 +48,6 @@ public class RunActivity extends AppCompatActivity
 
     private Chronometer crRunTime;
     private FloatingActionButton fabRunStartFinish;
-    private TextView tvRunDistanceDebug;
     private TextView tvRunDistance;
     private TextView tvRunFoundsCollected;
 
@@ -51,9 +60,6 @@ public class RunActivity extends AppCompatActivity
         setContentView(R.layout.activity_run);
 
         crRunTime = findViewById(R.id.cr_run_time);
-
-        //Distance traveled debug TextView
-        tvRunDistanceDebug = findViewById(R.id.tv_run_distance_debug);
 
         //Distance traveled TextView
         tvRunDistance = findViewById(R.id.tv_run_distance);
@@ -93,13 +99,18 @@ public class RunActivity extends AppCompatActivity
                 isServiceBound = false;
             }
         };
+
+        if(!checkPermissions())
+            requestPermissions();
     }
 
     @Override
     protected void onStart()
     {
         super.onStart();
-        startLocationService();
+
+        if(checkPermissions())
+            startLocationService();
     }
 
     @Override
@@ -115,7 +126,10 @@ public class RunActivity extends AppCompatActivity
             }
         }
         updateStopRunUI();
-        unbindService(serviceConnection);
+
+        if(isServiceBound)
+            unbindService(serviceConnection);
+
         isServiceBound = false;
     }
 
@@ -144,6 +158,64 @@ public class RunActivity extends AppCompatActivity
         else
         {
             super.onBackPressed();
+        }
+    }
+
+    private boolean checkPermissions()
+    {
+        int permissionState = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        return permissionState == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermissions()
+    {
+        boolean shouldProvideRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (shouldProvideRationale)
+        {
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.fr_run_container), R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE);
+            snackbar.setAction(R.string.allow, new View.OnClickListener() {
+                @Override
+                public void onClick(View view)
+                {
+                    ActivityCompat.requestPermissions(RunActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSIONS_REQUEST_CODE);
+                }
+            })
+            .show();
+        }
+        else
+        {
+            ActivityCompat.requestPermissions(RunActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSIONS_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE)
+        {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                startLocationService();
+            }
+            else if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED)
+            {
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.fr_run_container), R.string.permission_denied_explanation, Snackbar.LENGTH_INDEFINITE);
+                snackbar.setAction(R.string.settings, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        // Build intent that displays the App settings screen.
+                        Intent intent = new Intent();
+                        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null);
+                        intent.setData(uri);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                });
+                snackbar.show();
+            }
         }
     }
 
@@ -210,7 +282,6 @@ public class RunActivity extends AppCompatActivity
         if (isServiceBound)
         {
             float distance = locationService.distanceCovered();
-            tvRunDistanceDebug.setText("" + distance);
             setDistanceText(ConvertionUtils.meterToKm(distance));
             setCollectedText(ConvertionUtils.foundsFromDistance(distance));
         }

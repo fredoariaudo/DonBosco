@@ -18,6 +18,10 @@
     <string name="no">No</string>
     <string name="donate_more">Donar más</string>
     <string name="run_in_progress">Actividad en progreso</string>
+    <string name="permission_rationale">Los datos de localización son utilizados para medir distancias.</string>
+    <string name="permission_denied_explanation">El permiso es necesario para el funcionamiento de la aplicación.</string>
+    <string name="allow">Permitir</string>
+    <string name="settings">Ajustes</string>
 
     <string name="hint_user">Usuario</string>
     <string name="hint_password">Contraseña</string>

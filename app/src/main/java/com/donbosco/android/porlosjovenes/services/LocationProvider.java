@@ -1,10 +1,13 @@
 package com.donbosco.android.porlosjovenes.services;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -72,6 +75,9 @@ public class LocationProvider implements GoogleApiClient.ConnectionCallbacks, Go
     @Override
     public void onConnected(Bundle bundle)
     {
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            return;
+
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         mLocationCallback.handleInitialLocation(location);
         startPeriodicUpdates();
@@ -79,6 +85,9 @@ public class LocationProvider implements GoogleApiClient.ConnectionCallbacks, Go
 
     private void startPeriodicUpdates()
     {
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            return;
+
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
     }
 
