@@ -13,6 +13,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.TextView;
@@ -55,11 +57,11 @@ public class RunActivity extends AppCompatActivity
 
         //Distance traveled TextView
         tvRunDistance = findViewById(R.id.tv_run_distance);
-        tvRunDistance.setText(getString(R.string.distance_format, 0f));
+        setDistanceText(0f);
 
         //Founds collected TextView
         tvRunFoundsCollected = findViewById(R.id.tv_run_founds_collected);
-        tvRunFoundsCollected.setText(getString(R.string.founds_collected_format, 0f));
+        setCollectedText(0f);
 
         fabRunStartFinish = findViewById(R.id.fab_run_finish);
         fabRunStartFinish.setOnClickListener(new View.OnClickListener() {
@@ -189,14 +191,28 @@ public class RunActivity extends AppCompatActivity
         }
     }
 
+    private void setDistanceText(float distance)
+    {
+        SpannableString spannableString = new SpannableString(getString(R.string.distance_format, distance));
+        spannableString.setSpan(new RelativeSizeSpan(0.6f), spannableString.length() - 2, spannableString.length(), 0);
+        tvRunDistance.setText(spannableString);
+    }
+
+    private void setCollectedText(float collected)
+    {
+        SpannableString spannableString = new SpannableString(getString(R.string.founds_collected_format, collected));
+        spannableString.setSpan(new RelativeSizeSpan(0.6f), 0, 1, 0);
+        tvRunFoundsCollected.setText(spannableString);
+    }
+
     private void updateUI()
     {
         if (isServiceBound)
         {
             float distance = locationService.distanceCovered();
             tvRunDistanceDebug.setText("" + distance);
-            tvRunDistance.setText(getString(R.string.distance_format, ConvertionUtils.meterToKm(distance)));
-            tvRunFoundsCollected.setText(getString(R.string.founds_collected_format, ConvertionUtils.foundsFromDistance(distance)));
+            setDistanceText(ConvertionUtils.meterToKm(distance));
+            setCollectedText(ConvertionUtils.foundsFromDistance(distance));
         }
     }
 
