@@ -1,0 +1,42 @@
+package com.donbosco.android.porlosjovenes.adapters;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.model.Sponsor;
+
+public class SponsorsRvAdapter extends ArrayRvAdapter<Sponsor, SponsorsRvAdapter.SponsorViewHolder>
+{
+    protected static class SponsorViewHolder extends RecyclerView.ViewHolder
+    {
+        ImageView iv_sli_logo;
+        TextView tv_sli_title;
+
+        public SponsorViewHolder(View itemView)
+        {
+            super(itemView);
+            iv_sli_logo = itemView.findViewById(R.id.iv_sli_logo);
+            tv_sli_title = itemView.findViewById(R.id.tv_sli_title);
+        }
+    }
+
+    @Override
+    public SponsorViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View itemView = inflater.inflate(R.layout.sponsor_rv_item, parent, false);
+        return new SponsorViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(SponsorViewHolder holder, int position)
+    {
+        Sponsor sponsor = getItems().get(position);
+        holder.tv_sli_title.setText(sponsor.getName());
+    }
+}
