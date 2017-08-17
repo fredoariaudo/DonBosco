@@ -16,6 +16,7 @@
     <string name="want_finish_run">¿Desea finalizar la actividad?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
+    <string name="donate_more">Donar más</string>
 
     <string name="hint_user">Usuario</string>
     <string name="hint_password">Contraseña</string>

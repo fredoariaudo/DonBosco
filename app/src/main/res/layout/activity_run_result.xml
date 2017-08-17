@@ -28,11 +28,11 @@
             android:text="@string/travel"/>
 
         <TextView
+            android:id="@+id/tv_run_result_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:text="1,24 km"/>
+            android:paddingBottom="@dimen/activity_horizontal_margin"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -41,16 +41,16 @@
             android:text="@string/collected"/>
 
         <TextView
+            android:id="@+id/tv_run_result_collected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-            android:text="$ 10,24"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"/>
 
     </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Donar más"/>
+        android:text="@string/donate_more"/>
 
 </LinearLayout>

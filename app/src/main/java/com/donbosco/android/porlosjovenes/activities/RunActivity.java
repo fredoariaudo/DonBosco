@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.constants.IntentActions;
+import com.donbosco.android.porlosjovenes.model.Run;
 import com.donbosco.android.porlosjovenes.services.LocationService;
 import com.donbosco.android.porlosjovenes.util.ConvertionUtils;
 
@@ -249,16 +250,29 @@ public class RunActivity extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialogInterface, int i)
             {
-                stopWalkService();
-                updateStopRunUI();
-
-                Intent intent = new Intent(RunActivity.this, RunResultActivity.class);
-                startActivity(intent);
-                finish();
+                finishRun();
             }
         });
         builder.setNegativeButton(R.string.no, null);
         builder.show();
+    }
+
+    private void finishRun()
+    {
+        stopWalkService();
+        updateStopRunUI();
+
+        float distance = mLocationService.distanceCovered();
+
+        Run run = new Run();
+        run.setDistance(distance);
+        run.setTime(SystemClock.elapsedRealtime() - crRunTime.getBase());
+        run.setCollected(ConvertionUtils.foundsFromDistance(distance));
+
+        Intent intent = new Intent(RunActivity.this, RunResultActivity.class);
+        intent.putExtra(ExtraKeys.RUN, run);
+        startActivity(intent);
+        finish();
     }
 
     private static class UIUpdateHandler extends Handler
