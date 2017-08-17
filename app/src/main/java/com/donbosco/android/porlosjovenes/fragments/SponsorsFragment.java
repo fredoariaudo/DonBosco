@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.adapters.SponsorsRvAdapter;
@@ -25,6 +26,7 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
 {
     private static final int SPONSORS_LOADER_ID = 1;
 
+    private ProgressBar pbSponsors;
     private SponsorsRvAdapter adapter;
 
     @Nullable
@@ -32,6 +34,8 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.fragment_sponsors, container, false);
+
+        pbSponsors = rootView.findViewById(R.id.pb_sponsors);
 
         RecyclerView rvSponsors = rootView.findViewById(R.id.rv_sponsors);
         rvSponsors.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -48,7 +52,7 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public Loader<ArrayList<Sponsor>> onCreateLoader(int id, Bundle args)
     {
-        return new SponsorsLoader(getContext());
+        return new SponsorsLoader(getContext(), pbSponsors);
     }
 
     @Override
@@ -56,6 +60,8 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
     {
         if(data != null)
             adapter.addAll(data);
+
+        pbSponsors.setVisibility(View.GONE);
     }
 
     @Override
@@ -67,15 +73,27 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
 
     private static class SponsorsLoader extends AsyncTaskLoader<ArrayList<Sponsor>>
     {
-        public SponsorsLoader(Context context)
+        private ArrayList<Sponsor> sponsors;
+        private ProgressBar progressBar;
+
+        public SponsorsLoader(Context context, ProgressBar progressBar)
         {
             super(context);
+            this.progressBar = progressBar;
         }
 
         @Override
         protected void onStartLoading()
         {
-            forceLoad();
+            if(sponsors != null)
+            {
+                deliverResult(sponsors);
+            }
+            else
+            {
+                progressBar.setVisibility(View.VISIBLE);
+                forceLoad();
+            }
         }
 
         @Override
@@ -87,6 +105,7 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
         @Override
         public void deliverResult(ArrayList<Sponsor> data)
         {
+            sponsors = data;
             super.deliverResult(data);
         }
     }
