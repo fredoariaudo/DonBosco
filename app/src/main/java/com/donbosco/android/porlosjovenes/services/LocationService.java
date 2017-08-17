@@ -184,7 +184,7 @@ public class LocationService extends Service implements LocationProvider.Locatio
     {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setContentTitle(getString(R.string.app_name))
-                .setContentText("Tap to return to walk activity")
+                .setContentText(getString(R.string.run_in_progress))
                 .setSmallIcon(R.mipmap.ic_launcher);
 
         Intent resultIntent = new Intent(this, RunActivity.class);
