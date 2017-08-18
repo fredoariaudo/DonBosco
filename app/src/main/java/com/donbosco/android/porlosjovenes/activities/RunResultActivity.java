@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.model.Run;
-import com.donbosco.android.porlosjovenes.util.ConvertionUtils;
+import com.donbosco.android.porlosjovenes.util.ConversionUtils;
 
 public class RunResultActivity extends AppCompatActivity
 {
@@ -22,7 +22,7 @@ public class RunResultActivity extends AppCompatActivity
         TextView tvRunResultDistance = findViewById(R.id.tv_run_result_distance);
         TextView tvRunResultCollected = findViewById(R.id.tv_run_result_collected);
 
-        tvRunResultDistance.setText(getString(R.string.distance_format, ConvertionUtils.meterToKm(run.getDistance())));
+        tvRunResultDistance.setText(getString(R.string.distance_format, ConversionUtils.meterToKm(run.getDistance())));
         tvRunResultCollected.setText(getString(R.string.founds_collected_format, run.getCollected()));
     }
 }

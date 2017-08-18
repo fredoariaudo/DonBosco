@@ -1,6 +1,6 @@
 package com.donbosco.android.porlosjovenes.util;
 
-public class ConvertionUtils
+public class ConversionUtils
 {
     public static float meterToKm(float meters)
     {

@@ -31,7 +31,7 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.model.Run;
 import com.donbosco.android.porlosjovenes.services.LocationService;
-import com.donbosco.android.porlosjovenes.util.ConvertionUtils;
+import com.donbosco.android.porlosjovenes.util.ConversionUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -51,7 +51,7 @@ public class RunActivity extends AppCompatActivity
     private TextView tvRunDistance;
     private TextView tvRunFoundsCollected;
 
-    private final Handler mUIUpdateHandler = new UIUpdateHandler(this);
+    private final Handler uiUpdateHandler = new UIUpdateHandler(this);
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -246,7 +246,7 @@ public class RunActivity extends AppCompatActivity
 
     private void updateStartRunUI()
     {
-        mUIUpdateHandler.sendEmptyMessage(MESSAGE_UPDATE_UI);
+        uiUpdateHandler.sendEmptyMessage(MESSAGE_UPDATE_UI);
         fabRunStartFinish.setImageResource(R.drawable.ic_stop_black_24dp);
 
         //Set chronometer base time according if service is running or not
@@ -257,9 +257,9 @@ public class RunActivity extends AppCompatActivity
 
     private void updateStopRunUI()
     {
-        if(mUIUpdateHandler.hasMessages(MESSAGE_UPDATE_UI))
+        if(uiUpdateHandler.hasMessages(MESSAGE_UPDATE_UI))
         {
-            mUIUpdateHandler.removeMessages(MESSAGE_UPDATE_UI);
+            uiUpdateHandler.removeMessages(MESSAGE_UPDATE_UI);
         }
     }
 
@@ -282,8 +282,8 @@ public class RunActivity extends AppCompatActivity
         if (isServiceBound)
         {
             float distance = locationService.distanceCovered();
-            setDistanceText(ConvertionUtils.meterToKm(distance));
-            setCollectedText(ConvertionUtils.foundsFromDistance(distance));
+            setDistanceText(ConversionUtils.meterToKm(distance));
+            setCollectedText(ConversionUtils.foundsFromDistance(distance));
         }
     }
 
@@ -325,7 +325,7 @@ public class RunActivity extends AppCompatActivity
         Run run = new Run();
         run.setDistance(distance);
         run.setTime(SystemClock.elapsedRealtime() - crRunTime.getBase());
-        run.setCollected(ConvertionUtils.foundsFromDistance(distance));
+        run.setCollected(ConversionUtils.foundsFromDistance(distance));
 
         Intent intent = new Intent(RunActivity.this, RunResultActivity.class);
         intent.putExtra(ExtraKeys.RUN, run);

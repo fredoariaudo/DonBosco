@@ -29,7 +29,7 @@ public class RestApi
         return restApi;
     }
 
-    public ArrayList getSponsors()
+    public ArrayList<Sponsor> getSponsors()
     {
         ArrayList<Sponsor> sponsors = new ArrayList<>();
 
@@ -50,11 +50,9 @@ public class RestApi
 
     private Retrofit buildRetrofit()
     {
-        Retrofit retrofit = new Retrofit.Builder().
+        return new Retrofit.Builder().
                 baseUrl(BASE_URL).
                 addConverterFactory(GsonConverterFactory.create()).
                 build();
-
-        return retrofit;
     }
 }

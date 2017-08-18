@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public abstract class ArrayRvAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>
 {
-    private ArrayList<T> items = new ArrayList<T>();
+    private ArrayList<T> items = new ArrayList<>();
 
     public void add(T item)
     {
