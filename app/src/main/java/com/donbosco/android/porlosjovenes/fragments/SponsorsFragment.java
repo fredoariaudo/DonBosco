@@ -80,7 +80,7 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
     {
         Sponsor sponsor = adapter.getItems().get(itemPosition);
 
-        if(TextUtils.isEmpty(sponsor.getUrl()))
+        if(!TextUtils.isEmpty(sponsor.getUrl()))
         {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sponsor.getUrl()));
             startActivity(intent);
