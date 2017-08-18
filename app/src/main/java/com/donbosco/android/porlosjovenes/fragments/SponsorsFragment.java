@@ -1,6 +1,8 @@
 package com.donbosco.android.porlosjovenes.fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,19 +12,21 @@ import android.support.v4.content.Loader;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.adapters.RvAdapterListener;
 import com.donbosco.android.porlosjovenes.adapters.SponsorsRvAdapter;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
 
 import java.util.ArrayList;
 
-public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<Sponsor>>
+public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<Sponsor>>, RvAdapterListener
 {
     private static final int SPONSORS_LOADER_ID = 1;
 
@@ -41,7 +45,7 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
         rvSponsors.setLayoutManager(new LinearLayoutManager(getContext()));
         rvSponsors.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
-        adapter = new SponsorsRvAdapter();
+        adapter = new SponsorsRvAdapter(this);
         rvSponsors.setAdapter(adapter);
 
         getLoaderManager().initLoader(SPONSORS_LOADER_ID, null, this);
@@ -59,7 +63,7 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
     public void onLoadFinished(Loader<ArrayList<Sponsor>> loader, ArrayList<Sponsor> data)
     {
         if(data != null)
-            adapter.addAll(data);
+            adapter.setItems(data);
 
         pbSponsors.setVisibility(View.GONE);
     }
@@ -69,6 +73,24 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
     {
         if(adapter != null)
             adapter.clear();
+    }
+
+    @Override
+    public void onItemClick(View v, int itemPosition)
+    {
+        Sponsor sponsor = adapter.getItems().get(itemPosition);
+
+        if(TextUtils.isEmpty(sponsor.getUrl()))
+        {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sponsor.getUrl()));
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public boolean onItemLongClick(View v, int itemPosition)
+    {
+        return false;
     }
 
     private static class SponsorsLoader extends AsyncTaskLoader<ArrayList<Sponsor>>

@@ -34,6 +34,12 @@ public abstract class ArrayRvAdapter<T, VH extends RecyclerView.ViewHolder> exte
         return item;
     }
 
+    public void setItems(Collection<T> items)
+    {
+        this.items = new ArrayList<>(items);
+        notifyDataSetChanged();
+    }
+
     public void clear()
     {
         this.items.clear();
