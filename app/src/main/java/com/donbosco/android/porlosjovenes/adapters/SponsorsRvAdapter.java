@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
 
@@ -57,5 +58,6 @@ public class SponsorsRvAdapter extends ArrayRvAdapter<Sponsor, SponsorsRvAdapter
     {
         Sponsor sponsor = getItems().get(position);
         holder.tv_sli_title.setText(sponsor.getName());
+        Glide.with(holder.iv_sli_logo.getContext()).load(sponsor.getLogo()).into(holder.iv_sli_logo);
     }
 }

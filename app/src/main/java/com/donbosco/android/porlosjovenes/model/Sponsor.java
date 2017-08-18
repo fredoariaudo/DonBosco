@@ -10,6 +10,10 @@ public class Sponsor
     private String name;
     @SerializedName("Url")
     private String url;
+    @SerializedName("UrlLogo")
+    private String logo;
+    @SerializedName("UrlImagen")
+    private String image;
 
     public long getId() {
         return id;
@@ -33,5 +37,21 @@ public class Sponsor
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

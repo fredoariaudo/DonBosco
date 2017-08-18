@@ -10,8 +10,7 @@
         android:id="@+id/iv_sli_logo"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:background="@color/colorAccent"/>
+        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
     <TextView
         android:id="@+id/tv_sli_title"
