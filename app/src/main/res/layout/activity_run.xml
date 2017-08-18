@@ -41,18 +41,6 @@
         android:gravity="bottom|right"
         android:orientation="vertical">
 
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <com.donbosco.android.porlosjovenes.components.logger.LogView
-                android:id="@+id/lv_run_log"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </android.support.v4.widget.NestedScrollView>
-
         <TextView
             android:id="@+id/tv_run_distance"
             android:layout_width="wrap_content"
