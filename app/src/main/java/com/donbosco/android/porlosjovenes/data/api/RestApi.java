@@ -1,5 +1,6 @@
 package com.donbosco.android.porlosjovenes.data.api;
 
+import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
 
 import java.util.ArrayList;
@@ -27,6 +28,25 @@ public class RestApi
             restApi = new RestApi();
 
         return restApi;
+    }
+
+    public RunConfig getRunConfig()
+    {
+        RunConfig runConfig = null;
+
+        try
+        {
+            Retrofit retrofit = buildRetrofit();
+            ApiService apiService = retrofit.create(ApiService.class);
+            Call<RunConfig> runConfigCall = apiService.getRunConfig();
+            runConfig = runConfigCall.execute().body();
+        }
+        catch(Exception e)
+        {
+
+        }
+
+        return runConfig;
     }
 
     public ArrayList<Sponsor> getSponsors()

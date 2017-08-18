@@ -1,5 +1,6 @@
 package com.donbosco.android.porlosjovenes.data.api;
 
+import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
 
 import java.util.ArrayList;
@@ -11,4 +12,7 @@ public interface ApiService
 {
     @HTTP(method = "GET", path = "Sponsor")
     Call<ArrayList<Sponsor>> getSponsors();
+
+    @HTTP(method = "GET", path = "Configuracion/GetConfiguracionIni")
+    Call<RunConfig> getRunConfig();
 }
