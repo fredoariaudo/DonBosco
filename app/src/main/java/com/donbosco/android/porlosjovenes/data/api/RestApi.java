@@ -11,7 +11,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestApi
 {
-    private final static String BASE_URL = "http://172.16.129.80/DonBoscoWebAPI/api/";
+    private final static String BASE_URL = "http://demosweb02.grupoprominente.com/DonBoscoWebAPI/api/";
+    //private final static String BASE_URL = "http://172.16.129.80/DonBoscoWebAPI/api/";
 
     private static RestApi restApi;
 

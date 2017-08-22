@@ -4,7 +4,7 @@
     android:id="@+id/fr_run_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sponsor"
+    android:background="@android:color/black"
     android:clipChildren="false">
 
     <LinearLayout

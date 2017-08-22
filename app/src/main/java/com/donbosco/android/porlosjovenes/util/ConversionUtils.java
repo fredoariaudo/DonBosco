@@ -1,5 +1,7 @@
 package com.donbosco.android.porlosjovenes.util;
 
+import com.donbosco.android.porlosjovenes.model.RunConfig;
+
 public class ConversionUtils
 {
     public static float meterToKm(float meters)
@@ -7,9 +9,9 @@ public class ConversionUtils
         return meters / 1000;
     }
 
-    public static float foundsFromDistance(float meters)
+    public static float foundsFromDistance(float meters, RunConfig runConfig)
     {
-        float km = meterToKm(meters);
-        return km * 100;
+        float valuePerDistance = runConfig.getAmountPerDistance() / runConfig.getDistance();
+        return meterToKm(meters) * valuePerDistance;
     }
 }

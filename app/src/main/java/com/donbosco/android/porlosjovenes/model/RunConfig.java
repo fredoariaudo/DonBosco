@@ -2,8 +2,12 @@ package com.donbosco.android.porlosjovenes.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class RunConfig
+import java.io.Serializable;
+
+public class RunConfig implements Serializable
 {
+    private static final long serialVersionUID = -7315471573977186057L;
+
     @SerializedName("IdSponsor")
     private long sponsorId;
     @SerializedName("Sponsor")
@@ -11,7 +15,9 @@ public class RunConfig
     @SerializedName("UrlImagen")
     private String sponsorImage;
     @SerializedName("ValorKms")
-    private double amountPerDistance;
+    private float amountPerDistance;
+    @SerializedName("Kms")
+    private float distance;
 
     public long getSponsorId() {
         return sponsorId;
@@ -37,11 +43,19 @@ public class RunConfig
         this.sponsorImage = sponsorImage;
     }
 
-    public double getAmountPerDistance() {
+    public float getAmountPerDistance() {
         return amountPerDistance;
     }
 
-    public void setAmountPerDistance(double amountPerDistance) {
+    public void setAmountPerDistance(float amountPerDistance) {
         this.amountPerDistance = amountPerDistance;
+    }
+
+    public float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
     }
 }

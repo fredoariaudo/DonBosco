@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
@@ -17,6 +18,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,12 +26,17 @@ import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.widget.Chronometer;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.donbosco.android.porlosjovenes.BuildConfig;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.model.Run;
+import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.services.LocationService;
 import com.donbosco.android.porlosjovenes.util.ConversionUtils;
 
@@ -46,18 +53,35 @@ public class RunActivity extends AppCompatActivity
     private LocationService locationService;
     private boolean isServiceBound;
 
+    private final Handler uiUpdateHandler = new UIUpdateHandler(this);
+
+    private FrameLayout frRunContainer;
     private Chronometer crRunTime;
     private FloatingActionButton fabRunStartFinish;
     private TextView tvRunDistance;
     private TextView tvRunFoundsCollected;
 
-    private final Handler uiUpdateHandler = new UIUpdateHandler(this);
+    private RunConfig runConfig;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
+
+        runConfig = (RunConfig) getIntent().getSerializableExtra(ExtraKeys.RUN_CONFIG);
+
+        frRunContainer = findViewById(R.id.fr_run_container);
+        if(runConfig != null)
+        {
+            Glide.with(this).asDrawable().load(runConfig.getSponsorImage()).into(new SimpleTarget<Drawable>() {
+                @Override
+                public void onResourceReady(Drawable resource, Transition<? super Drawable> transition)
+                {
+                    ViewCompat.setBackground(frRunContainer, resource);
+                }
+            });
+        }
 
         crRunTime = findViewById(R.id.cr_run_time);
 
@@ -144,12 +168,7 @@ public class RunActivity extends AppCompatActivity
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i)
                 {
-                    stopWalkService();
-                    updateStopRunUI();
-
-                    Intent intent = new Intent(RunActivity.this, RunResultActivity.class);
-                    startActivity(intent);
-                    finish();
+                    finishRun();
                 }
             });
             builder.setNegativeButton(R.string.no, null);
@@ -283,7 +302,7 @@ public class RunActivity extends AppCompatActivity
         {
             float distance = locationService.distanceCovered();
             setDistanceText(ConversionUtils.meterToKm(distance));
-            setCollectedText(ConversionUtils.foundsFromDistance(distance));
+            setCollectedText(ConversionUtils.foundsFromDistance(distance, runConfig));
         }
     }
 
@@ -325,7 +344,7 @@ public class RunActivity extends AppCompatActivity
         Run run = new Run();
         run.setDistance(distance);
         run.setTime(SystemClock.elapsedRealtime() - crRunTime.getBase());
-        run.setCollected(ConversionUtils.foundsFromDistance(distance));
+        run.setCollected(ConversionUtils.foundsFromDistance(distance, runConfig));
 
         Intent intent = new Intent(RunActivity.this, RunResultActivity.class);
         intent.putExtra(ExtraKeys.RUN, run);
