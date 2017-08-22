@@ -14,7 +14,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <Chronometer
+        <com.donbosco.android.porlosjovenes.components.SmartChronometer
             android:id="@+id/cr_run_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.view.View;
-import android.widget.Chronometer;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -34,6 +33,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.donbosco.android.porlosjovenes.BuildConfig;
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.components.SmartChronometer;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.model.Run;
 import com.donbosco.android.porlosjovenes.model.RunConfig;
@@ -47,7 +47,7 @@ public class RunActivity extends AppCompatActivity
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
     private final static int MESSAGE_UPDATE_UI = 0;
-    private final static int UI_UPDATE_RATE = 1000; //1 second
+    private final static int UI_UPDATE_RATE = 2000; //2 seconds
 
     private ServiceConnection serviceConnection;
     private LocationService locationService;
@@ -56,7 +56,7 @@ public class RunActivity extends AppCompatActivity
     private final Handler uiUpdateHandler = new UIUpdateHandler(this);
 
     private FrameLayout frRunContainer;
-    private Chronometer crRunTime;
+    private SmartChronometer crRunTime;
     private FloatingActionButton fabRunStartFinish;
     private TextView tvRunDistance;
     private TextView tvRunFoundsCollected;
@@ -241,6 +241,7 @@ public class RunActivity extends AppCompatActivity
     private void startLocationService()
     {
         Intent intent = new Intent(this, LocationService.class);
+        intent.putExtra(ExtraKeys.RUN_CONFIG, runConfig);
         startService(intent);
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
     }
@@ -268,10 +269,12 @@ public class RunActivity extends AppCompatActivity
         uiUpdateHandler.sendEmptyMessage(MESSAGE_UPDATE_UI);
         fabRunStartFinish.setImageResource(R.drawable.ic_stop_black_24dp);
 
-        //Set chronometer base time according if service is running or not
-        long chronoBase = SystemClock.elapsedRealtime() - (locationService.elapsedTime() * 1000);
-        crRunTime.setBase(chronoBase);
-        crRunTime.start();
+        if(!crRunTime.isRunning())
+        {
+            long chronoBase = SystemClock.elapsedRealtime() - (locationService.elapsedTime() * 1000);
+            crRunTime.setBase(chronoBase);
+            crRunTime.start();
+        }
     }
 
     private void updateStopRunUI()
