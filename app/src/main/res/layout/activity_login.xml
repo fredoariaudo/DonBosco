@@ -5,53 +5,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:padding="@dimen/login_margin"
-        android:orientation="vertical"
-        app:showDividers="middle"
-        app:divider="@drawable/login_divider">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
-        <android.support.design.widget.TextInputLayout
+        <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/ll_login_data"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:padding="@dimen/login_margin"
+            android:orientation="vertical"
+            app:showDividers="middle"
+            app:divider="@drawable/login_divider">
 
-            <EditText
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_login_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/hint_email"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="@string/hint_password"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/hint_user"/>
+                android:text="@string/login"/>
 
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_login_sign_up"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="@string/hint_password"/>
+                android:layout_gravity="center_horizontal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:text="@string/dont_have_account"/>
 
-        </android.support.design.widget.TextInputLayout>
+        </android.support.v7.widget.LinearLayoutCompat>
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login"/>
-
-        <TextView
-            android:id="@+id/tv_login_sign_up"
+        <ProgressBar
+            android:id="@+id/pb_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:text="@string/dont_have_account"/>
+            android:layout_gravity="center"
+            android:visibility="gone"/>
 
-    </android.support.v7.widget.LinearLayoutCompat>
+    </FrameLayout>
 
 </android.support.v4.widget.NestedScrollView>
