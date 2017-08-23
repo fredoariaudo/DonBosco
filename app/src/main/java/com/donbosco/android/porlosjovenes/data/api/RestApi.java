@@ -2,6 +2,7 @@ package com.donbosco.android.porlosjovenes.data.api;
 
 import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
+import com.donbosco.android.porlosjovenes.model.User;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,24 @@ public class RestApi
             restApi = new RestApi();
 
         return restApi;
+    }
+
+    public User login(String email, String password)
+    {
+        User user = null;
+
+        try
+        {
+            Retrofit retrofit = buildRetrofit();
+            ApiService apiService = retrofit.create(ApiService.class);
+            Call<User> loginCall = apiService.login(email, password);
+            user = loginCall.execute().body();
+        }
+        catch(Exception e)
+        {
+        }
+
+        return user;
     }
 
     public RunConfig getRunConfig()
