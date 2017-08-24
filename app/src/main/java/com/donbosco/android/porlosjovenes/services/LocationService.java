@@ -164,6 +164,10 @@ public class LocationService extends Service implements LocationProvider.Locatio
         return mCurrentLocation;
     }
 
+    public RunConfig getRunConfig() {
+        return runConfig;
+    }
+
     public class LocalBinder extends Binder
     {
         public LocationService getService()
