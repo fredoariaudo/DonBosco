@@ -127,15 +127,14 @@ public class LoginActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(User user)
         {
-            llLoginData.setVisibility(View.VISIBLE);
-            pbLogin.setVisibility(View.GONE);
-
             if(user != null)
             {
                 startHomeActivity();
             }
             else
             {
+                llLoginData.setVisibility(View.VISIBLE);
+                pbLogin.setVisibility(View.GONE);
                 Snackbar.make(findViewById(android.R.id.content), R.string.wrong_email_or_password, Snackbar.LENGTH_SHORT).show();
             }
         }
