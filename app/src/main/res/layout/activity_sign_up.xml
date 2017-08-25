@@ -36,6 +36,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:id="@+id/et_sign_up_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
@@ -48,6 +49,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:id="@+id/et_sign_up_user"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
@@ -60,6 +62,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:id="@+id/et_sign_up_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
@@ -68,6 +71,7 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <Button
+                    android:id="@+id/btn_sign_up"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sign_up"/>

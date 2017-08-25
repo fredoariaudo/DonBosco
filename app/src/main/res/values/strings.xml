@@ -5,6 +5,7 @@
     <string name="sign_up">Registrarse</string>
     <string name="must_type_email_password">Debe ingresar email y contraseña</string>
     <string name="wrong_email_or_password">El email o la contraseña son incorrectos</string>
+    <string name="must_fill_all_fields">Debe completar todos los campos</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_activity">Actividad</string>
