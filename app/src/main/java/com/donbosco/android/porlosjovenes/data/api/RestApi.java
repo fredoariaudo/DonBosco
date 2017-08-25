@@ -1,20 +1,21 @@
 package com.donbosco.android.porlosjovenes.data.api;
 
+import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.model.RunConfig;
+import com.donbosco.android.porlosjovenes.model.RunResultResponse;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
 import com.donbosco.android.porlosjovenes.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestApi
 {
-    private final static String BASE_URL = "http://demosweb02.grupoprominente.com/DonBoscoWebAPI/api/";
-    //private final static String BASE_URL = "http://172.16.129.80/DonBoscoWebAPI/api/";
-
     private static RestApi restApi;
 
     private RestApi()
@@ -69,6 +70,25 @@ public class RestApi
         return runConfig;
     }
 
+    public RunResultResponse sendRunResult(HashMap<String, String> runData, Callback<RunResultResponse> callback)
+    {
+        RunResultResponse runResultResponse = null;
+
+        try
+        {
+            Retrofit retrofit = buildRetrofit();
+            ApiService apiService = retrofit.create(ApiService.class);
+            Call<RunResultResponse> sendRunResultCall = apiService.sendRunResult(runData);
+            sendRunResultCall.enqueue(callback);
+        }
+        catch(Exception e)
+        {
+
+        }
+
+        return runResultResponse;
+    }
+
     public ArrayList<Sponsor> getSponsors()
     {
         ArrayList<Sponsor> sponsors = new ArrayList<>();
@@ -91,7 +111,7 @@ public class RestApi
     private Retrofit buildRetrofit()
     {
         return new Retrofit.Builder().
-                baseUrl(BASE_URL).
+                baseUrl(RestApiConstants.API_BASE_URL).
                 addConverterFactory(GsonConverterFactory.create()).
                 build();
     }

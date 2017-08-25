@@ -351,6 +351,7 @@ public class RunActivity extends AppCompatActivity
 
         Intent intent = new Intent(RunActivity.this, RunResultActivity.class);
         intent.putExtra(ExtraKeys.RUN, run);
+        intent.putExtra(ExtraKeys.RUN_CONFIG, runConfig);
         startActivity(intent);
         finish();
     }
