@@ -34,7 +34,8 @@
     </style>
 
     <!-- Login activity theme. -->
-    <style name="LoginTheme" parent="SplashTheme">
+    <style name="LoginTheme" parent="AppTheme.Dark.NoActionBar">
+        <item name="android:windowBackground">@color/colorPrimary</item>
         <item name="colorControlActivated">@android:color/white</item>
     </style>
 
