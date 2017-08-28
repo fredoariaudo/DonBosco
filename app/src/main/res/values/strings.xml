@@ -10,15 +10,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_activity">Actividad</string>
     <string name="nav_sponsors">Alianzas</string>
-    <string name="your_history">Tu historial</string>
-    <string name="distance_tracked">Distancia recorrida</string>
     <string name="current_distance_tracked">DISTANCIA ACTUAL RECORRIDA</string>
     <string name="current_amount_collected">DONACIÓN TOTAL</string>
-    <string name="collected">Recaudado</string>
     <string name="together_collected">JUNTOS DONAMOS</string>
-    <string name="congratulations">Felicitaciones</string>
-    <string name="travel">Recorrido</string>
-    <string name="start">Comenzar</string>
     <string name="want_finish_run">¿Desea finalizar la actividad?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
