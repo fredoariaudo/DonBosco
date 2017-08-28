@@ -3,6 +3,7 @@ package com.donbosco.android.porlosjovenes.data.api;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.model.RunResultResponse;
+import com.donbosco.android.porlosjovenes.model.SignUpResponse;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
 import com.donbosco.android.porlosjovenes.model.User;
 
@@ -49,6 +50,25 @@ public class RestApi
         }
 
         return user;
+    }
+
+    public SignUpResponse signUp(HashMap<String, String> userData)
+    {
+        SignUpResponse signUpResponse = null;
+
+        try
+        {
+            Retrofit retrofit = buildRetrofit();
+            ApiService apiService = retrofit.create(ApiService.class);
+            Call<SignUpResponse> signUpCall = apiService.signUp(userData);
+            signUpResponse = signUpCall.execute().body();
+        }
+        catch(Exception e)
+        {
+
+        }
+
+        return signUpResponse;
     }
 
     public RunConfig getRunConfig()

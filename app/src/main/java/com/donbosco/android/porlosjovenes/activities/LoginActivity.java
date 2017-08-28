@@ -20,6 +20,8 @@ import com.donbosco.android.porlosjovenes.model.User;
 
 public class LoginActivity extends AppCompatActivity
 {
+    private final static int SIGN_UP_REQUEST = 1;
+
     private LinearLayoutCompat llLoginData;
     private EditText etLoginEmail;
     private EditText etLoginPassword;
@@ -66,10 +68,23 @@ public class LoginActivity extends AppCompatActivity
             loginTask.cancel(true);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if(requestCode == SIGN_UP_REQUEST && resultCode == RESULT_OK)
+        {
+            finish();
+        }
+        else
+        {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
     private void startSignUp()
     {
         Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, SIGN_UP_REQUEST);
     }
 
     private void login()

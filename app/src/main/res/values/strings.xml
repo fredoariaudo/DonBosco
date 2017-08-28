@@ -25,6 +25,7 @@
     <string name="permission_denied_explanation">El permiso es necesario para el funcionamiento de la aplicación.</string>
     <string name="allow">Permitir</string>
     <string name="settings">Ajustes</string>
+    <string name="api_generic_error">Ocurrio un error al conectarse al servidor. Compruebe su conexión a internet o intente nuevamente más tarde</string>
 
     <string name="hint_user">Usuario</string>
     <string name="hint_password">Contraseña</string>

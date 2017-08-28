@@ -5,6 +5,8 @@ public class RestApiConstants
     public static final String API_BASE_URL = "http://demosweb02.grupoprominente.com/DonBoscoWebAPI/api/";
     //public static final String API_BASE_URL = "http://172.16.129.80/DonBoscoWebAPI/api/";
 
+    public static final String PARAM_USER = "Usuario";
+    public static final String PARAM_PASSWORD = "Password";
     public static final String PARAM_EMAIL = "Email";
     public static final String PARAM_DISTANCE = "KmsDistancia";
     public static final String PARAM_END_LAT = "LatitudFin";

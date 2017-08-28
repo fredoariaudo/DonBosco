@@ -1,5 +1,6 @@
 package com.donbosco.android.porlosjovenes.activities;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
+import com.donbosco.android.porlosjovenes.data.UserSerializer;
+import com.donbosco.android.porlosjovenes.data.api.RestApi;
+import com.donbosco.android.porlosjovenes.model.SignUpResponse;
+import com.donbosco.android.porlosjovenes.model.User;
+
+import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity
 {
@@ -58,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity
     {
         if(!TextUtils.isEmpty(etSignUpEmail.getText()) && !TextUtils.isEmpty(etSignUpUser.getText()) && !TextUtils.isEmpty(etSignUpPassword.getText()))
         {
-            signUpTask = new SignUpTask();
+            signUpTask = new SignUpTask(etSignUpEmail.getText().toString(), etSignUpUser.getText().toString(), etSignUpPassword.getText().toString());
             signUpTask.execute();
         }
         else
@@ -67,8 +75,27 @@ public class SignUpActivity extends AppCompatActivity
         }
     }
 
-    private class SignUpTask extends AsyncTask<Void, Integer, Void>
+    private void startHomeActivity()
     {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private class SignUpTask extends AsyncTask<Void, Integer, SignUpResponse>
+    {
+        private String email;
+        private String userName;
+        private String password;
+
+        public SignUpTask(String email, String userName, String password)
+        {
+            this.email = email;
+            this.userName = userName;
+            this.password = password;
+        }
+
         @Override
         protected void onPreExecute()
         {
@@ -77,24 +104,48 @@ public class SignUpActivity extends AppCompatActivity
         }
 
         @Override
-        protected Void doInBackground(Void... voids)
+        protected SignUpResponse doInBackground(Void... voids)
         {
-            try
-            {
-                Thread.sleep(3000);
-            }
-            catch(Exception e)
-            {
+            HashMap<String, String> userData = new HashMap<>();
+            userData.put(RestApiConstants.PARAM_USER, userName);
+            userData.put(RestApiConstants.PARAM_PASSWORD, password);
+            userData.put(RestApiConstants.PARAM_EMAIL, email);
 
+            SignUpResponse signUpResponse = RestApi.getInstance().signUp(userData);
+            if(signUpResponse != null && signUpResponse.getCode() == 0)
+            {
+                User user = new User();
+                user.setEmail(email);
+                user.setUserName(userName);
+                user.setPassword(password);
+                UserSerializer.getInstance().save(SignUpActivity.this, user);
             }
-            return null;
+
+            return signUpResponse;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid)
+        protected void onPostExecute(SignUpResponse signUpResponse)
         {
-            llSignUpData.setVisibility(View.VISIBLE);
-            pbSignUp.setVisibility(View.INVISIBLE);
+            if(signUpResponse != null)
+            {
+                if(signUpResponse.getCode() == 0)
+                {
+                    startHomeActivity();
+                }
+                else
+                {
+                    llSignUpData.setVisibility(View.VISIBLE);
+                    pbSignUp.setVisibility(View.INVISIBLE);
+                    Snackbar.make(findViewById(android.R.id.content), signUpResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                llSignUpData.setVisibility(View.VISIBLE);
+                pbSignUp.setVisibility(View.INVISIBLE);
+                Snackbar.make(findViewById(android.R.id.content), R.string.api_generic_error, Snackbar.LENGTH_SHORT).show();
+            }
         }
     }
 }

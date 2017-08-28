@@ -2,6 +2,7 @@ package com.donbosco.android.porlosjovenes.data.api;
 
 import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.model.RunResultResponse;
+import com.donbosco.android.porlosjovenes.model.SignUpResponse;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
 import com.donbosco.android.porlosjovenes.model.User;
 
@@ -17,6 +18,9 @@ public interface ApiService
 {
     @HTTP(method = "GET", path = "Usuario/Login")
     Call<User> login(@Query("email") String email, @Query("password") String password);
+
+    @HTTP(method = "POST", path = "Usuario", hasBody = true)
+    Call<SignUpResponse> signUp(@Body HashMap<String, String> user);
 
     @HTTP(method = "GET", path = "Sponsor")
     Call<ArrayList<Sponsor>> getSponsors();
