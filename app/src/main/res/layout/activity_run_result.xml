@@ -1,36 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:padding="@dimen/login_margin"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/iv_run_result_logo"
-        android:layout_width="160dp"
-        android:layout_height="160dp"/>
-
-    <TextView
-        android:id="@+id/tv_run_result_together_collected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="32dp"
-        android:drawablePadding="4dp"
-        android:text="@string/together_collected"
-        style="@style/run_result_together_collected"/>
-
-    <TextView
-        android:id="@+id/tv_run_result_collected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="64dp"
-        style="@style/run_result_amount_collected"/>
-
-    <Button
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/donate_more"
-        android:theme="@style/secondary_color_button"/>
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-</LinearLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/login_margin"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <ImageView
+            android:id="@+id/iv_run_result_logo"
+            android:layout_width="160dp"
+            android:layout_height="160dp"/>
+
+        <TextView
+            android:id="@+id/tv_run_result_together_collected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="32dp"
+            android:drawablePadding="4dp"
+            android:text="@string/together_collected"
+            style="@style/run_result_together_collected"/>
+
+        <TextView
+            android:id="@+id/tv_run_result_collected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="64dp"
+            style="@style/run_result_amount_collected"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/donate_more"
+            android:theme="@style/secondary_color_button"/>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
