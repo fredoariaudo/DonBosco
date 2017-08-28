@@ -18,6 +18,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,7 @@ import com.donbosco.android.porlosjovenes.model.Run;
 import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.services.LocationService;
 import com.donbosco.android.porlosjovenes.util.ConversionUtils;
+import com.donbosco.android.porlosjovenes.util.ResourceUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -84,6 +86,12 @@ public class RunActivity extends AppCompatActivity
         }
 
         crRunTime = findViewById(R.id.cr_run_time);
+
+        //Set drawables to distance tracked and amount collected titles
+        TextView tvRunDistanceTitle = findViewById(R.id.tv_run_distance_title);
+        TextView tvRunFoundsCollectedTitle = findViewById(R.id.tv_run_founds_collected_title);
+        ResourceUtil.setCompoundDrawableLeft(this, tvRunDistanceTitle, ContextCompat.getColor(this, android.R.color.white), R.drawable.ic_timer_black_18dp);
+        ResourceUtil.setCompoundDrawableLeft(this, tvRunFoundsCollectedTitle, ContextCompat.getColor(this, android.R.color.white), R.drawable.ic_favorite_border_black_18dp);
 
         //Distance traveled TextView
         tvRunDistance = findViewById(R.id.tv_run_distance);

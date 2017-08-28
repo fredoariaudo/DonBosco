@@ -12,6 +12,8 @@
     <string name="nav_sponsors">Alianzas</string>
     <string name="your_history">Tu historial</string>
     <string name="distance_tracked">Distancia recorrida</string>
+    <string name="current_distance_tracked">DISTANCIA ACTUAL RECORRIDA</string>
+    <string name="current_amount_collected">DONACIÓN TOTAL</string>
     <string name="collected">Recaudado</string>
     <string name="together_collected">JUNTOS DONAMOS</string>
     <string name="congratulations">Felicitaciones</string>
