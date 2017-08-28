@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
+        android:background="@drawable/trama_background"
         android:padding="@dimen/login_margin"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">

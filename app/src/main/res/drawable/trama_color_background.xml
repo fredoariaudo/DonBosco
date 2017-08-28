@@ -7,10 +7,4 @@
             android:gravity="center"/>
     </item>
 
-    <item>
-        <bitmap
-            android:src="@drawable/logo_1kplj_blanco"
-            android:gravity="center"/>
-    </item>
-
 </layer-list>
