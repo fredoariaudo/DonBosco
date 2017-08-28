@@ -10,10 +10,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.fragments.ActivityFragment;
 import com.donbosco.android.porlosjovenes.fragments.SponsorsFragment;
+import com.donbosco.android.porlosjovenes.model.User;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -34,6 +37,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         navigationView = findViewById(R.id.nav_view);
+        TextView tvNavUserName = navigationView.getHeaderView(0).findViewById(R.id.tv_nav_user_name);
+        TextView tvNavEmail = navigationView.getHeaderView(0).findViewById(R.id.tv_nav_email);
+
+        User user = UserSerializer.getInstance().load(this);
+        if(user != null)
+        {
+            tvNavUserName.setText(user.getUserName());
+            tvNavEmail.setText(user.getEmail());
+        }
+
         navigationView.setNavigationItemSelectedListener(this);
 
         if(savedInstanceState == null)
