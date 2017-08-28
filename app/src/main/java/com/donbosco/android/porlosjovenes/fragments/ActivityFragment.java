@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -11,7 +12,6 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.activities.RunActivity;
@@ -23,7 +23,7 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
 {
     private static final int RUN_CONFIG_LOADER_ID = 1;
 
-    private Button btnActivityBegin;
+    private FloatingActionButton fabActivityBegin;
 
     private RunConfig runConfig;
 
@@ -33,9 +33,9 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
     {
         View rootView = inflater.inflate(R.layout.fragment_activity, container, false);
 
-        btnActivityBegin = rootView.findViewById(R.id.btn_activity_begin);
-        btnActivityBegin.setEnabled(false);
-        btnActivityBegin.setOnClickListener(new View.OnClickListener() {
+        fabActivityBegin = rootView.findViewById(R.id.fab_activity_begin);
+        fabActivityBegin.setEnabled(false);
+        fabActivityBegin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -59,7 +59,7 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
     {
         if(data != null)
         {
-            btnActivityBegin.setEnabled(true);
+            fabActivityBegin.setEnabled(true);
             runConfig = data;
         }
     }
