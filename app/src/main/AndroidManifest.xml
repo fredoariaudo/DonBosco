@@ -44,7 +44,7 @@
         <activity
             android:name=".activities.RunResultActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <service
             android:name=".services.LocationService"/>
     </application>

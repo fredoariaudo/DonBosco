@@ -1,9 +1,12 @@
 package com.donbosco.android.porlosjovenes.activities;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
@@ -13,7 +16,7 @@ import com.donbosco.android.porlosjovenes.model.Run;
 import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.model.RunResultResponse;
 import com.donbosco.android.porlosjovenes.model.User;
-import com.donbosco.android.porlosjovenes.util.ConversionUtils;
+import com.donbosco.android.porlosjovenes.util.ResourceUtil;
 
 import java.util.HashMap;
 
@@ -32,10 +35,13 @@ public class RunResultActivity extends AppCompatActivity
         Run run = (Run) getIntent().getSerializableExtra(ExtraKeys.RUN);
         RunConfig runConfig = (RunConfig) getIntent().getSerializableExtra(ExtraKeys.RUN_CONFIG);
 
-        TextView tvRunResultDistance = findViewById(R.id.tv_run_result_distance);
-        TextView tvRunResultCollected = findViewById(R.id.tv_run_result_collected);
+        ImageView ivRunResultLogo = findViewById(R.id.iv_run_result_logo);
+        Glide.with(this).load(runConfig.getSponsorImage()).into(ivRunResultLogo);
 
-        tvRunResultDistance.setText(getString(R.string.distance_format, ConversionUtils.meterToKm(run.getDistance())));
+        TextView tvRunResultTogetherCollected = findViewById(R.id.tv_run_result_together_collected);
+        ResourceUtil.setCompoundDrawableLeft(this, tvRunResultTogetherCollected, ContextCompat.getColor(this, R.color.colorPrimary), R.drawable.ic_favorite_black_24dp);
+
+        TextView tvRunResultCollected = findViewById(R.id.tv_run_result_collected);
         tvRunResultCollected.setText(getString(R.string.founds_collected_format, run.getCollected()));
 
         User user = UserSerializer.getInstance().load(this);
