@@ -4,7 +4,8 @@
     <item>
         <bitmap
             android:src="@drawable/trama"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:alpha="0.25"/>
     </item>
 
 </layer-list>
