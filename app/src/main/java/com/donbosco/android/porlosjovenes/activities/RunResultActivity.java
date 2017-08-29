@@ -87,6 +87,7 @@ public class RunResultActivity extends AppCompatActivity
     private void donateMore()
     {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(RestApiConstants.DONATE_MORE_URL));
-        startActivity(intent);
+        if(intent.resolveActivity(getPackageManager()) != null)
+            startActivity(intent);
     }
 }
