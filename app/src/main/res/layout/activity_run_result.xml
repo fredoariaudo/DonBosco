@@ -50,6 +50,7 @@
             style="@style/run_result_amount_collected"/>
 
         <Button
+            android:id="@+id/btn_run_result_donate_more"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/donate_more"

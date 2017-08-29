@@ -1,9 +1,13 @@
 package com.donbosco.android.porlosjovenes.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,6 +52,15 @@ public class RunResultActivity extends AppCompatActivity
         TextView tvRunResultCollected = findViewById(R.id.tv_run_result_collected);
         tvRunResultCollected.setText(getString(R.string.founds_collected_format, run.getCollected()));
 
+        Button btnRunResultDonateMore = findViewById(R.id.btn_run_result_donate_more);
+        btnRunResultDonateMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                donateMore();
+            }
+        });
+
         User user = UserSerializer.getInstance().load(this);
 
         HashMap<String, String> runData = new HashMap<>();
@@ -69,5 +82,11 @@ public class RunResultActivity extends AppCompatActivity
             {
             }
         });
+    }
+
+    private void donateMore()
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(RestApiConstants.DONATE_MORE_URL));
+        startActivity(intent);
     }
 }
