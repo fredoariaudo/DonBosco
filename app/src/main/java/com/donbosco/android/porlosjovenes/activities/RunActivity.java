@@ -1,13 +1,16 @@
 package com.donbosco.android.porlosjovenes.activities;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
@@ -15,6 +18,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -26,7 +30,6 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -54,10 +57,12 @@ public class RunActivity extends AppCompatActivity
     private ServiceConnection serviceConnection;
     private LocationService locationService;
     private boolean isServiceBound;
-
     private final Handler uiUpdateHandler = new UIUpdateHandler(this);
 
-    private FrameLayout frRunContainer;
+    private BroadcastReceiver locationStatusReceiver;
+    private Snackbar sbLocationStatus;
+
+    private CoordinatorLayout clRunContainer;
     private SmartChronometer crRunTime;
     private FloatingActionButton fabRunStartFinish;
     private TextView tvRunDistance;
@@ -73,14 +78,14 @@ public class RunActivity extends AppCompatActivity
 
         runConfig = (RunConfig) getIntent().getSerializableExtra(ExtraKeys.RUN_CONFIG);
 
-        frRunContainer = findViewById(R.id.fr_run_container);
+        clRunContainer = findViewById(R.id.cl_run_container);
         if(runConfig != null)
         {
             Glide.with(this).asDrawable().load(runConfig.getSponsorImage()).into(new SimpleTarget<Drawable>() {
                 @Override
                 public void onResourceReady(Drawable resource, Transition<? super Drawable> transition)
                 {
-                    ViewCompat.setBackground(frRunContainer, resource);
+                    ViewCompat.setBackground(clRunContainer, resource);
                 }
             });
         }
@@ -132,6 +137,34 @@ public class RunActivity extends AppCompatActivity
             }
         };
 
+        //Create location status receiver to receive location status updates
+        locationStatusReceiver = new BroadcastReceiver()
+        {
+            @Override
+            public void onReceive(Context context, Intent intent)
+            {
+                if (intent.getAction().matches(LocationManager.PROVIDERS_CHANGED_ACTION))
+                {
+                    LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+                    if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+                    {
+                        if(sbLocationStatus == null || !sbLocationStatus.isShownOrQueued())
+                        {
+                            sbLocationStatus = Snackbar.make(clRunContainer, R.string.location_disabled_message, Snackbar.LENGTH_INDEFINITE);
+                            sbLocationStatus.show();
+                        }
+                    }
+                    else
+                    {
+                        if(sbLocationStatus != null && sbLocationStatus.isShownOrQueued())
+                        {
+                            sbLocationStatus.dismiss();
+                        }
+                    }
+                }
+            }
+        };
+
         if(!checkPermissions())
             requestPermissions();
     }
@@ -143,6 +176,8 @@ public class RunActivity extends AppCompatActivity
 
         if(checkPermissions())
             startLocationService();
+
+        registerReceiver(locationStatusReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
     }
 
     @Override
@@ -163,6 +198,9 @@ public class RunActivity extends AppCompatActivity
             unbindService(serviceConnection);
 
         isServiceBound = false;
+
+        if(locationStatusReceiver != null)
+            unregisterReceiver(locationStatusReceiver);
     }
 
     @Override
@@ -186,7 +224,7 @@ public class RunActivity extends AppCompatActivity
 
         if (shouldProvideRationale)
         {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.fr_run_container), R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE);
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_run_container), R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE);
             snackbar.setAction(R.string.allow, new View.OnClickListener() {
                 @Override
                 public void onClick(View view)
@@ -213,7 +251,7 @@ public class RunActivity extends AppCompatActivity
             }
             else if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED)
             {
-                Snackbar snackbar = Snackbar.make(findViewById(R.id.fr_run_container), R.string.permission_denied_explanation, Snackbar.LENGTH_INDEFINITE);
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_run_container), R.string.permission_denied_explanation, Snackbar.LENGTH_INDEFINITE);
                 snackbar.setAction(R.string.settings, new View.OnClickListener() {
                     @Override
                     public void onClick(View view)

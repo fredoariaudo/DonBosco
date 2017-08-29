@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fr_run_container"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_run_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
@@ -28,7 +29,8 @@
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:layout_gravity="bottom"
         android:gravity="bottom|center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_behavior="com.donbosco.android.porlosjovenes.components.MoveUpwardsBehavior">
 
         <TextView
             android:id="@+id/tv_run_distance_title"
@@ -66,4 +68,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

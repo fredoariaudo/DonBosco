@@ -1,14 +1,18 @@
 package com.donbosco.android.porlosjovenes.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,9 +80,27 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
 
     private void startRun()
     {
-        Intent intent = new Intent(getContext(), RunActivity.class);
-        intent.putExtra(ExtraKeys.RUN_CONFIG, runConfig);
-        startActivity(intent);
+        LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+        {
+            Intent intent = new Intent(getContext(), RunActivity.class);
+            intent.putExtra(ExtraKeys.RUN_CONFIG, runConfig);
+            startActivity(intent);
+        }
+        else
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setMessage(R.string.location_disabled_message);
+            builder.setPositiveButton(R.string.enable, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+            });
+            builder.show();
+        }
     }
 
     private static class RunConfigLoader extends AsyncTaskLoader<RunConfig>
