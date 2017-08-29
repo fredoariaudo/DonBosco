@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Handler;
@@ -23,18 +22,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.donbosco.android.porlosjovenes.BuildConfig;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.components.SmartChronometer;
@@ -76,18 +73,13 @@ public class RunActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
 
-        runConfig = (RunConfig) getIntent().getSerializableExtra(ExtraKeys.RUN_CONFIG);
-
         clRunContainer = findViewById(R.id.cl_run_container);
+
+        runConfig = (RunConfig) getIntent().getSerializableExtra(ExtraKeys.RUN_CONFIG);
         if(runConfig != null)
         {
-            Glide.with(this).asDrawable().load(runConfig.getSponsorImage()).into(new SimpleTarget<Drawable>() {
-                @Override
-                public void onResourceReady(Drawable resource, Transition<? super Drawable> transition)
-                {
-                    ViewCompat.setBackground(clRunContainer, resource);
-                }
-            });
+            ImageView ivRunBackground = findViewById(R.id.iv_run_background);
+            Glide.with(this).load(runConfig.getSponsorImage()).into(ivRunBackground);
         }
 
         crRunTime = findViewById(R.id.cr_run_time);

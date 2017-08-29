@@ -4,8 +4,14 @@
     android:id="@+id/cl_run_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
     android:clipChildren="false">
+
+    <ImageView
+        android:id="@+id/iv_run_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@android:color/black"/>
 
     <LinearLayout
         android:layout_width="match_parent"
