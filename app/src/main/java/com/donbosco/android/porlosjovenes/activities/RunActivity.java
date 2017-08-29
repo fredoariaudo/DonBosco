@@ -191,13 +191,10 @@ public class RunActivity extends AppCompatActivity
             {
                 stopLocationService();
             }
+            unbindService(serviceConnection);
+            isServiceBound = false;
         }
         updateStopRunUI();
-
-        if(isServiceBound)
-            unbindService(serviceConnection);
-
-        isServiceBound = false;
 
         if(locationStatusReceiver != null)
             unregisterReceiver(locationStatusReceiver);
