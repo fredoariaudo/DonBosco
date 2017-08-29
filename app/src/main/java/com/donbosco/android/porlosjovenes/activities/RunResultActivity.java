@@ -40,7 +40,7 @@ public class RunResultActivity extends AppCompatActivity
         RunConfig runConfig = (RunConfig) getIntent().getSerializableExtra(ExtraKeys.RUN_CONFIG);
 
         ImageView ivRunResultLogo = findViewById(R.id.iv_run_result_logo);
-        Glide.with(this).load(runConfig.getSponsorImage()).into(ivRunResultLogo);
+        Glide.with(this).load(runConfig.getSponsorLogo()).into(ivRunResultLogo);
 
         TextView tvRunResultTogetherCollected = findViewById(R.id.tv_run_result_together_collected);
         ResourceUtil.setCompoundDrawableLeft(this, tvRunResultTogetherCollected, ContextCompat.getColor(this, R.color.colorPrimary), R.drawable.ic_favorite_black_24dp);

@@ -14,6 +14,8 @@ public class RunConfig implements Serializable
     private String sponsorName;
     @SerializedName("UrlImagen")
     private String sponsorImage;
+    @SerializedName("UrlLogo")
+    private String sponsorLogo;
     @SerializedName("ValorKms")
     private float amountPerDistance;
     @SerializedName("Kms")
@@ -41,6 +43,14 @@ public class RunConfig implements Serializable
 
     public void setSponsorImage(String sponsorImage) {
         this.sponsorImage = sponsorImage;
+    }
+
+    public String getSponsorLogo() {
+        return sponsorLogo;
+    }
+
+    public void setSponsorLogo(String sponsorLogo) {
+        this.sponsorLogo = sponsorLogo;
     }
 
     public float getAmountPerDistance() {
