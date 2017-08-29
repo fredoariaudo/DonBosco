@@ -21,6 +21,7 @@ import com.donbosco.android.porlosjovenes.model.Run;
 import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.model.RunResultResponse;
 import com.donbosco.android.porlosjovenes.model.User;
+import com.donbosco.android.porlosjovenes.util.ConversionUtils;
 import com.donbosco.android.porlosjovenes.util.ResourceUtil;
 
 import java.util.HashMap;
@@ -63,9 +64,10 @@ public class RunResultActivity extends AppCompatActivity
 
         User user = UserSerializer.getInstance().load(this);
 
+        String distance = String.format("%.03f", ConversionUtils.meterToKm(run.getDistance()));
         HashMap<String, String> runData = new HashMap<>();
         runData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
-        runData.put(RestApiConstants.PARAM_DISTANCE, String.valueOf(run.getDistance()));
+        runData.put(RestApiConstants.PARAM_DISTANCE, distance);
         runData.put(RestApiConstants.PARAM_END_LAT, String.valueOf(0));
         runData.put(RestApiConstants.PARAM_END_LNG, String.valueOf(0));
         runData.put(RestApiConstants.PARAM_SPONSOR_ID, String.valueOf(runConfig.getSponsorId()));
