@@ -14,6 +14,7 @@
     <string name="current_amount_collected">DONACIÓN TOTAL</string>
     <string name="together_collected">JUNTOS DONAMOS</string>
     <string name="want_finish_run">¿Desea finalizar la actividad?</string>
+    <string name="want_discard_run">¿Desea descartar la actividad?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="donate_more">Donar más</string>

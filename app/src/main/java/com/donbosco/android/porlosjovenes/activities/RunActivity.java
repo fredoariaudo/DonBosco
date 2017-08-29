@@ -169,23 +169,9 @@ public class RunActivity extends AppCompatActivity
     public void onBackPressed()
     {
         if(isServiceBound && locationService.isUserWalking())
-        {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.want_finish_run);
-            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i)
-                {
-                    finishRun();
-                }
-            });
-            builder.setNegativeButton(R.string.no, null);
-            builder.show();
-        }
+            showFinishAlert();
         else
-        {
             super.onBackPressed();
-        }
     }
 
     private boolean checkPermissions()
@@ -332,17 +318,44 @@ public class RunActivity extends AppCompatActivity
 
     private void showFinishAlert()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.want_finish_run);
-        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i)
-            {
-                finishRun();
-            }
-        });
-        builder.setNegativeButton(R.string.no, null);
-        builder.show();
+        float distance = locationService.distanceCovered();
+        float collected = ConversionUtils.foundsFromDistance(distance, runConfig);
+
+        if(collected > 0)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.want_finish_run);
+            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+                    finishRun();
+                }
+            });
+            builder.setNegativeButton(R.string.no, null);
+            builder.show();
+        }
+        else
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.want_discard_run);
+            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+                    discardRun();
+                }
+            });
+            builder.setNegativeButton(R.string.no, null);
+            builder.show();
+        }
+    }
+
+    private void discardRun()
+    {
+        stopWalkService();
+        updateStopRunUI();
+        finish();
     }
 
     private void finishRun()
