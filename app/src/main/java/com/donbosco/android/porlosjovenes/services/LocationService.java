@@ -77,8 +77,11 @@ public class LocationService extends Service implements LocationProvider.Locatio
     {
         if(isUserWalking)
         {
-            float distanceDiff = mPreviousLocation.distanceTo(mCurrentLocation); // Return meter unit
-            mDistanceCovered = mDistanceCovered + distanceDiff;
+            if(mPreviousLocation != null && mCurrentLocation != null)
+            {
+                float distanceDiff = mPreviousLocation.distanceTo(mCurrentLocation); // Return meter unit
+                mDistanceCovered = mDistanceCovered + distanceDiff;
+            }
             mPreviousLocation = mCurrentLocation;
         }
     }
