@@ -64,10 +64,9 @@ public class RunResultActivity extends AppCompatActivity
 
         User user = UserSerializer.getInstance().load(this);
 
-        String distance = String.format("%.03f", ConversionUtils.meterToKm(run.getDistance()));
         HashMap<String, String> runData = new HashMap<>();
         runData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
-        runData.put(RestApiConstants.PARAM_DISTANCE, distance);
+        runData.put(RestApiConstants.PARAM_DISTANCE, String.valueOf(ConversionUtils.meterToKm(run.getDistance())));
         runData.put(RestApiConstants.PARAM_END_LAT, String.valueOf(0));
         runData.put(RestApiConstants.PARAM_END_LNG, String.valueOf(0));
         runData.put(RestApiConstants.PARAM_SPONSOR_ID, String.valueOf(runConfig.getSponsorId()));
