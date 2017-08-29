@@ -12,19 +12,33 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/logo_1kplj_blanco"/>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_activity_begin"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_play_arrow_black_24dp"
-            android:tint="@android:color/white"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="104dp">
+
+            <ProgressBar
+                android:id="@+id/pb_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_activity_begin"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_play_arrow_black_24dp"
+                android:tint="@android:color/white"
+                android:visibility="invisible" />
+
+        </FrameLayout>
 
     </LinearLayout>
 

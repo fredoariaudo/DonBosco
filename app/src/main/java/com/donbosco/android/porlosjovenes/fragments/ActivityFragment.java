@@ -12,6 +12,7 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.activities.RunActivity;
@@ -23,6 +24,7 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
 {
     private static final int RUN_CONFIG_LOADER_ID = 1;
 
+    private ProgressBar pbActivity;
     private FloatingActionButton fabActivityBegin;
 
     private RunConfig runConfig;
@@ -33,8 +35,9 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
     {
         View rootView = inflater.inflate(R.layout.fragment_activity, container, false);
 
+        pbActivity = rootView.findViewById(R.id.pb_activity);
+
         fabActivityBegin = rootView.findViewById(R.id.fab_activity_begin);
-        fabActivityBegin.setEnabled(false);
         fabActivityBegin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -51,15 +54,17 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public Loader<RunConfig> onCreateLoader(int id, Bundle args)
     {
-        return new RunConfigLoader(getContext());
+        return new RunConfigLoader(getContext(), pbActivity);
     }
 
     @Override
     public void onLoadFinished(Loader<RunConfig> loader, RunConfig data)
     {
+        pbActivity.setVisibility(View.GONE);
+
         if(data != null)
         {
-            fabActivityBegin.setEnabled(true);
+            fabActivityBegin.show();
             runConfig = data;
         }
     }
@@ -78,14 +83,18 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
 
     private static class RunConfigLoader extends AsyncTaskLoader<RunConfig>
     {
-        public RunConfigLoader(Context context)
+        private ProgressBar progressBar;
+
+        public RunConfigLoader(Context context, ProgressBar progressBar)
         {
             super(context);
+            this.progressBar = progressBar;
         }
 
         @Override
         protected void onStartLoading()
         {
+            progressBar.setVisibility(View.VISIBLE);
             forceLoad();
         }
 
@@ -93,12 +102,6 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
         public RunConfig loadInBackground()
         {
             return RestApi.getInstance().getRunConfig();
-        }
-
-        @Override
-        public void deliverResult(RunConfig data)
-        {
-            super.deliverResult(data);
         }
     }
 }
