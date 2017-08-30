@@ -120,6 +120,11 @@ public class RunActivity extends AppCompatActivity
                 {
                     updateStartRunUI();
                 }
+                else
+                {
+                    initializeWalkService();
+                    updateStartRunUI();
+                }
             }
 
             @Override
@@ -288,7 +293,6 @@ public class RunActivity extends AppCompatActivity
     private void updateStartRunUI()
     {
         uiUpdateHandler.sendEmptyMessage(MESSAGE_UPDATE_UI);
-        fabRunStartFinish.setImageResource(R.drawable.ic_stop_black_24dp);
 
         if(!crRunTime.isRunning())
         {

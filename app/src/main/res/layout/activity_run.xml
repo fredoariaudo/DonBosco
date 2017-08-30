@@ -70,7 +70,7 @@
             android:layout_height="72dp"
             android:layout_marginTop="16dp"
             android:tint="@android:color/white"
-            android:src="@drawable/ic_play_arrow_black_24dp"/>
+            android:src="@drawable/ic_stop_black_24dp"/>
 
     </LinearLayout>
 
