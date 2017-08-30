@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -21,6 +22,7 @@ import android.widget.ProgressBar;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.adapters.RvAdapterListener;
 import com.donbosco.android.porlosjovenes.adapters.SponsorsRvAdapter;
+import com.donbosco.android.porlosjovenes.application.AppInfo;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
 
@@ -30,6 +32,7 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
 {
     private static final int SPONSORS_LOADER_ID = 1;
 
+    private View rootView;
     private ProgressBar pbSponsors;
     private SponsorsRvAdapter adapter;
 
@@ -37,7 +40,7 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.fragment_sponsors, container, false);
+        rootView = inflater.inflate(R.layout.fragment_sponsors, container, false);
 
         pbSponsors = rootView.findViewById(R.id.pb_sponsors);
 
@@ -66,6 +69,9 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
             adapter.setItems(data);
 
         pbSponsors.setVisibility(View.GONE);
+
+        if(!AppInfo.connected)
+            Snackbar.make(rootView, R.string.api_generic_error, Snackbar.LENGTH_LONG).show();
     }
 
     @Override

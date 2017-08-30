@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -20,6 +21,7 @@ import android.widget.ProgressBar;
 
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.activities.RunActivity;
+import com.donbosco.android.porlosjovenes.application.AppInfo;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
 import com.donbosco.android.porlosjovenes.model.RunConfig;
@@ -28,6 +30,7 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
 {
     private static final int RUN_CONFIG_LOADER_ID = 1;
 
+    private View rootView;
     private ProgressBar pbActivity;
     private FloatingActionButton fabActivityBegin;
 
@@ -37,7 +40,7 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.fragment_activity, container, false);
+        rootView = inflater.inflate(R.layout.fragment_activity, container, false);
 
         pbActivity = rootView.findViewById(R.id.pb_activity);
 
@@ -71,6 +74,9 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
             fabActivityBegin.show();
             runConfig = data;
         }
+
+        if(!AppInfo.connected)
+            Snackbar.make(rootView, R.string.api_generic_error, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
