@@ -7,10 +7,6 @@ import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
-/**
- * Created by AAriaudo on 29/08/2017.
- */
-
 public class MoveUpwardsBehavior extends CoordinatorLayout.Behavior<View>
 {
     public MoveUpwardsBehavior() {
