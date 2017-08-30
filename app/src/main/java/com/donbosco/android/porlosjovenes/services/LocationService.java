@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Binder;
 import android.os.IBinder;
@@ -195,7 +196,8 @@ public class LocationService extends Service implements LocationProvider.Locatio
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(getString(R.string.run_in_progress))
-                .setSmallIcon(R.mipmap.ic_launcher);
+                .setSmallIcon(R.drawable.ic_stat_noti_small)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
 
         Intent resultIntent = new Intent(this, RunActivity.class);
         resultIntent.putExtra(ExtraKeys.RUN_CONFIG, runConfig);
