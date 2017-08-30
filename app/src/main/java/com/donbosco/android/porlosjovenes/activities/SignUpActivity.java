@@ -127,6 +127,8 @@ public class SignUpActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(SignUpResponse signUpResponse)
         {
+            pbSignUp.setVisibility(View.GONE);
+
             if(signUpResponse != null)
             {
                 if(signUpResponse.getCode() == 0)
@@ -136,14 +138,12 @@ public class SignUpActivity extends AppCompatActivity
                 else
                 {
                     llSignUpData.setVisibility(View.VISIBLE);
-                    pbSignUp.setVisibility(View.INVISIBLE);
                     Snackbar.make(findViewById(android.R.id.content), signUpResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
                 }
             }
             else
             {
                 llSignUpData.setVisibility(View.VISIBLE);
-                pbSignUp.setVisibility(View.INVISIBLE);
                 Snackbar.make(findViewById(android.R.id.content), R.string.api_generic_error, Snackbar.LENGTH_SHORT).show();
             }
         }
