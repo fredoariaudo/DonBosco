@@ -1,5 +1,7 @@
 package com.donbosco.android.porlosjovenes.activities;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -7,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -83,6 +86,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_sponsors:
                 fragment = Fragment.instantiate(this, SponsorsFragment.class.getName());
                 break;
+
+            case R.id.nav_logout:
+                logout();
+                break;
         }
 
         if(fragment != null)
@@ -99,5 +106,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     {
         navigationView.getMenu().findItem(menuItemId).setChecked(true);
         onNavigationItemSelected(navigationView.getMenu().findItem(menuItemId));
+    }
+
+    private void logout()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.sure_logout);
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
+                UserSerializer.getInstance().clear(HomeActivity.this);
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton(R.string.no, null);
+        builder.show();
     }
 }

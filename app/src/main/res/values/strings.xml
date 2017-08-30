@@ -10,6 +10,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_activity">Actividad</string>
     <string name="nav_sponsors">Alianzas</string>
+    <string name="nav_logout">Cerrar sesión</string>
+    <string name="sure_logout">¿Esta seguro que desea cerrar sesión?</string>
     <string name="current_distance_tracked">DISTANCIA ACTUAL RECORRIDA</string>
     <string name="current_amount_collected">DONACIÓN TOTAL</string>
     <string name="together_collected">JUNTOS DONAMOS</string>
