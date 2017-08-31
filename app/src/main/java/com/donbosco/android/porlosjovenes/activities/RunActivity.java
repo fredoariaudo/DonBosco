@@ -34,6 +34,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.donbosco.android.porlosjovenes.BuildConfig;
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.application.AppInfo;
 import com.donbosco.android.porlosjovenes.components.SmartChronometer;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.model.Run;
@@ -352,23 +353,36 @@ public class RunActivity extends AppCompatActivity
         float distance = locationService.distanceCovered();
         float collected = ConversionUtils.foundsFromDistance(distance, runConfig);
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.finish_run);
+
         if(collected > 0)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.want_finish_run);
-            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i)
-                {
-                    finishRun();
-                }
-            });
-            builder.setNegativeButton(R.string.no, null);
-            builder.show();
+            if(AppInfo.connected)
+            {
+                builder.setMessage(R.string.want_finish_run);
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i)
+                    {
+                        finishRun();
+                    }
+                });
+            }
+            else
+            {
+                builder.setMessage(R.string.want_finish_run_no_internet);
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i)
+                    {
+                        discardRun();
+                    }
+                });
+            }
         }
         else
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(R.string.want_discard_run);
             builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
@@ -377,9 +391,10 @@ public class RunActivity extends AppCompatActivity
                     discardRun();
                 }
             });
-            builder.setNegativeButton(R.string.no, null);
-            builder.show();
         }
+
+        builder.setNegativeButton(R.string.no, null);
+        builder.show();
     }
 
     private void discardRun()

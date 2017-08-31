@@ -59,6 +59,13 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     @Override
+    public void onStart()
+    {
+        super.onStart();
+        fabActivityBegin.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
     public Loader<RunConfig> onCreateLoader(int id, Bundle args)
     {
         return new RunConfigLoader(getContext(), pbActivity);
