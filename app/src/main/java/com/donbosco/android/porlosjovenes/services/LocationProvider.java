@@ -26,6 +26,7 @@ public class LocationProvider implements GoogleApiClient.ConnectionCallbacks, Go
     public static final String TAG = LocationProvider.class.getSimpleName();
 
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+    private final static int MIN_ACCURACY = 50;
 
     public interface LocationCallback
     {
@@ -79,7 +80,10 @@ public class LocationProvider implements GoogleApiClient.ConnectionCallbacks, Go
             return;
 
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        mLocationCallback.handleInitialLocation(location);
+
+        if(location != null && location.hasAccuracy() && location.getAccuracy() < MIN_ACCURACY)
+            mLocationCallback.handleInitialLocation(location);
+
         startPeriodicUpdates();
     }
 
@@ -120,6 +124,7 @@ public class LocationProvider implements GoogleApiClient.ConnectionCallbacks, Go
     @Override
     public void onLocationChanged(Location location)
     {
-        mLocationCallback.handleNewLocation(location);
+        if(location != null && location.hasAccuracy() && location.getAccuracy() < MIN_ACCURACY)
+            mLocationCallback.handleNewLocation(location);
     }
 }
