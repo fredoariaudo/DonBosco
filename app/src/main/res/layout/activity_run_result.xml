@@ -37,8 +37,9 @@
             android:id="@+id/tv_run_result_together_collected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:drawablePadding="8dp"
             android:paddingTop="32dp"
-            android:drawablePadding="4dp"
             android:text="@string/together_collected"
             style="@style/run_result_together_collected"/>
 
@@ -52,7 +53,8 @@
             android:id="@+id/tv_run_result_distance_traveled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="4dp"
+            android:gravity="center_vertical"
+            android:drawablePadding="8dp"
             android:paddingTop="24dp"
             android:paddingBottom="32dp"
             style="@style/run_result_together_collected"/>
