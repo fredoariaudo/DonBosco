@@ -49,6 +49,18 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <service
             android:name=".services.LocationService"/>
+        <service
+            android:name=".services.PljFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".services.PljFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
