@@ -76,6 +76,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/sign_up"/>
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/icon_inverted"/>
+
             </android.support.v7.widget.LinearLayoutCompat>
 
             <ProgressBar
