@@ -53,6 +53,10 @@ public class RunResultActivity extends AppCompatActivity
         TextView tvRunResultCollected = findViewById(R.id.tv_run_result_collected);
         tvRunResultCollected.setText(getString(R.string.founds_collected_format, run.getCollected()));
 
+        TextView tvRunResultDistanceTraveled = findViewById(R.id.tv_run_result_distance_traveled);
+        tvRunResultDistanceTraveled.setText(getString(R.string.distance_format, ConversionUtils.meterToKm(run.getDistance())));
+        ResourceUtil.setCompoundDrawableLeft(this, tvRunResultDistanceTraveled, ContextCompat.getColor(this, R.color.colorPrimary), R.drawable.ic_directions_run_black_24dp);
+
         Button btnRunResultDonateMore = findViewById(R.id.btn_run_result_donate_more);
         btnRunResultDonateMore.setOnClickListener(new View.OnClickListener() {
             @Override

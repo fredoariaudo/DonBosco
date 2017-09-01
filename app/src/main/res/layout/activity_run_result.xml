@@ -30,8 +30,8 @@
 
         <ImageView
             android:id="@+id/iv_run_result_logo"
-            android:layout_width="160dp"
-            android:layout_height="160dp"/>
+            android:layout_width="140dp"
+            android:layout_height="140dp"/>
 
         <TextView
             android:id="@+id/tv_run_result_together_collected"
@@ -46,8 +46,16 @@
             android:id="@+id/tv_run_result_collected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="64dp"
             style="@style/run_result_amount_collected"/>
+
+        <TextView
+            android:id="@+id/tv_run_result_distance_traveled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="4dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="32dp"
+            style="@style/run_result_together_collected"/>
 
         <Button
             android:id="@+id/btn_run_result_donate_more"
