@@ -19,53 +19,62 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
         android:background="@drawable/trama_background"
-        android:padding="@dimen/login_margin"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ImageView
-            android:id="@+id/iv_run_result_logo"
-            android:layout_width="140dp"
-            android:layout_height="140dp"/>
-
-        <TextView
-            android:id="@+id/tv_run_result_together_collected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:drawablePadding="8dp"
-            android:paddingTop="32dp"
-            android:text="@string/together_collected"
-            style="@style/run_result_together_collected"/>
-
-        <TextView
-            android:id="@+id/tv_run_result_collected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/run_result_amount_collected"/>
-
-        <TextView
-            android:id="@+id/tv_run_result_distance_traveled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:drawablePadding="8dp"
-            android:paddingTop="24dp"
-            android:paddingBottom="32dp"
-            style="@style/run_result_together_collected"/>
-
-        <Button
-            android:id="@+id/btn_run_result_donate_more"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/donate_more"
-            android:theme="@style/secondary_color_button"/>
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/login_margin"
+            android:paddingRight="@dimen/login_margin"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_run_result_logo"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginBottom="32dp"/>
+
+            <TextView
+                android:id="@+id/tv_run_result_together_collected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:drawablePadding="8dp"
+                android:text="@string/together_collected"
+                style="@style/run_result_together_collected"/>
+
+            <TextView
+                android:id="@+id/tv_run_result_collected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/run_result_amount_collected"/>
+
+            <TextView
+                android:id="@+id/tv_run_result_distance_traveled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:drawablePadding="8dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="32dp"
+                style="@style/run_result_together_collected"/>
+
+            <Button
+                android:id="@+id/btn_run_result_donate_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/donate_more"
+                android:theme="@style/secondary_color_button"/>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
