@@ -9,6 +9,13 @@ import android.widget.TextView;
 
 public class ResourceUtil
 {
+    public static Drawable tintDrawable(Context context, int drawable, int color)
+    {
+        Drawable compoundDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, drawable));
+        DrawableCompat.setTint(compoundDrawable, color);
+        return compoundDrawable;
+    }
+
     public static void setCompoundDrawableLeft(Context context, TextView textView, int color, int drawable)
     {
         Drawable compoundDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, drawable));

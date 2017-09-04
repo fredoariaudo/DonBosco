@@ -3,9 +3,7 @@ package com.donbosco.android.porlosjovenes.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.components.CloseActivity;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
@@ -30,16 +29,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RunResultActivity extends AppCompatActivity
+public class RunResultActivity extends CloseActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run_result);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         Run run = (Run) getIntent().getSerializableExtra(ExtraKeys.RUN);
         RunConfig runConfig = (RunConfig) getIntent().getSerializableExtra(ExtraKeys.RUN_CONFIG);
