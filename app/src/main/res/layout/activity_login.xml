@@ -57,12 +57,6 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-                <Button
-                    android:id="@+id/btn_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/login" />
-
                 <TextView
                     android:id="@+id/tv_login_sign_up"
                     android:layout_width="wrap_content"
@@ -70,6 +64,26 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/dont_have_account"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btn_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/login" />
+
+                    <Button
+                        android:id="@+id/btn_login_guest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/login_guest"
+                        android:theme="@style/accent_color_button"/>
+
+                </LinearLayout>
 
                 <ImageView
                     android:layout_width="wrap_content"

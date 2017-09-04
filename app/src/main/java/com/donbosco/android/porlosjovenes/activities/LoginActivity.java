@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
 import com.donbosco.android.porlosjovenes.model.User;
@@ -57,6 +58,15 @@ public class LoginActivity extends AppCompatActivity
                 login();
             }
         });
+
+        Button btnLoginGuest = findViewById(R.id.btn_login_guest);
+        btnLoginGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                continueAsGuest();
+            }
+        });
     }
 
     @Override
@@ -98,6 +108,15 @@ public class LoginActivity extends AppCompatActivity
         {
             Snackbar.make(findViewById(android.R.id.content), R.string.must_type_email_password, Snackbar.LENGTH_SHORT).show();
         }
+    }
+
+    private void continueAsGuest()
+    {
+        User user = new User();
+        user.setUserName(RestApiConstants.GUEST_USER_DEFAULT_USER_NAME);
+        user.setEmail(RestApiConstants.GUEST_USER_DEFAULT_EMAIL);
+        UserSerializer.getInstance().save(this, user);
+        startHomeActivity();
     }
 
     private void startHomeActivity()

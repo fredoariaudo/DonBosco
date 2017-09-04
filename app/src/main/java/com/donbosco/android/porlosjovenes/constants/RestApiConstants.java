@@ -18,4 +18,8 @@ public class RestApiConstants
     public static final String PARAM_END_LNG = "LongitudFin";
     public static final String PARAM_SPONSOR_ID = "IdSponsor";
     public static final String PARAM_DEVICE_ID = "IdDispositivo";
+
+    //Guest constants
+    public static final String GUEST_USER_DEFAULT_USER_NAME = "Invitado";
+    public static final String GUEST_USER_DEFAULT_EMAIL = "invitado";
 }

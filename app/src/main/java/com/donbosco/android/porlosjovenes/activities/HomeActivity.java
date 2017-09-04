@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.fragments.ActivityFragment;
 import com.donbosco.android.porlosjovenes.fragments.SponsorsFragment;
@@ -47,7 +48,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if(user != null)
         {
             tvNavUserName.setText(user.getUserName());
-            tvNavEmail.setText(user.getEmail());
+
+            if(!RestApiConstants.GUEST_USER_DEFAULT_EMAIL.equals(user.getEmail()))
+                tvNavEmail.setText(user.getEmail());
         }
 
         navigationView.setNavigationItemSelectedListener(this);
