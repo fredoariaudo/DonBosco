@@ -8,7 +8,7 @@ import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 
 import com.donbosco.android.porlosjovenes.R;
-import com.donbosco.android.porlosjovenes.activities.HomeActivity;
+import com.donbosco.android.porlosjovenes.activities.SplashActivity;
 import com.donbosco.android.porlosjovenes.constants.NotificationConstants;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -30,7 +30,7 @@ public class PljFirebaseMessagingService extends FirebaseMessagingService
 
     private void sendNotification(String body)
     {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 , intent, PendingIntent.FLAG_ONE_SHOT);
 
