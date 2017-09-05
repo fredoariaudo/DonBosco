@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.util.ResourceUtil;
 
-public class CloseActivity extends ToolbarActivity
+public abstract class CloseActivity extends ToolbarActivity
 {
     @Override
     public void setContentView(@LayoutRes int layoutResID)
