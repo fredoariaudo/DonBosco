@@ -50,6 +50,15 @@ public class LoginActivity extends AppCompatActivity
             }
         });
 
+        TextView tvLoginForgotPassword = findViewById(R.id.tv_login_forgot_password);
+        tvLoginForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                startRecoverPassword();
+            }
+        });
+
         Button btnLogin = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +104,12 @@ public class LoginActivity extends AppCompatActivity
     {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivityForResult(intent, SIGN_UP_REQUEST);
+    }
+
+    private void startRecoverPassword()
+    {
+        Intent intent = new Intent(this, RecoverPasswordActivity.class);
+        startActivity(intent);
     }
 
     private void login()

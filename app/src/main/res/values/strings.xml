@@ -2,11 +2,13 @@
     <string name="app_name">Por los jóvenes</string>
     <string name="login">Ingresar</string>
     <string name="login_guest">Continuar como invitado</string>
+    <string name="forgot_password">¿Olvido su contraseña?</string>
     <string name="dont_have_account">¿No tienes una cuenta? Regístrate</string>
     <string name="sign_up">Registrarse</string>
     <string name="must_type_email_password">Debe ingresar email y contraseña</string>
     <string name="wrong_email_or_password">El email o la contraseña son incorrectos</string>
     <string name="must_fill_all_fields">Debe completar todos los campos</string>
+    <string name="send">Enviar</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_activity">Actividad</string>

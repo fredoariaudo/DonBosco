@@ -65,6 +65,14 @@
                     android:text="@string/dont_have_account"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
+                <TextView
+                    android:id="@+id/tv_login_forgot_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/forgot_password"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
