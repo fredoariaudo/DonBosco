@@ -9,6 +9,7 @@
     <string name="wrong_email_or_password">El email o la contraseña son incorrectos</string>
     <string name="must_fill_all_fields">Debe completar todos los campos</string>
     <string name="send">Enviar</string>
+    <string name="change">Cambiar</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_activity">Actividad</string>
@@ -37,6 +38,9 @@
     <string name="hint_user">Usuario</string>
     <string name="hint_password">Contraseña</string>
     <string name="hint_email">E-mail</string>
+    <string name="hint_current_password">Contraseña actual</string>
+    <string name="hint_new_password">Nueva contraseña</string>
+    <string name="hint_new_password_confirm">Confirmar nueva contraseña</string>
 
     <string name="distance_format">%.03f km</string>
     <string name="founds_collected_format">$ %.02f</string>
