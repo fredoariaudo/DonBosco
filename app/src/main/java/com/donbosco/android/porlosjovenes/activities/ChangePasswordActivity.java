@@ -1,6 +1,8 @@
 package com.donbosco.android.porlosjovenes.activities;
 
+import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -65,7 +67,7 @@ public class ChangePasswordActivity extends AppCompatActivity
         {
             try
             {
-                Thread.sleep(2000);
+                Thread.sleep(1500);
             }
             catch(Exception e)
             {
@@ -78,6 +80,18 @@ public class ChangePasswordActivity extends AppCompatActivity
         protected void onPostExecute(Void aVoid)
         {
             pbChangePassword.setVisibility(View.GONE);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this, R.style.Theme_AppCompat_Light_Dialog);
+            builder.setMessage(R.string.password_changed_successfully_login);
+            builder.setPositiveButton(R.string.back, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+                    finish();
+                }
+            });
+            builder.setCancelable(false);
+            builder.show();
         }
     }
 }

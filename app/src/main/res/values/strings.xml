@@ -10,6 +10,8 @@
     <string name="must_fill_all_fields">Debe completar todos los campos</string>
     <string name="send">Enviar</string>
     <string name="change">Cambiar</string>
+    <string name="password_changed_successfully_login">La contraseña se cambio con éxito. Debe volver a loguearse.</string>
+    <string name="back">Volver</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_activity">Actividad</string>
