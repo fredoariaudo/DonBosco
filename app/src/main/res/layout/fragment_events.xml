@@ -7,7 +7,10 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_events"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:clipToPadding="false"/> <!-- Use this padding to compensate top and bottom padding from the rv item -->
 
     <ProgressBar
         android:id="@+id/pb_events"

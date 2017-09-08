@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -36,7 +35,6 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
 
         RecyclerView rvEvents = rootView.findViewById(R.id.rv_events);
         rvEvents.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvEvents.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
         adapter = new EventsRvAdapter();
         rvEvents.setAdapter(adapter);
@@ -57,6 +55,9 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public void onLoadFinished(Loader<ArrayList<Event>> loader, ArrayList<Event> data)
     {
+        if(data != null)
+            adapter.setItems(data);
+
         pbEvents.setVisibility(View.GONE);
     }
 
@@ -103,7 +104,18 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
 
             }
 
-            return new ArrayList<>();
+            ArrayList<Event> events = new ArrayList<>();
+
+            for(int i=0; i<20; i++)
+            {
+                Event event = new Event();
+                event.setTitle("Maraton Buenos Aires");
+                event.setDate("8 de Septiembre");
+                event.setHour("10:30 hs");
+                events.add(event);
+            }
+
+            return events;
         }
 
         @Override
