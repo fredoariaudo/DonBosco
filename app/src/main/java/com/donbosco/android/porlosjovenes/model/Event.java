@@ -9,6 +9,7 @@ public class Event implements Serializable
     private String title;
     private String date;
     private String hour;
+    private String image;
 
     public String getTitle() {
         return title;
@@ -32,5 +33,13 @@ public class Event implements Serializable
 
     public void setHour(String hour) {
         this.hour = hour;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

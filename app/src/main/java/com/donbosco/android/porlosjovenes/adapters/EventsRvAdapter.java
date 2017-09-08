@@ -4,8 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.model.Event;
 
@@ -20,6 +22,7 @@ public class EventsRvAdapter extends ArrayRvAdapter<Event, EventsRvAdapter.Event
         TextView tvEliTitle;
         TextView tvEliDate;
         TextView tvEliHour;
+        ImageView ivEliImage;
 
         public EventViewHolder(View itemView, RvAdapterListener rvAdapterListener)
         {
@@ -31,6 +34,7 @@ public class EventsRvAdapter extends ArrayRvAdapter<Event, EventsRvAdapter.Event
             tvEliTitle = itemView.findViewById(R.id.tv_eli_title);
             tvEliDate = itemView.findViewById(R.id.tv_eli_date);
             tvEliHour = itemView.findViewById(R.id.tv_eli_hour);
+            ivEliImage = itemView.findViewById(R.id.iv_eli_image);
         }
 
         @Override
@@ -60,5 +64,6 @@ public class EventsRvAdapter extends ArrayRvAdapter<Event, EventsRvAdapter.Event
         holder.tvEliTitle.setText(event.getTitle());
         holder.tvEliDate.setText(event.getDate());
         holder.tvEliHour.setText(event.getHour());
+        Glide.with(holder.ivEliImage.getContext()).load(event.getImage()).into(holder.ivEliImage);
     }
 }

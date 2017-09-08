@@ -116,7 +116,7 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
         {
             try
             {
-                Thread.sleep(1500);
+                Thread.sleep(1000);
             }
             catch(Exception e)
             {
@@ -125,12 +125,13 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
 
             ArrayList<Event> events = new ArrayList<>();
 
-            for(int i=0; i<20; i++)
+            for(int i=0; i<10; i++)
             {
                 Event event = new Event();
-                event.setTitle("Maraton Buenos Aires");
+                event.setTitle("Buenos Aires corre por los jóvenes");
                 event.setDate("8 de Septiembre");
                 event.setHour("10:30 hs");
+                event.setImage("http://clubdecorredores.com/carreras/2016/c508/logo.jpg");
                 events.add(event);
             }
 
