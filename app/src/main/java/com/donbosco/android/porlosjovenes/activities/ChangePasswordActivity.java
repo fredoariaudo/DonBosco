@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 
 public class ChangePasswordActivity extends AppCompatActivity
 {
@@ -81,8 +82,10 @@ public class ChangePasswordActivity extends AppCompatActivity
         {
             pbChangePassword.setVisibility(View.GONE);
 
+            int message = getIntent().getBooleanExtra(ExtraKeys.COME_FROM_RECOVER, false) ? R.string.password_changed_successfully_login : R.string.password_changed_successfully;
+
             AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this, R.style.Theme_AppCompat_Light_Dialog);
-            builder.setMessage(R.string.password_changed_successfully_login);
+            builder.setMessage(message);
             builder.setPositiveButton(R.string.back, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i)

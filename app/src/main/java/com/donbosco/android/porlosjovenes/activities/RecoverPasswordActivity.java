@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 
 public class RecoverPasswordActivity extends AppCompatActivity
 {
@@ -55,6 +56,7 @@ public class RecoverPasswordActivity extends AppCompatActivity
     private void startChangePassword()
     {
         Intent intent = new Intent(this, ChangePasswordActivity.class);
+        intent.putExtra(ExtraKeys.COME_FROM_RECOVER, true);
         startActivity(intent);
         finish();
     }
