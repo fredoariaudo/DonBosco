@@ -36,6 +36,8 @@
     <string name="api_generic_error">Ocurrio un error al conectarse al servidor. Compruebe su conexión a internet.</string>
     <string name="location_disabled_message">La localización debe estar activada para medir la distancia recorrida.</string>
     <string name="enable">Activar</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="change_password">Cambiar contraseña</string>
 
     <string name="hint_user">Usuario</string>
     <string name="hint_password">Contraseña</string>
