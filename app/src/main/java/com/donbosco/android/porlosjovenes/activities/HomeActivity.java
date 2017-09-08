@@ -19,6 +19,8 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.fragments.ActivityFragment;
+import com.donbosco.android.porlosjovenes.fragments.CampaignsFragment;
+import com.donbosco.android.porlosjovenes.fragments.EventsFragment;
 import com.donbosco.android.porlosjovenes.fragments.SponsorsFragment;
 import com.donbosco.android.porlosjovenes.model.User;
 
@@ -84,6 +86,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         {
             case R.id.nav_activity:
                 fragment = Fragment.instantiate(this, ActivityFragment.class.getName());
+                break;
+
+            case R.id.nav_campaigns:
+                fragment = Fragment.instantiate(this, CampaignsFragment.class.getName());
+                break;
+
+            case R.id.nav_events:
+                fragment = Fragment.instantiate(this, EventsFragment.class.getName());
                 break;
 
             case R.id.nav_sponsors:

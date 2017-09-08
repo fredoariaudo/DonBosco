@@ -7,6 +7,14 @@
             android:icon="@drawable/ic_directions_run_black_24dp"
             android:title="@string/nav_activity" />
         <item
+            android:id="@+id/nav_campaigns"
+            android:icon="@drawable/ic_local_activity_black_24dp"
+            android:title="@string/nav_campaigns" />
+        <item
+            android:id="@+id/nav_events"
+            android:icon="@drawable/ic_event_black_24dp"
+            android:title="@string/nav_events" />
+        <item
             android:id="@+id/nav_sponsors"
             android:icon="@drawable/ic_group_black_24dp"
             android:title="@string/nav_sponsors" />
