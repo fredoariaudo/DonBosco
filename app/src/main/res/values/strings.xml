@@ -10,6 +10,7 @@
     <string name="must_fill_all_fields">Debe completar todos los campos</string>
     <string name="must_type_email">Debe ingresar un email</string>
     <string name="wrong_email_format">Formato de email no válido</string>
+    <string name="passwords_do_not_match">Las contraseñas no coinciden.</string>
     <string name="send">Enviar</string>
     <string name="change">Cambiar</string>
     <string name="password_changed_successfully_login">La contraseña se cambio con éxito. Debe volver a loguearse.</string>

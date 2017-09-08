@@ -2,12 +2,15 @@ package com.donbosco.android.porlosjovenes.activities;
 
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.donbosco.android.porlosjovenes.R;
@@ -16,6 +19,9 @@ import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 public class ChangePasswordActivity extends AppCompatActivity
 {
     private LinearLayoutCompat llChangePasswordData;
+    private EditText etChangePasswordCurrent;
+    private EditText etChangePasswordNew;
+    private EditText etChangePasswordConfirmNew;
     private ProgressBar pbChangePassword;
 
     private ChangePasswordTask changePasswordTask;
@@ -27,6 +33,9 @@ public class ChangePasswordActivity extends AppCompatActivity
         setContentView(R.layout.activity_change_password);
 
         llChangePasswordData = findViewById(R.id.ll_change_password_data);
+        etChangePasswordCurrent = findViewById(R.id.et_change_password_current);
+        etChangePasswordNew = findViewById(R.id.et_change_password_new);
+        etChangePasswordConfirmNew = findViewById(R.id.et_change_password_confirm_new);
         pbChangePassword = findViewById(R.id.pb_change_password);
 
         Button btnChangePassword = findViewById(R.id.btn_change_password);
@@ -50,8 +59,23 @@ public class ChangePasswordActivity extends AppCompatActivity
 
     private void changePassword()
     {
-        changePasswordTask = new ChangePasswordTask();
-        changePasswordTask.execute();
+        String currentPassword = etChangePasswordCurrent.getText().toString();
+        String newPassword = etChangePasswordNew.getText().toString();
+        String confirmNewPassword = etChangePasswordConfirmNew.getText().toString();
+
+        if(TextUtils.isEmpty(currentPassword) || TextUtils.isEmpty(newPassword) || TextUtils.isEmpty(confirmNewPassword))
+        {
+            Snackbar.make(findViewById(android.R.id.content), R.string.must_fill_all_fields, Snackbar.LENGTH_SHORT).show();
+        }
+        else if(!newPassword.equals(confirmNewPassword))
+        {
+            Snackbar.make(findViewById(android.R.id.content), R.string.passwords_do_not_match, Snackbar.LENGTH_SHORT).show();
+        }
+        else
+        {
+            changePasswordTask = new ChangePasswordTask();
+            changePasswordTask.execute();
+        }
     }
 
     private class ChangePasswordTask extends AsyncTask<Void, Integer, Void>
