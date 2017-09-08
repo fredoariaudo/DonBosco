@@ -7,6 +7,10 @@
             android:icon="@drawable/ic_directions_run_black_24dp"
             android:title="@string/nav_activity" />
         <item
+            android:id="@+id/nav_sponsors"
+            android:icon="@drawable/ic_group_black_24dp"
+            android:title="@string/nav_sponsors" />
+        <item
             android:id="@+id/nav_campaigns"
             android:icon="@drawable/ic_local_activity_black_24dp"
             android:title="@string/nav_campaigns" />
@@ -14,17 +18,13 @@
             android:id="@+id/nav_events"
             android:icon="@drawable/ic_event_black_24dp"
             android:title="@string/nav_events" />
-        <item
-            android:id="@+id/nav_sponsors"
-            android:icon="@drawable/ic_group_black_24dp"
-            android:title="@string/nav_sponsors" />
     </group>
 
     <group android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_power_settings_new_black_24dp"
-            android:title="@string/nav_logout"/>
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="@string/nav_profile"/>
     </group>
 
 </menu>

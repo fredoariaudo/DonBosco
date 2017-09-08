@@ -1,7 +1,9 @@
 package com.donbosco.android.porlosjovenes.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -62,6 +64,7 @@ public class ProfileActivity extends NavUpActivity implements RvAdapterListener
                 break;
 
             case ProfileOption.LOGOUT:
+                logout();
                 break;
         }
     }
@@ -76,5 +79,23 @@ public class ProfileActivity extends NavUpActivity implements RvAdapterListener
     {
         Intent intent = new Intent(this, ChangePasswordActivity.class);
         startActivity(intent);
+    }
+
+    private void logout()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.sure_logout);
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
+                UserSerializer.getInstance().clear(ProfileActivity.this);
+                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton(R.string.no, null);
+        builder.show();
     }
 }
