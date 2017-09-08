@@ -58,6 +58,9 @@
             android:name=".activities.RunResultActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.EventDetailActivity"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".services.LocationService" />
         <service android:name=".services.PljFirebaseInstanceIdService">

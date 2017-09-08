@@ -1,6 +1,7 @@
 package com.donbosco.android.porlosjovenes.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,12 +16,15 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.activities.EventDetailActivity;
 import com.donbosco.android.porlosjovenes.adapters.EventsRvAdapter;
+import com.donbosco.android.porlosjovenes.adapters.RvAdapterListener;
+import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.model.Event;
 
 import java.util.ArrayList;
 
-public class EventsFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<Event>>
+public class EventsFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<Event>>, RvAdapterListener
 {
     private static final int EVENTS_LOADER_ID = 1;
 
@@ -36,7 +40,7 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
         RecyclerView rvEvents = rootView.findViewById(R.id.rv_events);
         rvEvents.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new EventsRvAdapter();
+        adapter = new EventsRvAdapter(this);
         rvEvents.setAdapter(adapter);
 
         pbEvents = rootView.findViewById(R.id.pb_events);
@@ -64,7 +68,22 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public void onLoaderReset(Loader<ArrayList<Event>> loader)
     {
+        adapter.clear();
+    }
 
+    @Override
+    public void onItemClick(View v, int itemPosition)
+    {
+        Event event = adapter.getItems().get(itemPosition);
+        Intent intent = new Intent(getContext(), EventDetailActivity.class);
+        intent.putExtra(ExtraKeys.EVENT, event);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onItemLongClick(View v, int itemPosition)
+    {
+        return false;
     }
 
     private static class EventsLoader extends AsyncTaskLoader<ArrayList<Event>>

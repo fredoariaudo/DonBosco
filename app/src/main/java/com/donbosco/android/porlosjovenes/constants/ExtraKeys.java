@@ -7,5 +7,6 @@ public class ExtraKeys
     public final static String USER_POSITION = "userPosition";
     public final static String RUN = "run";
     public final static String RUN_CONFIG = "runConfig";
+    public final static String EVENT = "event";
 }
 
