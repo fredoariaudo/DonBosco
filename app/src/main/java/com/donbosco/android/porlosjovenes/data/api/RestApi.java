@@ -3,7 +3,7 @@ package com.donbosco.android.porlosjovenes.data.api;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.model.RunResultResponse;
-import com.donbosco.android.porlosjovenes.model.SignUpResponse;
+import com.donbosco.android.porlosjovenes.model.UserResponse;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
 import com.donbosco.android.porlosjovenes.model.User;
 
@@ -52,61 +52,61 @@ public class RestApi
         return user;
     }
 
-    public SignUpResponse signUp(HashMap<String, String> userData)
+    public UserResponse signUp(HashMap<String, String> userData)
     {
-        SignUpResponse signUpResponse = null;
+        UserResponse userResponse = null;
 
         try
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<SignUpResponse> signUpCall = apiService.signUp(userData);
-            signUpResponse = signUpCall.execute().body();
+            Call<UserResponse> signUpCall = apiService.signUp(userData);
+            userResponse = signUpCall.execute().body();
         }
         catch(Exception e)
         {
 
         }
 
-        return signUpResponse;
+        return userResponse;
     }
 
-    public SignUpResponse recoverPassword(HashMap<String, String> userData, String alternativeEmail)
+    public UserResponse recoverPassword(HashMap<String, String> userData, String alternativeEmail)
     {
-        SignUpResponse signUpResponse = null;
+        UserResponse userResponse = null;
 
         try
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<SignUpResponse> recoverPasswordCall = apiService.recoverPassword(userData, alternativeEmail);
-            signUpResponse = recoverPasswordCall.execute().body();
+            Call<UserResponse> recoverPasswordCall = apiService.recoverPassword(userData, alternativeEmail);
+            userResponse = recoverPasswordCall.execute().body();
         }
         catch(Exception e)
         {
 
         }
 
-        return signUpResponse;
+        return userResponse;
     }
 
-    public SignUpResponse changePassword(HashMap<String, String> userData, String currentPassword, String newPassword, String confirmNewPassword)
+    public UserResponse changePassword(HashMap<String, String> userData, String currentPassword, String newPassword, String confirmNewPassword)
     {
-        SignUpResponse signUpResponse = null;
+        UserResponse userResponse = null;
 
         try
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<SignUpResponse> changePasswordCall = apiService.changePassword(userData, currentPassword, newPassword, confirmNewPassword);
-            signUpResponse = changePasswordCall.execute().body();
+            Call<UserResponse> changePasswordCall = apiService.changePassword(userData, currentPassword, newPassword, confirmNewPassword);
+            userResponse = changePasswordCall.execute().body();
         }
         catch(Exception e)
         {
 
         }
 
-        return signUpResponse;
+        return userResponse;
     }
 
     public RunConfig getRunConfig()

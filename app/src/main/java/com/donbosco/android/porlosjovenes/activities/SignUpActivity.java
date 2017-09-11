@@ -16,7 +16,7 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
-import com.donbosco.android.porlosjovenes.model.SignUpResponse;
+import com.donbosco.android.porlosjovenes.model.UserResponse;
 import com.donbosco.android.porlosjovenes.model.User;
 
 import java.util.HashMap;
@@ -83,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity
         finish();
     }
 
-    private class SignUpTask extends AsyncTask<Void, Integer, SignUpResponse>
+    private class SignUpTask extends AsyncTask<Void, Integer, UserResponse>
     {
         private String email;
         private String userName;
@@ -104,15 +104,15 @@ public class SignUpActivity extends AppCompatActivity
         }
 
         @Override
-        protected SignUpResponse doInBackground(Void... voids)
+        protected UserResponse doInBackground(Void... voids)
         {
             HashMap<String, String> userData = new HashMap<>();
             userData.put(RestApiConstants.PARAM_USER, userName);
             userData.put(RestApiConstants.PARAM_PASSWORD, password);
             userData.put(RestApiConstants.PARAM_EMAIL, email);
 
-            SignUpResponse signUpResponse = RestApi.getInstance().signUp(userData);
-            if(signUpResponse != null && signUpResponse.getCode() == 0)
+            UserResponse userResponse = RestApi.getInstance().signUp(userData);
+            if(userResponse != null && userResponse.getCode() == 0)
             {
                 User user = new User();
                 user.setEmail(email);
@@ -121,24 +121,24 @@ public class SignUpActivity extends AppCompatActivity
                 UserSerializer.getInstance().save(SignUpActivity.this, user);
             }
 
-            return signUpResponse;
+            return userResponse;
         }
 
         @Override
-        protected void onPostExecute(SignUpResponse signUpResponse)
+        protected void onPostExecute(UserResponse userResponse)
         {
             pbSignUp.setVisibility(View.GONE);
 
-            if(signUpResponse != null)
+            if(userResponse != null)
             {
-                if(signUpResponse.getCode() == 0)
+                if(userResponse.getCode() == 0)
                 {
                     startHomeActivity();
                 }
                 else
                 {
                     llSignUpData.setVisibility(View.VISIBLE);
-                    Snackbar.make(findViewById(android.R.id.content), signUpResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content), userResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
                 }
             }
             else

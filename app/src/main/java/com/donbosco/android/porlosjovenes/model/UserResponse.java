@@ -2,7 +2,7 @@ package com.donbosco.android.porlosjovenes.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class SignUpResponse
+public class UserResponse
 {
     @SerializedName("Code")
     private int code;

@@ -17,7 +17,7 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
-import com.donbosco.android.porlosjovenes.model.SignUpResponse;
+import com.donbosco.android.porlosjovenes.model.UserResponse;
 import com.donbosco.android.porlosjovenes.model.User;
 
 import java.util.HashMap;
@@ -88,7 +88,7 @@ public class ChangePasswordActivity extends AppCompatActivity
         }
     }
 
-    private class ChangePasswordTask extends AsyncTask<Void, Integer, SignUpResponse>
+    private class ChangePasswordTask extends AsyncTask<Void, Integer, UserResponse>
     {
         private User user;
         private String currentPassword;
@@ -111,23 +111,23 @@ public class ChangePasswordActivity extends AppCompatActivity
         }
 
         @Override
-        protected SignUpResponse doInBackground(Void... voids)
+        protected UserResponse doInBackground(Void... voids)
         {
             HashMap<String, String> userData = new HashMap<>();
             userData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
 
-            SignUpResponse signUpResponse = RestApi.getInstance().changePassword(userData, currentPassword, newPassword, confirmNewPassword);
-            return signUpResponse;
+            UserResponse userResponse = RestApi.getInstance().changePassword(userData, currentPassword, newPassword, confirmNewPassword);
+            return userResponse;
         }
 
         @Override
-        protected void onPostExecute(SignUpResponse signUpResponse)
+        protected void onPostExecute(UserResponse userResponse)
         {
             pbChangePassword.setVisibility(View.GONE);
 
-            if(signUpResponse != null)
+            if(userResponse != null)
             {
-                if(signUpResponse.getCode() == 0)
+                if(userResponse.getCode() == 0)
                 {
                     int message = getIntent().getBooleanExtra(ExtraKeys.COME_FROM_RECOVER, false) ? R.string.password_changed_successfully_login : R.string.password_changed_successfully;
 
@@ -146,13 +146,13 @@ public class ChangePasswordActivity extends AppCompatActivity
                 else
                 {
                     llChangePasswordData.setVisibility(View.VISIBLE);
-                    Snackbar.make(findViewById(android.R.id.content), signUpResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content), userResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
                 }
             }
             else
             {
                 llChangePasswordData.setVisibility(View.VISIBLE);
-                Snackbar.make(findViewById(android.R.id.content), signUpResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(android.R.id.content), userResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
             }
         }
     }

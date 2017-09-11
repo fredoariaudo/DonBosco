@@ -17,7 +17,7 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
-import com.donbosco.android.porlosjovenes.model.SignUpResponse;
+import com.donbosco.android.porlosjovenes.model.UserResponse;
 import com.donbosco.android.porlosjovenes.model.User;
 
 import java.util.HashMap;
@@ -85,7 +85,7 @@ public class RecoverPasswordActivity extends AppCompatActivity
         finish();
     }
 
-    private class RecoverPasswordTask extends AsyncTask<Void, Integer, SignUpResponse>
+    private class RecoverPasswordTask extends AsyncTask<Void, Integer, UserResponse>
     {
         private String email;
 
@@ -102,23 +102,23 @@ public class RecoverPasswordActivity extends AppCompatActivity
         }
 
         @Override
-        protected SignUpResponse doInBackground(Void... voids)
+        protected UserResponse doInBackground(Void... voids)
         {
             HashMap<String, String> userData = new HashMap<>();
             userData.put(RestApiConstants.PARAM_EMAIL, email);
 
-            SignUpResponse signUpResponse = RestApi.getInstance().recoverPassword(userData, "a@a.com");
-            return signUpResponse;
+            UserResponse userResponse = RestApi.getInstance().recoverPassword(userData, "a@a.com");
+            return userResponse;
         }
 
         @Override
-        protected void onPostExecute(SignUpResponse signUpResponse)
+        protected void onPostExecute(UserResponse userResponse)
         {
             pbRecoverPassword.setVisibility(View.GONE);
 
-            if(signUpResponse != null)
+            if(userResponse != null)
             {
-                if(signUpResponse.getCode() == 0)
+                if(userResponse.getCode() == 0)
                 {
                     User user = new User();
                     user.setEmail(email);
@@ -127,7 +127,7 @@ public class RecoverPasswordActivity extends AppCompatActivity
                 else
                 {
                     llRecoverPasswordData.setVisibility(View.VISIBLE);
-                    Snackbar.make(findViewById(android.R.id.content), signUpResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content), userResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
                 }
             }
             else

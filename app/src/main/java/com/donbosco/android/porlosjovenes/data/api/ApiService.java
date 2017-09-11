@@ -2,7 +2,7 @@ package com.donbosco.android.porlosjovenes.data.api;
 
 import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.model.RunResultResponse;
-import com.donbosco.android.porlosjovenes.model.SignUpResponse;
+import com.donbosco.android.porlosjovenes.model.UserResponse;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
 import com.donbosco.android.porlosjovenes.model.User;
 
@@ -20,13 +20,13 @@ public interface ApiService
     Call<User> login(@Query("email") String email, @Query("password") String password);
 
     @HTTP(method = "POST", path = "Usuario", hasBody = true)
-    Call<SignUpResponse> signUp(@Body HashMap<String, String> user);
+    Call<UserResponse> signUp(@Body HashMap<String, String> user);
 
     @HTTP(method = "POST", path = "Usuario/RecuperarPassword", hasBody = true)
-    Call<SignUpResponse> recoverPassword(@Body HashMap<String, String> user, @Query("emailAlternativo") String alternativeEmail);
+    Call<UserResponse> recoverPassword(@Body HashMap<String, String> user, @Query("emailAlternativo") String alternativeEmail);
 
     @HTTP(method = "POST", path = "Usuario/ActualizarPassword", hasBody = true)
-    Call<SignUpResponse> changePassword(@Body HashMap<String, String> user, @Query("actualPass") String currentPassword, @Query("nuevaPass") String newPassword, @Query("confirmarPass") String confirmNewPassword);
+    Call<UserResponse> changePassword(@Body HashMap<String, String> user, @Query("actualPass") String currentPassword, @Query("nuevaPass") String newPassword, @Query("confirmarPass") String confirmNewPassword);
 
     @HTTP(method = "GET", path = "Sponsor")
     Call<ArrayList<Sponsor>> getSponsors();
