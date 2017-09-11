@@ -22,6 +22,12 @@ public interface ApiService
     @HTTP(method = "POST", path = "Usuario", hasBody = true)
     Call<SignUpResponse> signUp(@Body HashMap<String, String> user);
 
+    @HTTP(method = "POST", path = "Usuario/RecuperarPassword", hasBody = true)
+    Call<SignUpResponse> recoverPassword(@Body HashMap<String, String> user, @Query("emailAlternativo") String alternativeEmail);
+
+    @HTTP(method = "POST", path = "Usuario/ActualizarPassword", hasBody = true)
+    Call<SignUpResponse> changePassword(@Body HashMap<String, String> user, @Query("actualPass") String currentPassword, @Query("nuevaPass") String newPassword, @Query("confirmarPass") String confirmNewPassword);
+
     @HTTP(method = "GET", path = "Sponsor")
     Call<ArrayList<Sponsor>> getSponsors();
 

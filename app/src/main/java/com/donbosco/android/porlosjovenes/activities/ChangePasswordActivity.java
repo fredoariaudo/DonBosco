@@ -15,6 +15,12 @@ import android.widget.ProgressBar;
 
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
+import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
+import com.donbosco.android.porlosjovenes.data.api.RestApi;
+import com.donbosco.android.porlosjovenes.model.SignUpResponse;
+import com.donbosco.android.porlosjovenes.model.User;
+
+import java.util.HashMap;
 
 public class ChangePasswordActivity extends AppCompatActivity
 {
@@ -26,11 +32,15 @@ public class ChangePasswordActivity extends AppCompatActivity
 
     private ChangePasswordTask changePasswordTask;
 
+    private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
+
+        user = (User) getIntent().getSerializableExtra(ExtraKeys.USER);
 
         llChangePasswordData = findViewById(R.id.ll_change_password_data);
         etChangePasswordCurrent = findViewById(R.id.et_change_password_current);
@@ -73,13 +83,26 @@ public class ChangePasswordActivity extends AppCompatActivity
         }
         else
         {
-            changePasswordTask = new ChangePasswordTask();
+            changePasswordTask = new ChangePasswordTask(user, currentPassword, newPassword, confirmNewPassword);
             changePasswordTask.execute();
         }
     }
 
-    private class ChangePasswordTask extends AsyncTask<Void, Integer, Void>
+    private class ChangePasswordTask extends AsyncTask<Void, Integer, SignUpResponse>
     {
+        private User user;
+        private String currentPassword;
+        private String newPassword;
+        private String confirmNewPassword;
+
+        public ChangePasswordTask(User user, String currentPassword, String newPassword, String confirmNewPassword)
+        {
+            this.user = user;
+            this.currentPassword = currentPassword;
+            this.newPassword = newPassword;
+            this.confirmNewPassword = confirmNewPassword;
+        }
+
         @Override
         protected void onPreExecute()
         {
@@ -88,37 +111,49 @@ public class ChangePasswordActivity extends AppCompatActivity
         }
 
         @Override
-        protected Void doInBackground(Void... voids)
+        protected SignUpResponse doInBackground(Void... voids)
         {
-            try
-            {
-                Thread.sleep(1500);
-            }
-            catch(Exception e)
-            {
+            HashMap<String, String> userData = new HashMap<>();
+            userData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
 
-            }
-            return null;
+            SignUpResponse signUpResponse = RestApi.getInstance().changePassword(userData, currentPassword, newPassword, confirmNewPassword);
+            return signUpResponse;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid)
+        protected void onPostExecute(SignUpResponse signUpResponse)
         {
             pbChangePassword.setVisibility(View.GONE);
 
-            int message = getIntent().getBooleanExtra(ExtraKeys.COME_FROM_RECOVER, false) ? R.string.password_changed_successfully_login : R.string.password_changed_successfully;
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this, R.style.Theme_AppCompat_Light_Dialog);
-            builder.setMessage(message);
-            builder.setPositiveButton(R.string.back, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i)
+            if(signUpResponse != null)
+            {
+                if(signUpResponse.getCode() == 0)
                 {
-                    finish();
+                    int message = getIntent().getBooleanExtra(ExtraKeys.COME_FROM_RECOVER, false) ? R.string.password_changed_successfully_login : R.string.password_changed_successfully;
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this, R.style.Theme_AppCompat_Light_Dialog);
+                    builder.setMessage(message);
+                    builder.setPositiveButton(R.string.back, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i)
+                        {
+                            finish();
+                        }
+                    });
+                    builder.setCancelable(false);
+                    builder.show();
                 }
-            });
-            builder.setCancelable(false);
-            builder.show();
+                else
+                {
+                    llChangePasswordData.setVisibility(View.VISIBLE);
+                    Snackbar.make(findViewById(android.R.id.content), signUpResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                llChangePasswordData.setVisibility(View.VISIBLE);
+                Snackbar.make(findViewById(android.R.id.content), signUpResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+            }
         }
     }
 }

@@ -71,6 +71,44 @@ public class RestApi
         return signUpResponse;
     }
 
+    public SignUpResponse recoverPassword(HashMap<String, String> userData, String alternativeEmail)
+    {
+        SignUpResponse signUpResponse = null;
+
+        try
+        {
+            Retrofit retrofit = buildRetrofit();
+            ApiService apiService = retrofit.create(ApiService.class);
+            Call<SignUpResponse> recoverPasswordCall = apiService.recoverPassword(userData, alternativeEmail);
+            signUpResponse = recoverPasswordCall.execute().body();
+        }
+        catch(Exception e)
+        {
+
+        }
+
+        return signUpResponse;
+    }
+
+    public SignUpResponse changePassword(HashMap<String, String> userData, String currentPassword, String newPassword, String confirmNewPassword)
+    {
+        SignUpResponse signUpResponse = null;
+
+        try
+        {
+            Retrofit retrofit = buildRetrofit();
+            ApiService apiService = retrofit.create(ApiService.class);
+            Call<SignUpResponse> changePasswordCall = apiService.changePassword(userData, currentPassword, newPassword, confirmNewPassword);
+            signUpResponse = changePasswordCall.execute().body();
+        }
+        catch(Exception e)
+        {
+
+        }
+
+        return signUpResponse;
+    }
+
     public RunConfig getRunConfig()
     {
         RunConfig runConfig = null;

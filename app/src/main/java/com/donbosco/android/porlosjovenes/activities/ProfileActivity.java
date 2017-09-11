@@ -14,6 +14,7 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.adapters.ProfileOptionRvAdapter;
 import com.donbosco.android.porlosjovenes.adapters.RvAdapterListener;
 import com.donbosco.android.porlosjovenes.components.NavUpActivity;
+import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.model.ProfileOption;
 import com.donbosco.android.porlosjovenes.model.User;
@@ -77,7 +78,9 @@ public class ProfileActivity extends NavUpActivity implements RvAdapterListener
 
     private void startChangePassword()
     {
+        User user = UserSerializer.getInstance().load(this);
         Intent intent = new Intent(this, ChangePasswordActivity.class);
+        intent.putExtra(ExtraKeys.USER, user);
         startActivity(intent);
     }
 

@@ -15,6 +15,12 @@ import android.widget.ProgressBar;
 
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
+import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
+import com.donbosco.android.porlosjovenes.data.api.RestApi;
+import com.donbosco.android.porlosjovenes.model.SignUpResponse;
+import com.donbosco.android.porlosjovenes.model.User;
+
+import java.util.HashMap;
 
 public class RecoverPasswordActivity extends AppCompatActivity
 {
@@ -65,21 +71,29 @@ public class RecoverPasswordActivity extends AppCompatActivity
         }
         else
         {
-            recoverPasswordTask = new RecoverPasswordTask();
+            recoverPasswordTask = new RecoverPasswordTask(etRecoverPasswordEmail.getText().toString());
             recoverPasswordTask.execute();
         }
     }
 
-    private void startChangePassword()
+    private void startChangePassword(User user)
     {
         Intent intent = new Intent(this, ChangePasswordActivity.class);
         intent.putExtra(ExtraKeys.COME_FROM_RECOVER, true);
+        intent.putExtra(ExtraKeys.USER, user);
         startActivity(intent);
         finish();
     }
 
-    private class RecoverPasswordTask extends AsyncTask<Void, Integer, Void>
+    private class RecoverPasswordTask extends AsyncTask<Void, Integer, SignUpResponse>
     {
+        private String email;
+
+        public RecoverPasswordTask(String email)
+        {
+            this.email = email;
+        }
+
         @Override
         protected void onPreExecute()
         {
@@ -88,24 +102,39 @@ public class RecoverPasswordActivity extends AppCompatActivity
         }
 
         @Override
-        protected Void doInBackground(Void... voids)
+        protected SignUpResponse doInBackground(Void... voids)
         {
-            try
-            {
-                Thread.sleep(2000);
-            }
-            catch(Exception e)
-            {
+            HashMap<String, String> userData = new HashMap<>();
+            userData.put(RestApiConstants.PARAM_EMAIL, email);
 
-            }
-            return null;
+            SignUpResponse signUpResponse = RestApi.getInstance().recoverPassword(userData, "a@a.com");
+            return signUpResponse;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid)
+        protected void onPostExecute(SignUpResponse signUpResponse)
         {
             pbRecoverPassword.setVisibility(View.GONE);
-            startChangePassword();
+
+            if(signUpResponse != null)
+            {
+                if(signUpResponse.getCode() == 0)
+                {
+                    User user = new User();
+                    user.setEmail(email);
+                    startChangePassword(user);
+                }
+                else
+                {
+                    llRecoverPasswordData.setVisibility(View.VISIBLE);
+                    Snackbar.make(findViewById(android.R.id.content), signUpResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                llRecoverPasswordData.setVisibility(View.VISIBLE);
+                Snackbar.make(findViewById(android.R.id.content), R.string.api_generic_error, Snackbar.LENGTH_SHORT).show();
+            }
         }
     }
 }
