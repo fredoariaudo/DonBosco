@@ -26,7 +26,7 @@ public interface ApiService
     Call<UserResponse> recoverPassword(@Body HashMap<String, String> user, @Query("emailAlternativo") String alternativeEmail);
 
     @HTTP(method = "POST", path = "Usuario/ActualizarPassword", hasBody = true)
-    Call<UserResponse> changePassword(@Body HashMap<String, String> user, @Query("actualPass") String currentPassword, @Query("nuevaPass") String newPassword, @Query("confirmarPass") String confirmNewPassword);
+    Call<UserResponse> changePassword(@Body HashMap<String, String> user, @Query("nuevaPass") String newPassword, @Query("confirmarPass") String confirmNewPassword);
 
     @HTTP(method = "GET", path = "Sponsor")
     Call<ArrayList<Sponsor>> getSponsors();

@@ -106,8 +106,10 @@ public class RecoverPasswordActivity extends AppCompatActivity
         {
             HashMap<String, String> userData = new HashMap<>();
             userData.put(RestApiConstants.PARAM_EMAIL, email);
+            userData.put(RestApiConstants.PARAM_USER, "");
+            userData.put(RestApiConstants.PARAM_PASSWORD, "");
 
-            UserResponse userResponse = RestApi.getInstance().recoverPassword(userData, "");
+            UserResponse userResponse = RestApi.getInstance().recoverPassword(userData, email);
             return userResponse;
         }
 

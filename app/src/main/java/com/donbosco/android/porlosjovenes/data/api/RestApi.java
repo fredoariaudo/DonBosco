@@ -90,7 +90,7 @@ public class RestApi
         return userResponse;
     }
 
-    public UserResponse changePassword(HashMap<String, String> userData, String currentPassword, String newPassword, String confirmNewPassword)
+    public UserResponse changePassword(HashMap<String, String> userData, String newPassword, String confirmNewPassword)
     {
         UserResponse userResponse = null;
 
@@ -98,7 +98,7 @@ public class RestApi
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<UserResponse> changePasswordCall = apiService.changePassword(userData, currentPassword, newPassword, confirmNewPassword);
+            Call<UserResponse> changePasswordCall = apiService.changePassword(userData, newPassword, confirmNewPassword);
             userResponse = changePasswordCall.execute().body();
         }
         catch(Exception e)
