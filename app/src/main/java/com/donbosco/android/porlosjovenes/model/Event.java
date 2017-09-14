@@ -1,17 +1,31 @@
 package com.donbosco.android.porlosjovenes.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Event implements Serializable
 {
     private static final long serialVersionUID = 6405148119412415478L;
 
+    @SerializedName("IdEvento")
+    private long id;
+    @SerializedName("Nombre")
     private String title;
     private String date;
     private String hour;
+    @SerializedName("Ubicacion")
     private String location;
     private String description;
     private String image;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

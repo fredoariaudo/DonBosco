@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -19,7 +20,9 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.activities.EventDetailActivity;
 import com.donbosco.android.porlosjovenes.adapters.EventsRvAdapter;
 import com.donbosco.android.porlosjovenes.adapters.RvAdapterListener;
+import com.donbosco.android.porlosjovenes.application.AppInfo;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
+import com.donbosco.android.porlosjovenes.data.api.RestApi;
 import com.donbosco.android.porlosjovenes.model.Event;
 
 import java.util.ArrayList;
@@ -28,6 +31,7 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
 {
     private static final int EVENTS_LOADER_ID = 1;
 
+    private View rootView;
     private ProgressBar pbEvents;
     private EventsRvAdapter adapter;
 
@@ -35,7 +39,7 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.fragment_events, container, false);
+        rootView = inflater.inflate(R.layout.fragment_events, container, false);
 
         RecyclerView rvEvents = rootView.findViewById(R.id.rv_events);
         rvEvents.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -63,6 +67,9 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
             adapter.setItems(data);
 
         pbEvents.setVisibility(View.GONE);
+
+        if(!AppInfo.connected)
+            Snackbar.make(rootView, R.string.api_generic_error, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -114,27 +121,19 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
         @Override
         public ArrayList<Event> loadInBackground()
         {
-            try
-            {
-                Thread.sleep(1000);
-            }
-            catch(Exception e)
-            {
+            ArrayList<Event> events = RestApi.getInstance().getEvents();
 
-            }
-
-            ArrayList<Event> events = new ArrayList<>();
-
-            for(int i=0; i<10; i++)
+            if(events != null)
             {
-                Event event = new Event();
-                event.setTitle("Buenos Aires corre por los jóvenes");
-                event.setDate("8 de Septiembre");
-                event.setHour("10:30 hs");
-                event.setLocation("Buenos Aires");
-                event.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
-                event.setImage("http://clubdecorredores.com/carreras/2016/c508/logo.jpg");
-                events.add(event);
+                for(Event event: events)
+                {
+                    event.setTitle("Buenos Aires corre por los jóvenes");
+                    event.setDate("8 de Septiembre");
+                    event.setHour("10:30 hs");
+                    event.setLocation("Buenos Aires");
+                    event.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+                    event.setImage("http://clubdecorredores.com/carreras/2016/c508/logo.jpg");
+                }
             }
 
             return events;
