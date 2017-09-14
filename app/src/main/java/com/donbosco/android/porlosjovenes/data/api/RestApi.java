@@ -1,6 +1,7 @@
 package com.donbosco.android.porlosjovenes.data.api;
 
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
+import com.donbosco.android.porlosjovenes.model.Event;
 import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.model.RunResultResponse;
 import com.donbosco.android.porlosjovenes.model.UserResponse;
@@ -164,6 +165,25 @@ public class RestApi
         }
 
         return sponsors;
+    }
+
+    public ArrayList<Event> getEvents()
+    {
+        ArrayList<Event> events = new ArrayList<>();
+
+        try
+        {
+            Retrofit retrofit = buildRetrofit();
+            ApiService apiService = retrofit.create(ApiService.class);
+            Call<ArrayList<Event>> eventsCall = apiService.getEvents();
+            events = eventsCall.execute().body();
+        }
+        catch(Exception e)
+        {
+
+        }
+
+        return events;
     }
 
     private Retrofit buildRetrofit()

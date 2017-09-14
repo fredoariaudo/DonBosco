@@ -1,5 +1,6 @@
 package com.donbosco.android.porlosjovenes.data.api;
 
+import com.donbosco.android.porlosjovenes.model.Event;
 import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.model.RunResultResponse;
 import com.donbosco.android.porlosjovenes.model.UserResponse;
@@ -28,8 +29,11 @@ public interface ApiService
     @HTTP(method = "POST", path = "Usuario/ActualizarPassword", hasBody = true)
     Call<UserResponse> changePassword(@Body HashMap<String, String> user, @Query("nuevaPass") String newPassword, @Query("confirmarPass") String confirmNewPassword);
 
-    @HTTP(method = "GET", path = "Sponsor")
+    @HTTP(method = "GET", path = "Empresa")
     Call<ArrayList<Sponsor>> getSponsors();
+
+    @HTTP(method = "GET", path = "Evento")
+    Call<ArrayList<Event>> getEvents();
 
     @HTTP(method = "GET", path = "Configuracion/GetConfiguracionIni")
     Call<RunConfig> getRunConfig();
