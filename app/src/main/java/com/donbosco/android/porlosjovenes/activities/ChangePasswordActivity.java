@@ -119,17 +119,7 @@ public class ChangePasswordActivity extends AppCompatActivity
             userData.put(RestApiConstants.PARAM_USER, "");
             userData.put(RestApiConstants.PARAM_PASSWORD, currentPassword);
 
-            UserResponse userResponse = RestApi.getInstance().changePassword(userData, newPassword, confirmNewPassword);
-
-            //Update new password
-            if(userResponse != null && userResponse.getCode() == 0)
-            {
-                User user = UserSerializer.getInstance().load(ChangePasswordActivity.this);
-                user.setPassword(newPassword);
-                UserSerializer.getInstance().save(ChangePasswordActivity.this, user);
-            }
-
-            return userResponse;
+            return RestApi.getInstance().changePassword(userData, newPassword, confirmNewPassword);
         }
 
         @Override
