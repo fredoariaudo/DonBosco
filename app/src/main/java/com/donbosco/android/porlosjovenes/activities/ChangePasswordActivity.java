@@ -16,7 +16,6 @@ import android.widget.ProgressBar;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
-import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
 import com.donbosco.android.porlosjovenes.model.UserResponse;
 import com.donbosco.android.porlosjovenes.model.User;
