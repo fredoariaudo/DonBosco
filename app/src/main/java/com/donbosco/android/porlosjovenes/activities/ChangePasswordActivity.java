@@ -154,7 +154,7 @@ public class ChangePasswordActivity extends AppCompatActivity
             else
             {
                 llChangePasswordData.setVisibility(View.VISIBLE);
-                Snackbar.make(findViewById(android.R.id.content), userResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(android.R.id.content), R.string.api_generic_error, Snackbar.LENGTH_SHORT).show();
             }
         }
     }
