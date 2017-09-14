@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import com.donbosco.android.porlosjovenes.adapters.ProfileOptionRvAdapter;
 import com.donbosco.android.porlosjovenes.adapters.RvAdapterListener;
 import com.donbosco.android.porlosjovenes.components.NavUpActivity;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
+import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.model.ProfileOption;
 import com.donbosco.android.porlosjovenes.model.User;
@@ -49,7 +51,10 @@ public class ProfileActivity extends NavUpActivity implements RvAdapterListener
         rvProfileOptions.setAdapter(adapter);
 
         //Initialize options adapter
-        adapter.add(new ProfileOption(ProfileOption.CHANGE_PASSWORD_ID, getString(R.string.change_password)));
+        //Do not show change password option to guest user
+        if(user != null && !TextUtils.isEmpty(user.getEmail()) && !user.getEmail().equalsIgnoreCase(RestApiConstants.GUEST_USER_DEFAULT_EMAIL))
+            adapter.add(new ProfileOption(ProfileOption.CHANGE_PASSWORD_ID, getString(R.string.change_password)));
+
         adapter.add(new ProfileOption(ProfileOption.LOGOUT, getString(R.string.logout)));
     }
 
