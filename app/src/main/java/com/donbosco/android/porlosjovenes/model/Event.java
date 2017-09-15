@@ -12,7 +12,10 @@ public class Event implements Serializable
     private long id;
     @SerializedName("Nombre")
     private String title;
-    private String date;
+    @SerializedName("VigenciaDesde")
+    private String startDate;
+    @SerializedName("VigenciaHasta")
+    private String endDate;
     private String hour;
     @SerializedName("Ubicacion")
     private String location;
@@ -35,12 +38,20 @@ public class Event implements Serializable
         this.title = title;
     }
 
-    public String getDate() {
-        return date;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public String getHour() {

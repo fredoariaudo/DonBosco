@@ -62,7 +62,7 @@ public class EventsRvAdapter extends ArrayRvAdapter<Event, EventsRvAdapter.Event
     {
         Event event = getItems().get(position);
         holder.tvEliTitle.setText(event.getTitle());
-        holder.tvEliDate.setText(event.getDate());
+        holder.tvEliDate.setText(event.getStartDate());
         holder.tvEliHour.setText(event.getHour());
         Glide.with(holder.ivEliImage.getContext()).load(event.getImage()).into(holder.ivEliImage);
     }

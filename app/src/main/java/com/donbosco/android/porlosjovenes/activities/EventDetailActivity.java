@@ -29,7 +29,7 @@ public class EventDetailActivity extends NavUpActivity
         TextView tvEventDetailLocation = findViewById(R.id.tv_event_detail_location);
         TextView tvEventDetailDescription = findViewById(R.id.tv_event_detail_description);
 
-        tvEventDetailDate.setText(event.getDate() + " - " + event.getHour());
+        tvEventDetailDate.setText(event.getStartDate() + " - " + event.getHour());
         tvEventDetailLocation.setText(event.getLocation());
         tvEventDetailDescription.setText(event.getDescription());
     }
