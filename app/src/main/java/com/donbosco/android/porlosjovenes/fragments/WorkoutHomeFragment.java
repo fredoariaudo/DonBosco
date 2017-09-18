@@ -28,15 +28,15 @@ import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
 import com.donbosco.android.porlosjovenes.model.RunConfig;
 
-public class ActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<RunConfig>
+public class WorkoutHomeFragment extends Fragment implements LoaderManager.LoaderCallbacks<RunConfig>
 {
-    private static final int RUN_CONFIG_LOADER_ID = 1;
+    private static final int WORKOUT_CONFIG_LOADER_ID = 1;
 
     private View rootView;
-    private ViewPager vpWorkoutType;
+    private ViewPager vpWorkoutHomeType;
     private WorkoutTypePagerAdapter workoutTypePagerAdapter;
-    private ProgressBar pbActivity;
-    private FloatingActionButton fabActivityBegin;
+    private ProgressBar pbWorkoutHome;
+    private FloatingActionButton fabWorkoutHomeBegin;
 
     private RunConfig runConfig;
 
@@ -44,16 +44,16 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        rootView = inflater.inflate(R.layout.fragment_activity, container, false);
+        rootView = inflater.inflate(R.layout.fragment_workout_home, container, false);
 
-        vpWorkoutType = rootView.findViewById(R.id.vp_workout_type);
+        vpWorkoutHomeType = rootView.findViewById(R.id.vp_workout_home_type);
         workoutTypePagerAdapter = new WorkoutTypePagerAdapter(getContext());
-        vpWorkoutType.setAdapter(workoutTypePagerAdapter);
+        vpWorkoutHomeType.setAdapter(workoutTypePagerAdapter);
 
-        pbActivity = rootView.findViewById(R.id.pb_activity);
+        pbWorkoutHome = rootView.findViewById(R.id.pb_workout_home);
 
-        fabActivityBegin = rootView.findViewById(R.id.fab_activity_begin);
-        fabActivityBegin.setOnClickListener(new View.OnClickListener() {
+        fabWorkoutHomeBegin = rootView.findViewById(R.id.fab_workout_home_begin);
+        fabWorkoutHomeBegin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -61,7 +61,7 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
             }
         });
 
-        getLoaderManager().initLoader(RUN_CONFIG_LOADER_ID, null, this);
+        getLoaderManager().initLoader(WORKOUT_CONFIG_LOADER_ID, null, this);
 
         return rootView;
     }
@@ -70,23 +70,23 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
     public void onStart()
     {
         super.onStart();
-        fabActivityBegin.setVisibility(View.INVISIBLE);
+        fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public Loader<RunConfig> onCreateLoader(int id, Bundle args)
     {
-        return new RunConfigLoader(getContext(), pbActivity);
+        return new RunConfigLoader(getContext(), pbWorkoutHome);
     }
 
     @Override
     public void onLoadFinished(Loader<RunConfig> loader, RunConfig data)
     {
-        pbActivity.setVisibility(View.GONE);
+        pbWorkoutHome.setVisibility(View.GONE);
 
         if(data != null)
         {
-            fabActivityBegin.show();
+            fabWorkoutHomeBegin.show();
             runConfig = data;
         }
 
@@ -104,7 +104,7 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
         LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
         {
-            int selectedWorkout = workoutTypePagerAdapter.getWorkoutTypeAt(vpWorkoutType.getCurrentItem());
+            int selectedWorkout = workoutTypePagerAdapter.getWorkoutTypeAt(vpWorkoutHomeType.getCurrentItem());
             runConfig.setWorkoutType(selectedWorkout);
             Intent intent = new Intent(getContext(), RunActivity.class);
             intent.putExtra(ExtraKeys.RUN_CONFIG, runConfig);
