@@ -90,10 +90,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 fragment = Fragment.instantiate(this, SponsorsFragment.class.getName());
                 break;
 
-            case R.id.nav_campaigns:
-                fragment = Fragment.instantiate(this, CampaignsFragment.class.getName());
-                break;
-
             case R.id.nav_events:
                 fragment = Fragment.instantiate(this, EventsFragment.class.getName());
                 break;
