@@ -28,9 +28,9 @@
             style="@style/run_values"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_run"
+            android:id="@+id/iv_run_workout_type"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:tint="@android:color/white"/>
 
     </LinearLayout>

@@ -8,6 +8,10 @@ public class RunConfig implements Serializable
 {
     private static final long serialVersionUID = -7315471573977186057L;
 
+    public static final int WORKOUT_TYPE_WALK = 0;
+    public static final int WORKOUT_TYPE_RUN = 1;
+    public static final int WORKOUT_TYPE_BIKE = 2;
+
     @SerializedName("IdSponsor")
     private long sponsorId;
     @SerializedName("Sponsor")
@@ -20,6 +24,7 @@ public class RunConfig implements Serializable
     private float amountPerDistance;
     @SerializedName("Kms")
     private float distance;
+    private int workoutType;
 
     public long getSponsorId() {
         return sponsorId;
@@ -67,5 +72,13 @@ public class RunConfig implements Serializable
 
     public void setDistance(float distance) {
         this.distance = distance;
+    }
+
+    public int getWorkoutType() {
+        return workoutType;
+    }
+
+    public void setWorkoutType(int workoutType) {
+        this.workoutType = workoutType;
     }
 }

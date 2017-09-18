@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.ProgressBar;
 
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.activities.RunActivity;
+import com.donbosco.android.porlosjovenes.adapters.WorkoutTypePagerAdapter;
 import com.donbosco.android.porlosjovenes.application.AppInfo;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
@@ -31,6 +33,8 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
     private static final int RUN_CONFIG_LOADER_ID = 1;
 
     private View rootView;
+    private ViewPager vpWorkoutType;
+    private WorkoutTypePagerAdapter workoutTypePagerAdapter;
     private ProgressBar pbActivity;
     private FloatingActionButton fabActivityBegin;
 
@@ -41,6 +45,10 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         rootView = inflater.inflate(R.layout.fragment_activity, container, false);
+
+        vpWorkoutType = rootView.findViewById(R.id.vp_workout_type);
+        workoutTypePagerAdapter = new WorkoutTypePagerAdapter(getContext());
+        vpWorkoutType.setAdapter(workoutTypePagerAdapter);
 
         pbActivity = rootView.findViewById(R.id.pb_activity);
 
@@ -96,6 +104,8 @@ public class ActivityFragment extends Fragment implements LoaderManager.LoaderCa
         LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
         {
+            int selectedWorkout = workoutTypePagerAdapter.getWorkoutTypeAt(vpWorkoutType.getCurrentItem());
+            runConfig.setWorkoutType(selectedWorkout);
             Intent intent = new Intent(getContext(), RunActivity.class);
             intent.putExtra(ExtraKeys.RUN_CONFIG, runConfig);
             startActivity(intent);

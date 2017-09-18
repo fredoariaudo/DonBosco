@@ -22,6 +22,7 @@ import com.donbosco.android.porlosjovenes.model.RunResultResponse;
 import com.donbosco.android.porlosjovenes.model.User;
 import com.donbosco.android.porlosjovenes.util.ConversionUtils;
 import com.donbosco.android.porlosjovenes.util.ResourceUtil;
+import com.donbosco.android.porlosjovenes.util.WorkoutUtils;
 
 import java.util.HashMap;
 
@@ -51,7 +52,7 @@ public class RunResultActivity extends CloseActivity
 
         TextView tvRunResultDistanceTraveled = findViewById(R.id.tv_run_result_distance_traveled);
         tvRunResultDistanceTraveled.setText(getString(R.string.distance_format, ConversionUtils.meterToKm(run.getDistance())));
-        ResourceUtil.setCompoundDrawableLeftDp(this, tvRunResultDistanceTraveled, ContextCompat.getColor(this, R.color.colorPrimary), R.drawable.ic_run, 36);
+        ResourceUtil.setCompoundDrawableLeftDp(this, tvRunResultDistanceTraveled, ContextCompat.getColor(this, R.color.colorPrimary), WorkoutUtils.getWorkoutIcon(runConfig.getWorkoutType()), 36);
 
         Button btnRunResultDonateMore = findViewById(R.id.btn_run_result_donate_more);
         btnRunResultDonateMore.setOnClickListener(new View.OnClickListener() {

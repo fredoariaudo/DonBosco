@@ -42,6 +42,7 @@ import com.donbosco.android.porlosjovenes.model.RunConfig;
 import com.donbosco.android.porlosjovenes.services.LocationService;
 import com.donbosco.android.porlosjovenes.util.ConversionUtils;
 import com.donbosco.android.porlosjovenes.util.ResourceUtil;
+import com.donbosco.android.porlosjovenes.util.WorkoutUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -81,6 +82,9 @@ public class RunActivity extends AppCompatActivity
         {
             ImageView ivRunBackground = findViewById(R.id.iv_run_background);
             Glide.with(this).load(runConfig.getSponsorImage()).into(ivRunBackground);
+
+            ImageView ivRunWorkoutType = findViewById(R.id.iv_run_workout_type);
+            ivRunWorkoutType.setImageResource(WorkoutUtils.getWorkoutIcon(runConfig.getWorkoutType()));
         }
 
         crRunTime = findViewById(R.id.cr_run_time);
