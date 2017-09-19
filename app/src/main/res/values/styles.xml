@@ -72,14 +72,14 @@
         <item name="android:textSize">56sp</item>
     </style>
 
-    <style name="run_result_together_collected">
+    <style name="workout_result_together_collected">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
-    <style name="run_result_amount_collected">
+    <style name="workout_result_amount_collected">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display3</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorAccent</item>

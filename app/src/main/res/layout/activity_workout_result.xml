@@ -36,38 +36,38 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/iv_run_result_logo"
+                android:id="@+id/iv_workout_result_logo"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_marginBottom="32dp"/>
 
             <TextView
-                android:id="@+id/tv_run_result_together_collected"
+                android:id="@+id/tv_workout_result_together_collected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:drawablePadding="8dp"
                 android:text="@string/together_collected"
-                style="@style/run_result_together_collected"/>
+                style="@style/workout_result_together_collected"/>
 
             <TextView
-                android:id="@+id/tv_run_result_collected"
+                android:id="@+id/tv_workout_result_collected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/run_result_amount_collected"/>
+                style="@style/workout_result_amount_collected"/>
 
             <TextView
-                android:id="@+id/tv_run_result_distance_traveled"
+                android:id="@+id/tv_workout_result_distance_traveled"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:drawablePadding="8dp"
                 android:paddingTop="24dp"
                 android:paddingBottom="32dp"
-                style="@style/run_result_together_collected"/>
+                style="@style/workout_result_together_collected"/>
 
             <Button
-                android:id="@+id/btn_run_result_donate_more"
+                android:id="@+id/btn_workout_result_donate_more"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/donate_more"

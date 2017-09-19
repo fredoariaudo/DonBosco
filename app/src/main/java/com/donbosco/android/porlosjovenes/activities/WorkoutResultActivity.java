@@ -30,32 +30,32 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RunResultActivity extends CloseActivity
+public class WorkoutResultActivity extends CloseActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_run_result);
+        setContentView(R.layout.activity_workout_result);
 
         Run run = (Run) getIntent().getSerializableExtra(ExtraKeys.RUN);
         RunConfig runConfig = (RunConfig) getIntent().getSerializableExtra(ExtraKeys.RUN_CONFIG);
 
-        ImageView ivRunResultLogo = findViewById(R.id.iv_run_result_logo);
-        Glide.with(this).load(runConfig.getSponsorLogo()).into(ivRunResultLogo);
+        ImageView ivWorkoutResultLogo = findViewById(R.id.iv_workout_result_logo);
+        Glide.with(this).load(runConfig.getSponsorLogo()).into(ivWorkoutResultLogo);
 
-        TextView tvRunResultTogetherCollected = findViewById(R.id.tv_run_result_together_collected);
-        ResourceUtil.setCompoundDrawableLeft(this, tvRunResultTogetherCollected, ContextCompat.getColor(this, R.color.colorPrimary), R.drawable.ic_favorite_black_24dp);
+        TextView tvWorkoutResultTogetherCollected = findViewById(R.id.tv_workout_result_together_collected);
+        ResourceUtil.setCompoundDrawableLeft(this, tvWorkoutResultTogetherCollected, ContextCompat.getColor(this, R.color.colorPrimary), R.drawable.ic_favorite_black_24dp);
 
-        TextView tvRunResultCollected = findViewById(R.id.tv_run_result_collected);
-        tvRunResultCollected.setText(getString(R.string.founds_collected_format, run.getCollected()));
+        TextView tvWorkoutResultCollected = findViewById(R.id.tv_workout_result_collected);
+        tvWorkoutResultCollected.setText(getString(R.string.founds_collected_format, run.getCollected()));
 
-        TextView tvRunResultDistanceTraveled = findViewById(R.id.tv_run_result_distance_traveled);
-        tvRunResultDistanceTraveled.setText(getString(R.string.distance_format, ConversionUtils.meterToKm(run.getDistance())));
-        ResourceUtil.setCompoundDrawableLeftDp(this, tvRunResultDistanceTraveled, ContextCompat.getColor(this, R.color.colorPrimary), WorkoutUtils.getWorkoutIcon(runConfig.getWorkoutType()), 36);
+        TextView tvWorkoutResultDistanceTraveled = findViewById(R.id.tv_workout_result_distance_traveled);
+        tvWorkoutResultDistanceTraveled.setText(getString(R.string.distance_format, ConversionUtils.meterToKm(run.getDistance())));
+        ResourceUtil.setCompoundDrawableLeftDp(this, tvWorkoutResultDistanceTraveled, ContextCompat.getColor(this, R.color.colorPrimary), WorkoutUtils.getWorkoutIcon(runConfig.getWorkoutType()), 36);
 
-        Button btnRunResultDonateMore = findViewById(R.id.btn_run_result_donate_more);
-        btnRunResultDonateMore.setOnClickListener(new View.OnClickListener() {
+        Button btnWorkoutResultDonateMore = findViewById(R.id.btn_workout_result_donate_more);
+        btnWorkoutResultDonateMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
