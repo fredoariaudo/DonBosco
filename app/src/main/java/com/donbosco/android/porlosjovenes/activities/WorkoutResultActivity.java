@@ -65,15 +65,15 @@ public class WorkoutResultActivity extends CloseActivity
 
         User user = UserSerializer.getInstance().load(this);
 
-        HashMap<String, String> runData = new HashMap<>();
-        runData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
-        runData.put(RestApiConstants.PARAM_DISTANCE, String.valueOf(ConversionUtils.meterToKm(workout.getDistance())));
-        runData.put(RestApiConstants.PARAM_END_LAT, String.valueOf(0));
-        runData.put(RestApiConstants.PARAM_END_LNG, String.valueOf(0));
-        runData.put(RestApiConstants.PARAM_SPONSOR_ID, String.valueOf(workoutConfig.getSponsorId()));
-        runData.put(RestApiConstants.PARAM_DEVICE_ID, String.valueOf(0));
+        HashMap<String, String> workoutData = new HashMap<>();
+        workoutData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
+        workoutData.put(RestApiConstants.PARAM_DISTANCE, String.valueOf(ConversionUtils.meterToKm(workout.getDistance())));
+        workoutData.put(RestApiConstants.PARAM_END_LAT, String.valueOf(0));
+        workoutData.put(RestApiConstants.PARAM_END_LNG, String.valueOf(0));
+        workoutData.put(RestApiConstants.PARAM_SPONSOR_ID, String.valueOf(workoutConfig.getSponsorId()));
+        workoutData.put(RestApiConstants.PARAM_DEVICE_ID, String.valueOf(0));
 
-        RestApi.getInstance().sendWorkoutResult(runData, new Callback<WorkoutResultResponse>() {
+        RestApi.getInstance().sendWorkoutResult(workoutData, new Callback<WorkoutResultResponse>() {
             @Override
             public void onResponse(Call<WorkoutResultResponse> call, Response<WorkoutResultResponse> response)
             {

@@ -57,7 +57,7 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
             @Override
             public void onClick(View view)
             {
-                startRun();
+                startWorkout();
             }
         });
 
@@ -76,7 +76,7 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
     @Override
     public Loader<WorkoutConfig> onCreateLoader(int id, Bundle args)
     {
-        return new RunConfigLoader(getContext(), pbWorkoutHome);
+        return new WorkoutConfigLoader(getContext(), pbWorkoutHome);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
     {
     }
 
-    private void startRun()
+    private void startWorkout()
     {
         LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
@@ -134,11 +134,11 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
         }
     }
 
-    private static class RunConfigLoader extends AsyncTaskLoader<WorkoutConfig>
+    private static class WorkoutConfigLoader extends AsyncTaskLoader<WorkoutConfig>
     {
         private ProgressBar progressBar;
 
-        public RunConfigLoader(Context context, ProgressBar progressBar)
+        public WorkoutConfigLoader(Context context, ProgressBar progressBar)
         {
             super(context);
             this.progressBar = progressBar;
