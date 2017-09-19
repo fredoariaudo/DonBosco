@@ -78,7 +78,7 @@ public class SplashActivity extends AppCompatActivity
     private void resumeRunActivity(WorkoutConfig workoutConfig)
     {
         Intent intent = new Intent(SplashActivity.this, RunActivity.class);
-        intent.putExtra(ExtraKeys.RUN_CONFIG, workoutConfig);
+        intent.putExtra(ExtraKeys.WORKOUT_CONFIG, workoutConfig);
         startActivity(intent);
         finish();
     }

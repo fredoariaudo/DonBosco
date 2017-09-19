@@ -115,7 +115,7 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
             int selectedWorkout = workoutTypePagerAdapter.getWorkoutTypeAt(vpWorkoutHomeType.getCurrentItem());
             workoutConfig.setWorkoutType(selectedWorkout);
             Intent intent = new Intent(getContext(), RunActivity.class);
-            intent.putExtra(ExtraKeys.RUN_CONFIG, workoutConfig);
+            intent.putExtra(ExtraKeys.WORKOUT_CONFIG, workoutConfig);
             startActivity(intent);
         }
         else

@@ -39,7 +39,7 @@ public class WorkoutResultActivity extends CloseActivity
         setContentView(R.layout.activity_workout_result);
 
         Run run = (Run) getIntent().getSerializableExtra(ExtraKeys.RUN);
-        WorkoutConfig workoutConfig = (WorkoutConfig) getIntent().getSerializableExtra(ExtraKeys.RUN_CONFIG);
+        WorkoutConfig workoutConfig = (WorkoutConfig) getIntent().getSerializableExtra(ExtraKeys.WORKOUT_CONFIG);
 
         ImageView ivWorkoutResultLogo = findViewById(R.id.iv_workout_result_logo);
         Glide.with(this).load(workoutConfig.getSponsorLogo()).into(ivWorkoutResultLogo);

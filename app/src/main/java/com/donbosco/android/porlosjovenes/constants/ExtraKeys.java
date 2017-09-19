@@ -6,7 +6,7 @@ public class ExtraKeys
     public final static String LOCATION_SERVICE_RESULT_CODE = "locationServiceResultCode";
     public final static String USER_POSITION = "userPosition";
     public final static String RUN = "run";
-    public final static String RUN_CONFIG = "runConfig";
+    public final static String WORKOUT_CONFIG = "workoutConfig";
     public final static String EVENT = "event";
     public final static String USER = "user";
 }

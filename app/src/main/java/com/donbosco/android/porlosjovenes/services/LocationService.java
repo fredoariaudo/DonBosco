@@ -48,7 +48,7 @@ public class LocationService extends Service implements LocationProvider.Locatio
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        workoutConfig = (WorkoutConfig) intent.getSerializableExtra(ExtraKeys.RUN_CONFIG);
+        workoutConfig = (WorkoutConfig) intent.getSerializableExtra(ExtraKeys.WORKOUT_CONFIG);
         return START_NOT_STICKY;
     }
 
@@ -200,7 +200,7 @@ public class LocationService extends Service implements LocationProvider.Locatio
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
 
         Intent resultIntent = new Intent(this, RunActivity.class);
-        resultIntent.putExtra(ExtraKeys.RUN_CONFIG, workoutConfig);
+        resultIntent.putExtra(ExtraKeys.WORKOUT_CONFIG, workoutConfig);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(resultPendingIntent);
         return builder.build();

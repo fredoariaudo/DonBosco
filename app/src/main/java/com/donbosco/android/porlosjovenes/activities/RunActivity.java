@@ -77,7 +77,7 @@ public class RunActivity extends AppCompatActivity
 
         clRunContainer = findViewById(R.id.cl_run_container);
 
-        workoutConfig = (WorkoutConfig) getIntent().getSerializableExtra(ExtraKeys.RUN_CONFIG);
+        workoutConfig = (WorkoutConfig) getIntent().getSerializableExtra(ExtraKeys.WORKOUT_CONFIG);
         if(workoutConfig != null)
         {
             ImageView ivRunBackground = findViewById(R.id.iv_run_background);
@@ -272,7 +272,7 @@ public class RunActivity extends AppCompatActivity
     private void startLocationService()
     {
         Intent intent = new Intent(this, LocationService.class);
-        intent.putExtra(ExtraKeys.RUN_CONFIG, workoutConfig);
+        intent.putExtra(ExtraKeys.WORKOUT_CONFIG, workoutConfig);
         startService(intent);
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
     }
@@ -422,7 +422,7 @@ public class RunActivity extends AppCompatActivity
 
         Intent intent = new Intent(RunActivity.this, WorkoutResultActivity.class);
         intent.putExtra(ExtraKeys.RUN, run);
-        intent.putExtra(ExtraKeys.RUN_CONFIG, workoutConfig);
+        intent.putExtra(ExtraKeys.WORKOUT_CONFIG, workoutConfig);
         startActivity(intent);
         finish();
     }
