@@ -3,7 +3,7 @@ package com.donbosco.android.porlosjovenes.data.api;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.model.Event;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
-import com.donbosco.android.porlosjovenes.model.RunResultResponse;
+import com.donbosco.android.porlosjovenes.model.WorkoutResultResponse;
 import com.donbosco.android.porlosjovenes.model.UserResponse;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
 import com.donbosco.android.porlosjovenes.model.User;
@@ -129,23 +129,23 @@ public class RestApi
         return workoutConfig;
     }
 
-    public RunResultResponse sendRunResult(HashMap<String, String> runData, Callback<RunResultResponse> callback)
+    public WorkoutResultResponse sendWorkoutResult(HashMap<String, String> workoutData, Callback<WorkoutResultResponse> callback)
     {
-        RunResultResponse runResultResponse = null;
+        WorkoutResultResponse workoutResultResponse = null;
 
         try
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<RunResultResponse> sendRunResultCall = apiService.sendRunResult(runData);
-            sendRunResultCall.enqueue(callback);
+            Call<WorkoutResultResponse> sendWorkoutResultCall = apiService.sendWorkoutResult(workoutData);
+            sendWorkoutResultCall.enqueue(callback);
         }
         catch(Exception e)
         {
 
         }
 
-        return runResultResponse;
+        return workoutResultResponse;
     }
 
     public ArrayList<Sponsor> getSponsors()

@@ -18,7 +18,7 @@ import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
 import com.donbosco.android.porlosjovenes.model.Workout;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
-import com.donbosco.android.porlosjovenes.model.RunResultResponse;
+import com.donbosco.android.porlosjovenes.model.WorkoutResultResponse;
 import com.donbosco.android.porlosjovenes.model.User;
 import com.donbosco.android.porlosjovenes.util.ConversionUtils;
 import com.donbosco.android.porlosjovenes.util.ResourceUtil;
@@ -73,14 +73,14 @@ public class WorkoutResultActivity extends CloseActivity
         runData.put(RestApiConstants.PARAM_SPONSOR_ID, String.valueOf(workoutConfig.getSponsorId()));
         runData.put(RestApiConstants.PARAM_DEVICE_ID, String.valueOf(0));
 
-        RestApi.getInstance().sendRunResult(runData, new Callback<RunResultResponse>() {
+        RestApi.getInstance().sendWorkoutResult(runData, new Callback<WorkoutResultResponse>() {
             @Override
-            public void onResponse(Call<RunResultResponse> call, Response<RunResultResponse> response)
+            public void onResponse(Call<WorkoutResultResponse> call, Response<WorkoutResultResponse> response)
             {
             }
 
             @Override
-            public void onFailure(Call<RunResultResponse> call, Throwable t)
+            public void onFailure(Call<WorkoutResultResponse> call, Throwable t)
             {
             }
         });
