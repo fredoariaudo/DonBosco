@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class RunConfig implements Serializable
+public class WorkoutConfig implements Serializable
 {
     private static final long serialVersionUID = -7315471573977186057L;
 

@@ -1,7 +1,7 @@
 package com.donbosco.android.porlosjovenes.data.api;
 
 import com.donbosco.android.porlosjovenes.model.Event;
-import com.donbosco.android.porlosjovenes.model.RunConfig;
+import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.model.RunResultResponse;
 import com.donbosco.android.porlosjovenes.model.UserResponse;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
@@ -36,7 +36,7 @@ public interface ApiService
     Call<ArrayList<Event>> getEvents();
 
     @HTTP(method = "GET", path = "Configuracion/GetConfiguracionIni")
-    Call<RunConfig> getRunConfig();
+    Call<WorkoutConfig> getWorkoutConfig();
 
     @HTTP(method = "POST", path = "Actividad", hasBody = true)
     Call<RunResultResponse> sendRunResult(@Body HashMap<String, String> runData);

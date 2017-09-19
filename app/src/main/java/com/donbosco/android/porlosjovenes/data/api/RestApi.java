@@ -2,7 +2,7 @@ package com.donbosco.android.porlosjovenes.data.api;
 
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.model.Event;
-import com.donbosco.android.porlosjovenes.model.RunConfig;
+import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.model.RunResultResponse;
 import com.donbosco.android.porlosjovenes.model.UserResponse;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
@@ -110,23 +110,23 @@ public class RestApi
         return userResponse;
     }
 
-    public RunConfig getRunConfig()
+    public WorkoutConfig getWorkoutConfig()
     {
-        RunConfig runConfig = null;
+        WorkoutConfig workoutConfig = null;
 
         try
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<RunConfig> runConfigCall = apiService.getRunConfig();
-            runConfig = runConfigCall.execute().body();
+            Call<WorkoutConfig> workoutConfigCall = apiService.getWorkoutConfig();
+            workoutConfig = workoutConfigCall.execute().body();
         }
         catch(Exception e)
         {
 
         }
 
-        return runConfig;
+        return workoutConfig;
     }
 
     public RunResultResponse sendRunResult(HashMap<String, String> runData, Callback<RunResultResponse> callback)

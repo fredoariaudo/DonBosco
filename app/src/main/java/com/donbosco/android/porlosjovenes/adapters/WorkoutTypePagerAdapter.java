@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.donbosco.android.porlosjovenes.R;
-import com.donbosco.android.porlosjovenes.model.RunConfig;
+import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.util.WorkoutUtils;
 
 public class WorkoutTypePagerAdapter extends PagerAdapter
 {
-    private int[] items = new int[]{RunConfig.WORKOUT_TYPE_WALK, RunConfig.WORKOUT_TYPE_RUN, RunConfig.WORKOUT_TYPE_BIKE};
+    private int[] items = new int[]{WorkoutConfig.WORKOUT_TYPE_WALK, WorkoutConfig.WORKOUT_TYPE_RUN, WorkoutConfig.WORKOUT_TYPE_BIKE};
     private Context context;
 
     public WorkoutTypePagerAdapter(Context context)

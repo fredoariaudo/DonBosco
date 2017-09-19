@@ -38,7 +38,7 @@ import com.donbosco.android.porlosjovenes.application.AppInfo;
 import com.donbosco.android.porlosjovenes.components.SmartChronometer;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.model.Run;
-import com.donbosco.android.porlosjovenes.model.RunConfig;
+import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.services.LocationService;
 import com.donbosco.android.porlosjovenes.util.ConversionUtils;
 import com.donbosco.android.porlosjovenes.util.ResourceUtil;
@@ -67,7 +67,7 @@ public class RunActivity extends AppCompatActivity
     private TextView tvRunDistance;
     private TextView tvRunFoundsCollected;
 
-    private RunConfig runConfig;
+    private WorkoutConfig workoutConfig;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -77,14 +77,14 @@ public class RunActivity extends AppCompatActivity
 
         clRunContainer = findViewById(R.id.cl_run_container);
 
-        runConfig = (RunConfig) getIntent().getSerializableExtra(ExtraKeys.RUN_CONFIG);
-        if(runConfig != null)
+        workoutConfig = (WorkoutConfig) getIntent().getSerializableExtra(ExtraKeys.RUN_CONFIG);
+        if(workoutConfig != null)
         {
             ImageView ivRunBackground = findViewById(R.id.iv_run_background);
-            Glide.with(this).load(runConfig.getSponsorImage()).into(ivRunBackground);
+            Glide.with(this).load(workoutConfig.getSponsorImage()).into(ivRunBackground);
 
             ImageView ivRunWorkoutType = findViewById(R.id.iv_run_workout_type);
-            ivRunWorkoutType.setImageResource(WorkoutUtils.getWorkoutIcon(runConfig.getWorkoutType()));
+            ivRunWorkoutType.setImageResource(WorkoutUtils.getWorkoutIcon(workoutConfig.getWorkoutType()));
         }
 
         crRunTime = findViewById(R.id.cr_run_time);
@@ -272,7 +272,7 @@ public class RunActivity extends AppCompatActivity
     private void startLocationService()
     {
         Intent intent = new Intent(this, LocationService.class);
-        intent.putExtra(ExtraKeys.RUN_CONFIG, runConfig);
+        intent.putExtra(ExtraKeys.RUN_CONFIG, workoutConfig);
         startService(intent);
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
     }
@@ -335,7 +335,7 @@ public class RunActivity extends AppCompatActivity
         {
             float distance = locationService.distanceCovered();
             setDistanceText(ConversionUtils.meterToKm(distance));
-            setCollectedText(ConversionUtils.foundsFromDistance(distance, runConfig));
+            setCollectedText(ConversionUtils.foundsFromDistance(distance, workoutConfig));
         }
     }
 
@@ -355,7 +355,7 @@ public class RunActivity extends AppCompatActivity
     private void showFinishAlert()
     {
         float distance = locationService.distanceCovered();
-        float collected = ConversionUtils.foundsFromDistance(distance, runConfig);
+        float collected = ConversionUtils.foundsFromDistance(distance, workoutConfig);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.finish_run);
@@ -418,11 +418,11 @@ public class RunActivity extends AppCompatActivity
         Run run = new Run();
         run.setDistance(distance);
         run.setTime(SystemClock.elapsedRealtime() - crRunTime.getBase());
-        run.setCollected(ConversionUtils.foundsFromDistance(distance, runConfig));
+        run.setCollected(ConversionUtils.foundsFromDistance(distance, workoutConfig));
 
         Intent intent = new Intent(RunActivity.this, WorkoutResultActivity.class);
         intent.putExtra(ExtraKeys.RUN, run);
-        intent.putExtra(ExtraKeys.RUN_CONFIG, runConfig);
+        intent.putExtra(ExtraKeys.RUN_CONFIG, workoutConfig);
         startActivity(intent);
         finish();
     }

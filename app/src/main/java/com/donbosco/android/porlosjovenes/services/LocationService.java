@@ -17,7 +17,7 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.activities.RunActivity;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.constants.IntentActions;
-import com.donbosco.android.porlosjovenes.model.RunConfig;
+import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 
 public class LocationService extends Service implements LocationProvider.LocationCallback
 {
@@ -33,7 +33,7 @@ public class LocationService extends Service implements LocationProvider.Locatio
 
     private IBinder mIBinder = new LocalBinder();
 
-    private RunConfig runConfig;
+    private WorkoutConfig workoutConfig;
 
     @Override
     public void onCreate()
@@ -48,7 +48,7 @@ public class LocationService extends Service implements LocationProvider.Locatio
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        runConfig = (RunConfig) intent.getSerializableExtra(ExtraKeys.RUN_CONFIG);
+        workoutConfig = (WorkoutConfig) intent.getSerializableExtra(ExtraKeys.RUN_CONFIG);
         return START_NOT_STICKY;
     }
 
@@ -168,8 +168,8 @@ public class LocationService extends Service implements LocationProvider.Locatio
         return mCurrentLocation;
     }
 
-    public RunConfig getRunConfig() {
-        return runConfig;
+    public WorkoutConfig getWorkoutConfig() {
+        return workoutConfig;
     }
 
     public class LocalBinder extends Binder
@@ -200,7 +200,7 @@ public class LocationService extends Service implements LocationProvider.Locatio
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
 
         Intent resultIntent = new Intent(this, RunActivity.class);
-        resultIntent.putExtra(ExtraKeys.RUN_CONFIG, runConfig);
+        resultIntent.putExtra(ExtraKeys.RUN_CONFIG, workoutConfig);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(resultPendingIntent);
         return builder.build();

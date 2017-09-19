@@ -1,7 +1,7 @@
 package com.donbosco.android.porlosjovenes.util;
 
 import com.donbosco.android.porlosjovenes.R;
-import com.donbosco.android.porlosjovenes.model.RunConfig;
+import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 
 public class WorkoutUtils
 {
@@ -9,13 +9,13 @@ public class WorkoutUtils
     {
         switch (type)
         {
-            case RunConfig.WORKOUT_TYPE_WALK:
+            case WorkoutConfig.WORKOUT_TYPE_WALK:
                 return R.drawable.ic_directions_walk_black_96dp;
 
-            case RunConfig.WORKOUT_TYPE_RUN:
+            case WorkoutConfig.WORKOUT_TYPE_RUN:
                 return R.drawable.ic_directions_run_black_96dp;
 
-            case RunConfig.WORKOUT_TYPE_BIKE:
+            case WorkoutConfig.WORKOUT_TYPE_BIKE:
                 return R.drawable.ic_directions_bike_black_96dp;
 
             default:

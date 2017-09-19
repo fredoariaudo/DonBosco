@@ -26,9 +26,9 @@ import com.donbosco.android.porlosjovenes.adapters.WorkoutTypePagerAdapter;
 import com.donbosco.android.porlosjovenes.application.AppInfo;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
-import com.donbosco.android.porlosjovenes.model.RunConfig;
+import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 
-public class WorkoutHomeFragment extends Fragment implements LoaderManager.LoaderCallbacks<RunConfig>
+public class WorkoutHomeFragment extends Fragment implements LoaderManager.LoaderCallbacks<WorkoutConfig>
 {
     private static final int WORKOUT_CONFIG_LOADER_ID = 1;
 
@@ -38,7 +38,7 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
     private ProgressBar pbWorkoutHome;
     private FloatingActionButton fabWorkoutHomeBegin;
 
-    private RunConfig runConfig;
+    private WorkoutConfig workoutConfig;
 
     @Nullable
     @Override
@@ -74,20 +74,28 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
     }
 
     @Override
-    public Loader<RunConfig> onCreateLoader(int id, Bundle args)
+    public Loader<WorkoutConfig> onCreateLoader(int id, Bundle args)
     {
         return new RunConfigLoader(getContext(), pbWorkoutHome);
     }
 
     @Override
-    public void onLoadFinished(Loader<RunConfig> loader, RunConfig data)
+    public void onLoadFinished(Loader<WorkoutConfig> loader, WorkoutConfig data)
     {
         pbWorkoutHome.setVisibility(View.GONE);
 
         if(data != null)
         {
             fabWorkoutHomeBegin.show();
-            runConfig = data;
+            workoutConfig = data;
+        }
+        else
+        {
+            fabWorkoutHomeBegin.show();
+            workoutConfig = new WorkoutConfig();
+            workoutConfig.setSponsorImage("http://demosweb02.grupoprominente.com/DonBoscoWebApi/Imagenes/2/enel_pantallas%20simulacion%20app-14.jpg");
+            workoutConfig.setAmountPerDistance(1);
+            workoutConfig.setDistance(1);
         }
 
         if(!AppInfo.connected)
@@ -95,7 +103,7 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
     }
 
     @Override
-    public void onLoaderReset(Loader<RunConfig> loader)
+    public void onLoaderReset(Loader<WorkoutConfig> loader)
     {
     }
 
@@ -105,9 +113,9 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
         {
             int selectedWorkout = workoutTypePagerAdapter.getWorkoutTypeAt(vpWorkoutHomeType.getCurrentItem());
-            runConfig.setWorkoutType(selectedWorkout);
+            workoutConfig.setWorkoutType(selectedWorkout);
             Intent intent = new Intent(getContext(), RunActivity.class);
-            intent.putExtra(ExtraKeys.RUN_CONFIG, runConfig);
+            intent.putExtra(ExtraKeys.RUN_CONFIG, workoutConfig);
             startActivity(intent);
         }
         else
@@ -126,7 +134,7 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
         }
     }
 
-    private static class RunConfigLoader extends AsyncTaskLoader<RunConfig>
+    private static class RunConfigLoader extends AsyncTaskLoader<WorkoutConfig>
     {
         private ProgressBar progressBar;
 
@@ -144,9 +152,9 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
         }
 
         @Override
-        public RunConfig loadInBackground()
+        public WorkoutConfig loadInBackground()
         {
-            return RestApi.getInstance().getRunConfig();
+            return RestApi.getInstance().getWorkoutConfig();
         }
     }
 }

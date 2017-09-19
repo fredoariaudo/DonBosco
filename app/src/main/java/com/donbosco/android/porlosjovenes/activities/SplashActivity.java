@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
-import com.donbosco.android.porlosjovenes.model.RunConfig;
+import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.model.User;
 import com.donbosco.android.porlosjovenes.services.LocationService;
 
@@ -34,8 +34,8 @@ public class SplashActivity extends AppCompatActivity
                 LocationService.LocalBinder localBinder = (LocationService.LocalBinder) iBinder;
                 LocationService locationService = localBinder.getService();
 
-                if(locationService != null && locationService.isUserWalking() && locationService.getRunConfig() != null)
-                    resumeRunActivity(locationService.getRunConfig());
+                if(locationService != null && locationService.isUserWalking() && locationService.getWorkoutConfig() != null)
+                    resumeRunActivity(locationService.getWorkoutConfig());
                 else
                     startNexActivity();
             }
@@ -75,10 +75,10 @@ public class SplashActivity extends AppCompatActivity
         finish();
     }
 
-    private void resumeRunActivity(RunConfig runConfig)
+    private void resumeRunActivity(WorkoutConfig workoutConfig)
     {
         Intent intent = new Intent(SplashActivity.this, RunActivity.class);
-        intent.putExtra(ExtraKeys.RUN_CONFIG, runConfig);
+        intent.putExtra(ExtraKeys.RUN_CONFIG, workoutConfig);
         startActivity(intent);
         finish();
     }
