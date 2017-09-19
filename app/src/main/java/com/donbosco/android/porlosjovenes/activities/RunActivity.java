@@ -420,7 +420,7 @@ public class RunActivity extends AppCompatActivity
         run.setTime(SystemClock.elapsedRealtime() - crRunTime.getBase());
         run.setCollected(ConversionUtils.foundsFromDistance(distance, runConfig));
 
-        Intent intent = new Intent(RunActivity.this, RunResultActivity.class);
+        Intent intent = new Intent(RunActivity.this, WorkoutResultActivity.class);
         intent.putExtra(ExtraKeys.RUN, run);
         intent.putExtra(ExtraKeys.RUN_CONFIG, runConfig);
         startActivity(intent);
