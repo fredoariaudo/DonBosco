@@ -19,7 +19,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_activity">Actividad</string>
-    <string name="nav_campaigns">Campañas</string>
     <string name="nav_events">Eventos</string>
     <string name="nav_sponsors">Alianzas</string>
     <string name="nav_profile">Mi perfil</string>
