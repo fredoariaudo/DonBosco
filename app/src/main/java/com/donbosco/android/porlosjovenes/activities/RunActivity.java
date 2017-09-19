@@ -421,7 +421,7 @@ public class RunActivity extends AppCompatActivity
         workout.setCollected(ConversionUtils.foundsFromDistance(distance, workoutConfig));
 
         Intent intent = new Intent(RunActivity.this, WorkoutResultActivity.class);
-        intent.putExtra(ExtraKeys.RUN, workout);
+        intent.putExtra(ExtraKeys.WORKOUT, workout);
         intent.putExtra(ExtraKeys.WORKOUT_CONFIG, workoutConfig);
         startActivity(intent);
         finish();

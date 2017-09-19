@@ -38,7 +38,7 @@ public class WorkoutResultActivity extends CloseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_result);
 
-        Workout workout = (Workout) getIntent().getSerializableExtra(ExtraKeys.RUN);
+        Workout workout = (Workout) getIntent().getSerializableExtra(ExtraKeys.WORKOUT);
         WorkoutConfig workoutConfig = (WorkoutConfig) getIntent().getSerializableExtra(ExtraKeys.WORKOUT_CONFIG);
 
         ImageView ivWorkoutResultLogo = findViewById(R.id.iv_workout_result_logo);
