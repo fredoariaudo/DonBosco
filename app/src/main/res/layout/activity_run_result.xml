@@ -29,8 +29,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:paddingTop="@dimen/activity_horizontal_margin"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_margin"
+            android:paddingBottom="@dimen/activity_margin"
             android:paddingLeft="@dimen/login_margin"
             android:paddingRight="@dimen/login_margin"
             android:orientation="vertical">

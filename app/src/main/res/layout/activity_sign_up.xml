@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:orientation="vertical"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_margin"
+        android:paddingBottom="@dimen/activity_margin"
         android:paddingLeft="@dimen/login_margin"
         android:paddingRight="@dimen/login_margin">
 
@@ -95,7 +95,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_margin"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/icon_inverted"/>
 
