@@ -24,7 +24,7 @@ public interface ApiService
     Call<UserResponse> signUp(@Body HashMap<String, String> user);
 
     @HTTP(method = "POST", path = "Usuario/RecuperarPassword", hasBody = true)
-    Call<UserResponse> recoverPassword(@Body HashMap<String, String> user, @Query("emailAlternativo") String alternativeEmail);
+    Call<UserResponse> recoverPassword(@Body HashMap<String, String> user);
 
     @HTTP(method = "POST", path = "Usuario/ActualizarPassword", hasBody = true)
     Call<UserResponse> changePassword(@Body HashMap<String, String> user, @Query("nuevaPass") String newPassword, @Query("confirmarPass") String confirmNewPassword);

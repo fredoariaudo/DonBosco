@@ -72,7 +72,7 @@ public class RestApi
         return userResponse;
     }
 
-    public UserResponse recoverPassword(HashMap<String, String> userData, String alternativeEmail)
+    public UserResponse recoverPassword(HashMap<String, String> userData)
     {
         UserResponse userResponse = null;
 
@@ -80,7 +80,7 @@ public class RestApi
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<UserResponse> recoverPasswordCall = apiService.recoverPassword(userData, alternativeEmail);
+            Call<UserResponse> recoverPasswordCall = apiService.recoverPassword(userData);
             userResponse = recoverPasswordCall.execute().body();
         }
         catch(Exception e)
