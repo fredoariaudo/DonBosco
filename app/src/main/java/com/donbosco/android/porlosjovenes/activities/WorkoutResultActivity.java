@@ -16,7 +16,7 @@ import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
-import com.donbosco.android.porlosjovenes.model.Run;
+import com.donbosco.android.porlosjovenes.model.Workout;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.model.RunResultResponse;
 import com.donbosco.android.porlosjovenes.model.User;
@@ -38,7 +38,7 @@ public class WorkoutResultActivity extends CloseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_result);
 
-        Run run = (Run) getIntent().getSerializableExtra(ExtraKeys.RUN);
+        Workout workout = (Workout) getIntent().getSerializableExtra(ExtraKeys.RUN);
         WorkoutConfig workoutConfig = (WorkoutConfig) getIntent().getSerializableExtra(ExtraKeys.WORKOUT_CONFIG);
 
         ImageView ivWorkoutResultLogo = findViewById(R.id.iv_workout_result_logo);
@@ -48,10 +48,10 @@ public class WorkoutResultActivity extends CloseActivity
         ResourceUtil.setCompoundDrawableLeft(this, tvWorkoutResultTogetherCollected, ContextCompat.getColor(this, R.color.colorPrimary), R.drawable.ic_favorite_black_24dp);
 
         TextView tvWorkoutResultCollected = findViewById(R.id.tv_workout_result_collected);
-        tvWorkoutResultCollected.setText(getString(R.string.founds_collected_format, run.getCollected()));
+        tvWorkoutResultCollected.setText(getString(R.string.founds_collected_format, workout.getCollected()));
 
         TextView tvWorkoutResultDistanceTraveled = findViewById(R.id.tv_workout_result_distance_traveled);
-        tvWorkoutResultDistanceTraveled.setText(getString(R.string.distance_format, ConversionUtils.meterToKm(run.getDistance())));
+        tvWorkoutResultDistanceTraveled.setText(getString(R.string.distance_format, ConversionUtils.meterToKm(workout.getDistance())));
         ResourceUtil.setCompoundDrawableLeftDp(this, tvWorkoutResultDistanceTraveled, ContextCompat.getColor(this, R.color.colorPrimary), WorkoutUtils.getWorkoutIcon(workoutConfig.getWorkoutType()), 36);
 
         Button btnWorkoutResultDonateMore = findViewById(R.id.btn_workout_result_donate_more);
@@ -67,7 +67,7 @@ public class WorkoutResultActivity extends CloseActivity
 
         HashMap<String, String> runData = new HashMap<>();
         runData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
-        runData.put(RestApiConstants.PARAM_DISTANCE, String.valueOf(ConversionUtils.meterToKm(run.getDistance())));
+        runData.put(RestApiConstants.PARAM_DISTANCE, String.valueOf(ConversionUtils.meterToKm(workout.getDistance())));
         runData.put(RestApiConstants.PARAM_END_LAT, String.valueOf(0));
         runData.put(RestApiConstants.PARAM_END_LNG, String.valueOf(0));
         runData.put(RestApiConstants.PARAM_SPONSOR_ID, String.valueOf(workoutConfig.getSponsorId()));

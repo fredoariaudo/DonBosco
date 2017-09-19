@@ -37,7 +37,7 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.application.AppInfo;
 import com.donbosco.android.porlosjovenes.components.SmartChronometer;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
-import com.donbosco.android.porlosjovenes.model.Run;
+import com.donbosco.android.porlosjovenes.model.Workout;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.services.LocationService;
 import com.donbosco.android.porlosjovenes.util.ConversionUtils;
@@ -415,13 +415,13 @@ public class RunActivity extends AppCompatActivity
 
         float distance = locationService.distanceCovered();
 
-        Run run = new Run();
-        run.setDistance(distance);
-        run.setTime(SystemClock.elapsedRealtime() - crRunTime.getBase());
-        run.setCollected(ConversionUtils.foundsFromDistance(distance, workoutConfig));
+        Workout workout = new Workout();
+        workout.setDistance(distance);
+        workout.setTime(SystemClock.elapsedRealtime() - crRunTime.getBase());
+        workout.setCollected(ConversionUtils.foundsFromDistance(distance, workoutConfig));
 
         Intent intent = new Intent(RunActivity.this, WorkoutResultActivity.class);
-        intent.putExtra(ExtraKeys.RUN, run);
+        intent.putExtra(ExtraKeys.RUN, workout);
         intent.putExtra(ExtraKeys.WORKOUT_CONFIG, workoutConfig);
         startActivity(intent);
         finish();

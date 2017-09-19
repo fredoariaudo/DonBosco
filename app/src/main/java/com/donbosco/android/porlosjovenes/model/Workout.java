@@ -2,7 +2,7 @@ package com.donbosco.android.porlosjovenes.model;
 
 import java.io.Serializable;
 
-public class Run implements Serializable
+public class Workout implements Serializable
 {
     private static final long serialVersionUID = 1951151032906319932L;
 
