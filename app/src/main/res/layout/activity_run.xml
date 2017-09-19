@@ -74,7 +74,7 @@
             android:id="@+id/fab_run_finish"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/activity_margin"
             android:tint="@android:color/white"
             android:src="@drawable/ic_stop_black_24dp"/>
 
