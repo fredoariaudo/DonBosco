@@ -1,9 +1,9 @@
 package com.donbosco.android.porlosjovenes.data.api;
 
 import com.donbosco.android.porlosjovenes.model.Event;
+import com.donbosco.android.porlosjovenes.model.UserResponse;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.model.WorkoutResultResponse;
-import com.donbosco.android.porlosjovenes.model.UserResponse;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
 import com.donbosco.android.porlosjovenes.model.User;
 
@@ -34,6 +34,12 @@ public interface ApiService
 
     @HTTP(method = "GET", path = "Evento")
     Call<ArrayList<Event>> getEvents();
+
+    @HTTP(method = "POST", path = "Usuario/AltaEvento")
+    Call<UserResponse> signInEvent(@Body HashMap<String, String> user, @Query("idEvento") long eventId);
+
+    @HTTP(method = "POST", path = "Usuario/BajaEvento")
+    Call<UserResponse> signOutEvent(@Body HashMap<String, String> user, @Query("idEvento") long eventId);
 
     @HTTP(method = "GET", path = "Configuracion/GetConfiguracionIni")
     Call<WorkoutConfig> getWorkoutConfig();
