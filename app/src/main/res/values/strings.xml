@@ -13,6 +13,7 @@
     <string name="passwords_do_not_match">Las contraseñas no coinciden.</string>
     <string name="send">Enviar</string>
     <string name="change">Cambiar</string>
+    <string name="new_password_sent">Se ha enviado un e-mail con una nueva contraseña.</string>
     <string name="password_changed_successfully_login">La contraseña se cambio con éxito. Debe volver a loguearse.</string>
     <string name="password_changed_successfully">La contraseña se cambio con éxito.</string>
     <string name="back">Volver</string>

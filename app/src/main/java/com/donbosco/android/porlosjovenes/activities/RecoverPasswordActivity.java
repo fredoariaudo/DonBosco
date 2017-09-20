@@ -1,8 +1,10 @@
 package com.donbosco.android.porlosjovenes.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -121,9 +123,27 @@ public class RecoverPasswordActivity extends AppCompatActivity
             {
                 if(userResponse.getCode() == 0)
                 {
-                    User user = new User();
-                    user.setEmail(email);
-                    startChangePassword(user);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RecoverPasswordActivity.this, R.style.Theme_AppCompat_Light_Dialog);
+                    builder.setMessage(R.string.new_password_sent);
+                    builder.setPositiveButton(R.string.change_password, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i)
+                        {
+                            User user = new User();
+                            user.setEmail(email);
+                            startChangePassword(user);
+                        }
+
+                    });
+                    builder.setNegativeButton(R.string.back, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i)
+                        {
+                            finish();
+                        }
+                    });
+                    builder.setCancelable(false);
+                    builder.show();
                 }
                 else
                 {
