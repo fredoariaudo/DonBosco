@@ -19,7 +19,7 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
-import com.donbosco.android.porlosjovenes.model.UserResponse;
+import com.donbosco.android.porlosjovenes.model.GenericResponse;
 import com.donbosco.android.porlosjovenes.model.User;
 
 import java.util.HashMap;
@@ -87,7 +87,7 @@ public class RecoverPasswordActivity extends AppCompatActivity
         finish();
     }
 
-    private class RecoverPasswordTask extends AsyncTask<Void, Integer, UserResponse>
+    private class RecoverPasswordTask extends AsyncTask<Void, Integer, GenericResponse>
     {
         private String email;
 
@@ -104,7 +104,7 @@ public class RecoverPasswordActivity extends AppCompatActivity
         }
 
         @Override
-        protected UserResponse doInBackground(Void... voids)
+        protected GenericResponse doInBackground(Void... voids)
         {
             HashMap<String, String> userData = new HashMap<>();
             userData.put(RestApiConstants.PARAM_EMAIL, email);
@@ -115,13 +115,13 @@ public class RecoverPasswordActivity extends AppCompatActivity
         }
 
         @Override
-        protected void onPostExecute(UserResponse userResponse)
+        protected void onPostExecute(GenericResponse genericResponse)
         {
             pbRecoverPassword.setVisibility(View.GONE);
 
-            if(userResponse != null)
+            if(genericResponse != null)
             {
-                if(userResponse.getCode() == 0)
+                if(genericResponse.getCode() == 0)
                 {
                     AlertDialog.Builder builder = new AlertDialog.Builder(RecoverPasswordActivity.this, R.style.Theme_AppCompat_Light_Dialog);
                     builder.setMessage(R.string.new_password_sent);
@@ -148,7 +148,7 @@ public class RecoverPasswordActivity extends AppCompatActivity
                 else
                 {
                     llRecoverPasswordData.setVisibility(View.VISIBLE);
-                    Snackbar.make(findViewById(android.R.id.content), userResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content), genericResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
                 }
             }
             else

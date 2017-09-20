@@ -1,7 +1,7 @@
 package com.donbosco.android.porlosjovenes.data.api;
 
 import com.donbosco.android.porlosjovenes.model.Event;
-import com.donbosco.android.porlosjovenes.model.UserResponse;
+import com.donbosco.android.porlosjovenes.model.GenericResponse;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.model.WorkoutResultResponse;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
@@ -21,13 +21,13 @@ public interface ApiService
     Call<User> login(@Query("email") String email, @Query("password") String password);
 
     @HTTP(method = "POST", path = "Usuario", hasBody = true)
-    Call<UserResponse> signUp(@Body HashMap<String, String> user);
+    Call<GenericResponse> signUp(@Body HashMap<String, String> user);
 
     @HTTP(method = "POST", path = "Usuario/RecuperarPassword", hasBody = true)
-    Call<UserResponse> recoverPassword(@Body HashMap<String, String> user);
+    Call<GenericResponse> recoverPassword(@Body HashMap<String, String> user);
 
     @HTTP(method = "POST", path = "Usuario/ActualizarPassword", hasBody = true)
-    Call<UserResponse> changePassword(@Body HashMap<String, String> user, @Query("nuevaPass") String newPassword, @Query("confirmarPass") String confirmNewPassword);
+    Call<GenericResponse> changePassword(@Body HashMap<String, String> user, @Query("nuevaPass") String newPassword, @Query("confirmarPass") String confirmNewPassword);
 
     @HTTP(method = "GET", path = "Empresa")
     Call<ArrayList<Sponsor>> getSponsors();
@@ -36,10 +36,10 @@ public interface ApiService
     Call<ArrayList<Event>> getEvents();
 
     @HTTP(method = "POST", path = "Usuario/AltaEvento")
-    Call<UserResponse> signInEvent(@Body HashMap<String, String> user, @Query("idEvento") long eventId);
+    Call<GenericResponse> signInEvent(@Body HashMap<String, String> user, @Query("idEvento") long eventId);
 
     @HTTP(method = "POST", path = "Usuario/BajaEvento")
-    Call<UserResponse> signOutEvent(@Body HashMap<String, String> user, @Query("idEvento") long eventId);
+    Call<GenericResponse> signOutEvent(@Body HashMap<String, String> user, @Query("idEvento") long eventId);
 
     @HTTP(method = "GET", path = "Configuracion/GetConfiguracionIni")
     Call<WorkoutConfig> getWorkoutConfig();

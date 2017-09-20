@@ -2,7 +2,7 @@ package com.donbosco.android.porlosjovenes.data.api;
 
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.model.Event;
-import com.donbosco.android.porlosjovenes.model.UserResponse;
+import com.donbosco.android.porlosjovenes.model.GenericResponse;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.model.WorkoutResultResponse;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
@@ -53,61 +53,61 @@ public class RestApi
         return user;
     }
 
-    public UserResponse signUp(HashMap<String, String> userData)
+    public GenericResponse signUp(HashMap<String, String> userData)
     {
-        UserResponse userResponse = null;
+        GenericResponse genericResponse = null;
 
         try
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<UserResponse> signUpCall = apiService.signUp(userData);
-            userResponse = signUpCall.execute().body();
+            Call<GenericResponse> signUpCall = apiService.signUp(userData);
+            genericResponse = signUpCall.execute().body();
         }
         catch(Exception e)
         {
 
         }
 
-        return userResponse;
+        return genericResponse;
     }
 
-    public UserResponse recoverPassword(HashMap<String, String> userData)
+    public GenericResponse recoverPassword(HashMap<String, String> userData)
     {
-        UserResponse userResponse = null;
+        GenericResponse genericResponse = null;
 
         try
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<UserResponse> recoverPasswordCall = apiService.recoverPassword(userData);
-            userResponse = recoverPasswordCall.execute().body();
+            Call<GenericResponse> recoverPasswordCall = apiService.recoverPassword(userData);
+            genericResponse = recoverPasswordCall.execute().body();
         }
         catch(Exception e)
         {
 
         }
 
-        return userResponse;
+        return genericResponse;
     }
 
-    public UserResponse changePassword(HashMap<String, String> userData, String newPassword, String confirmNewPassword)
+    public GenericResponse changePassword(HashMap<String, String> userData, String newPassword, String confirmNewPassword)
     {
-        UserResponse userResponse = null;
+        GenericResponse genericResponse = null;
 
         try
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<UserResponse> changePasswordCall = apiService.changePassword(userData, newPassword, confirmNewPassword);
-            userResponse = changePasswordCall.execute().body();
+            Call<GenericResponse> changePasswordCall = apiService.changePassword(userData, newPassword, confirmNewPassword);
+            genericResponse = changePasswordCall.execute().body();
         }
         catch(Exception e)
         {
 
         }
 
-        return userResponse;
+        return genericResponse;
     }
 
     public WorkoutConfig getWorkoutConfig()
@@ -186,15 +186,15 @@ public class RestApi
         return events;
     }
 
-    private UserResponse signInEvent(HashMap<String, String> user, long eventId)
+    private GenericResponse signInEvent(HashMap<String, String> user, long eventId)
     {
-        UserResponse genericResponse = null;
+        GenericResponse genericResponse = null;
 
         try
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<UserResponse> signInEventCall = apiService.signInEvent(user, eventId);
+            Call<GenericResponse> signInEventCall = apiService.signInEvent(user, eventId);
             genericResponse = signInEventCall.execute().body();
         }
         catch(Exception e)
@@ -202,18 +202,18 @@ public class RestApi
 
         }
 
-        return  genericResponse;
+        return genericResponse;
     }
 
-    private UserResponse signOutEvent(HashMap<String, String> user, long eventId)
+    private GenericResponse signOutEvent(HashMap<String, String> user, long eventId)
     {
-        UserResponse genericResponse = null;
+        GenericResponse genericResponse = null;
 
         try
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<UserResponse> signOutEventCall = apiService.signOutEvent(user, eventId);
+            Call<GenericResponse> signOutEventCall = apiService.signOutEvent(user, eventId);
             genericResponse = signOutEventCall.execute().body();
         }
         catch(Exception e)
@@ -221,7 +221,7 @@ public class RestApi
 
         }
 
-        return  genericResponse;
+        return genericResponse;
     }
 
     private Retrofit buildRetrofit()

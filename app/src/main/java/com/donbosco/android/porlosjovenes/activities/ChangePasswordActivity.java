@@ -17,7 +17,7 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
-import com.donbosco.android.porlosjovenes.model.UserResponse;
+import com.donbosco.android.porlosjovenes.model.GenericResponse;
 import com.donbosco.android.porlosjovenes.model.User;
 
 import java.util.HashMap;
@@ -88,7 +88,7 @@ public class ChangePasswordActivity extends AppCompatActivity
         }
     }
 
-    private class ChangePasswordTask extends AsyncTask<Void, Integer, UserResponse>
+    private class ChangePasswordTask extends AsyncTask<Void, Integer, GenericResponse>
     {
         private User user;
         private String currentPassword;
@@ -111,7 +111,7 @@ public class ChangePasswordActivity extends AppCompatActivity
         }
 
         @Override
-        protected UserResponse doInBackground(Void... voids)
+        protected GenericResponse doInBackground(Void... voids)
         {
             HashMap<String, String> userData = new HashMap<>();
             userData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
@@ -122,13 +122,13 @@ public class ChangePasswordActivity extends AppCompatActivity
         }
 
         @Override
-        protected void onPostExecute(UserResponse userResponse)
+        protected void onPostExecute(GenericResponse genericResponse)
         {
             pbChangePassword.setVisibility(View.GONE);
 
-            if(userResponse != null)
+            if(genericResponse != null)
             {
-                if(userResponse.getCode() == 0)
+                if(genericResponse.getCode() == 0)
                 {
                     int message = getIntent().getBooleanExtra(ExtraKeys.COME_FROM_RECOVER, false) ? R.string.password_changed_successfully_login : R.string.password_changed_successfully;
 
@@ -147,7 +147,7 @@ public class ChangePasswordActivity extends AppCompatActivity
                 else
                 {
                     llChangePasswordData.setVisibility(View.VISIBLE);
-                    Snackbar.make(findViewById(android.R.id.content), userResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content), genericResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
                 }
             }
             else
