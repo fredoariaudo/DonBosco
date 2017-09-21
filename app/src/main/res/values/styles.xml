@@ -90,4 +90,15 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="event_rv_item_title">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="event_rv_item_subtitle">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorGreyDb</item>
+    </style>
+
 </resources>

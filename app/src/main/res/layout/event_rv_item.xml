@@ -28,20 +28,19 @@
                 android:id="@+id/tv_eli_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@color/colorPrimary"/>
+                style="@style/event_rv_item_title"/>
 
             <TextView
                 android:id="@+id/tv_eli_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+                style="@style/event_rv_item_subtitle"/>
 
             <TextView
                 android:id="@+id/tv_eli_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+                style="@style/event_rv_item_subtitle"/>
 
         </LinearLayout>
 
