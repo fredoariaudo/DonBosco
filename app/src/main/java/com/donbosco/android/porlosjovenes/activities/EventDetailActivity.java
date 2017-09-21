@@ -1,8 +1,10 @@
 package com.donbosco.android.porlosjovenes.activities;
 
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -74,21 +76,33 @@ public class EventDetailActivity extends NavUpActivity
     private void signInOut()
     {
         if(user.getActiveEvents().contains(event.getId()))
-        {
             signOut();
-        }
         else
-        {
             signIn();
-        }
     }
 
     private void signIn()
     {
         if(signInEventTask == null || !signInEventTask.getStatus().equals(AsyncTask.Status.RUNNING))
         {
-            signInEventTask = new SignInEventTask();
-            signInEventTask.execute();
+            AlertDialog.Builder builder = new AlertDialog.Builder(EventDetailActivity.this);
+            builder.setMessage(R.string.want_sing_in_event);
+            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+                    signInEventTask = new SignInEventTask();
+                    signInEventTask.execute();
+                }
+
+            });
+            builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+                }
+            });
+            builder.show();
         }
     }
 
@@ -96,8 +110,24 @@ public class EventDetailActivity extends NavUpActivity
     {
         if(signOutEventTask == null || !signOutEventTask.getStatus().equals(AsyncTask.Status.RUNNING))
         {
-            signOutEventTask = new SignOutEventTask();
-            signOutEventTask.execute();
+            AlertDialog.Builder builder = new AlertDialog.Builder(EventDetailActivity.this);
+            builder.setMessage(R.string.want_sing_out_event);
+            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+                    signOutEventTask = new SignOutEventTask();
+                    signOutEventTask.execute();
+                }
+
+            });
+            builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+                }
+            });
+            builder.show();
         }
     }
 
