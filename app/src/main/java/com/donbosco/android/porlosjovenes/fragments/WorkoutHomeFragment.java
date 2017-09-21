@@ -61,8 +61,6 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
             }
         });
 
-        getLoaderManager().initLoader(WORKOUT_CONFIG_LOADER_ID, null, this);
-
         return rootView;
     }
 
@@ -70,7 +68,19 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
     public void onStart()
     {
         super.onStart();
+
+        //Init the loader whenever the fragment is visible
         fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
+        getLoaderManager().initLoader(WORKOUT_CONFIG_LOADER_ID, null, this);
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+
+        //Destroy the loader to force reload workout config next time fragment is visible
+        getLoaderManager().destroyLoader(WORKOUT_CONFIG_LOADER_ID);
     }
 
     @Override
@@ -88,14 +98,6 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
         {
             fabWorkoutHomeBegin.show();
             workoutConfig = data;
-        }
-        else
-        {
-            fabWorkoutHomeBegin.show();
-            workoutConfig = new WorkoutConfig();
-            workoutConfig.setSponsorImage("http://demosweb02.grupoprominente.com/DonBoscoWebApi/Imagenes/2/enel_pantallas%20simulacion%20app-14.jpg");
-            workoutConfig.setAmountPerDistance(1);
-            workoutConfig.setDistance(1);
         }
 
         if(!AppInfo.connected)
