@@ -35,11 +35,11 @@ public interface ApiService
     @HTTP(method = "GET", path = "Evento")
     Call<ArrayList<Event>> getEvents();
 
-    @HTTP(method = "POST", path = "Usuario/AltaEvento")
-    Call<GenericResponse> signInEvent(@Body HashMap<String, String> user, @Query("idEvento") long eventId);
+    @HTTP(method = "POST", path = "Usuario/AltaEvento", hasBody = true)
+    Call<GenericResponse> signInEvent(@Body HashMap<String, String> user, @Query("pIdEvento") long eventId);
 
-    @HTTP(method = "POST", path = "Usuario/BajaEvento")
-    Call<GenericResponse> signOutEvent(@Body HashMap<String, String> user, @Query("idEvento") long eventId);
+    @HTTP(method = "POST", path = "Usuario/BajaEvento", hasBody = true)
+    Call<GenericResponse> signOutEvent(@Body HashMap<String, String> user, @Query("pIdEvento") long eventId);
 
     @HTTP(method = "GET", path = "Configuracion/GetConfiguracionIni")
     Call<WorkoutConfig> getWorkoutConfig();

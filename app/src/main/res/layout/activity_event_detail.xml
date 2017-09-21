@@ -8,6 +8,7 @@
     tools:context="com.donbosco.android.porlosjovenes.activities.EventDetailActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/abl_event_detail"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -29,7 +30,19 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+                android:id="@+id/pb_event_detail_signing_in_out"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_gravity="bottom"
+                android:indeterminate="true"
+                android:visibility="invisible"
+                app:mpb_progressStyle="horizontal"
+                app:mpb_useIntrinsicPadding="false"
+                app:mpb_showProgressBackground="false"
+                style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -69,5 +82,15 @@
         </android.support.v7.widget.LinearLayoutCompat>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_event_detail_sign_in_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin"
+        android:src="@drawable/ic_check_black_24dp"
+        android:tint="@android:color/white"
+        app:layout_anchor="@id/abl_event_detail"
+        app:layout_anchorGravity="bottom|end"/>
 
 </android.support.design.widget.CoordinatorLayout>
