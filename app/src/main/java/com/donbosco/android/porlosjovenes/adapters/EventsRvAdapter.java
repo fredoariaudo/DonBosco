@@ -21,7 +21,7 @@ public class EventsRvAdapter extends ArrayRvAdapter<Event, EventsRvAdapter.Event
 
         TextView tvEliTitle;
         TextView tvEliDate;
-        TextView tvEliHour;
+        TextView tvEliLocation;
         ImageView ivEliImage;
 
         public EventViewHolder(View itemView, RvAdapterListener rvAdapterListener)
@@ -33,7 +33,7 @@ public class EventsRvAdapter extends ArrayRvAdapter<Event, EventsRvAdapter.Event
 
             tvEliTitle = itemView.findViewById(R.id.tv_eli_title);
             tvEliDate = itemView.findViewById(R.id.tv_eli_date);
-            tvEliHour = itemView.findViewById(R.id.tv_eli_hour);
+            tvEliLocation = itemView.findViewById(R.id.tv_eli_location);
             ivEliImage = itemView.findViewById(R.id.iv_eli_image);
         }
 
@@ -63,7 +63,7 @@ public class EventsRvAdapter extends ArrayRvAdapter<Event, EventsRvAdapter.Event
         Event event = getItems().get(position);
         holder.tvEliTitle.setText(event.getTitle());
         holder.tvEliDate.setText(event.getStartDate());
-        holder.tvEliHour.setText(event.getHour());
+        holder.tvEliLocation.setText(event.getLocation());
         Glide.with(holder.ivEliImage.getContext()).load(event.getImage()).into(holder.ivEliImage);
     }
 }

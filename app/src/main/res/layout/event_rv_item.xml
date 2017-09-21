@@ -28,7 +28,8 @@
                 android:id="@+id/tv_eli_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/colorPrimary"/>
 
             <TextView
                 android:id="@+id/tv_eli_date"
@@ -37,7 +38,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
             <TextView
-                android:id="@+id/tv_eli_hour"
+                android:id="@+id/tv_eli_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>

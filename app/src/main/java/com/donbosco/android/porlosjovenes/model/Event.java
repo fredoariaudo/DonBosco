@@ -16,7 +16,6 @@ public class Event implements Serializable
     private String startDate;
     @SerializedName("VigenciaHasta")
     private String endDate;
-    private String hour;
     @SerializedName("Ubicacion")
     private String location;
     private String description;
@@ -52,14 +51,6 @@ public class Event implements Serializable
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
-    }
-
-    public String getHour() {
-        return hour;
-    }
-
-    public void setHour(String hour) {
-        this.hour = hour;
     }
 
     public String getLocation() {
