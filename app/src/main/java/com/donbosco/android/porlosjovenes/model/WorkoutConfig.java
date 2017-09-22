@@ -20,6 +20,8 @@ public class WorkoutConfig implements Serializable
     private String sponsorImage;
     @SerializedName("UrlLogo")
     private String sponsorLogo;
+    @SerializedName("IdEvento")
+    private long eventId;
     @SerializedName("ValorKms")
     private float amountPerDistance;
     @SerializedName("Kms")
@@ -56,6 +58,14 @@ public class WorkoutConfig implements Serializable
 
     public void setSponsorLogo(String sponsorLogo) {
         this.sponsorLogo = sponsorLogo;
+    }
+
+    public long getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(long eventId) {
+        this.eventId = eventId;
     }
 
     public float getAmountPerDistance() {

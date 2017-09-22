@@ -72,6 +72,7 @@ public class WorkoutResultActivity extends CloseActivity
         workoutData.put(RestApiConstants.PARAM_END_LNG, String.valueOf(0));
         workoutData.put(RestApiConstants.PARAM_SPONSOR_ID, String.valueOf(workoutConfig.getSponsorId()));
         workoutData.put(RestApiConstants.PARAM_DEVICE_ID, String.valueOf(0));
+        workoutData.put(RestApiConstants.PARAM_EVENT_ID, String.valueOf(workoutConfig.getEventId()));
 
         RestApi.getInstance().sendWorkoutResult(workoutData, new Callback<WorkoutResultResponse>() {
             @Override
