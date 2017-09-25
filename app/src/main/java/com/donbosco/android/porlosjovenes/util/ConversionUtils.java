@@ -25,7 +25,7 @@ public class ConversionUtils
         {
             formattedDate = new SimpleDateFormat("dd/MM/YYYY").format(new SimpleDateFormat("yyyy-MM-dd").parse(netDate));
         }
-        catch (ParseException e)
+        catch (Exception e)
         {
         }
 
