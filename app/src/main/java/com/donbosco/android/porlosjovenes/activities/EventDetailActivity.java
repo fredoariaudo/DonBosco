@@ -20,6 +20,7 @@ import com.donbosco.android.porlosjovenes.data.api.RestApi;
 import com.donbosco.android.porlosjovenes.model.Event;
 import com.donbosco.android.porlosjovenes.model.GenericResponse;
 import com.donbosco.android.porlosjovenes.model.User;
+import com.donbosco.android.porlosjovenes.util.ConversionUtils;
 
 import java.util.HashMap;
 
@@ -69,7 +70,7 @@ public class EventDetailActivity extends NavUpActivity
         TextView tvEventDetailLocation = findViewById(R.id.tv_event_detail_location);
         TextView tvEventDetailDescription = findViewById(R.id.tv_event_detail_description);
 
-        tvEventDetailDate.setText(event.getStartDate());
+        tvEventDetailDate.setText(ConversionUtils.net2JavaDate(event.getStartDate()));
         tvEventDetailLocation.setText(event.getLocation());
         tvEventDetailDescription.setText(event.getDescription());
     }

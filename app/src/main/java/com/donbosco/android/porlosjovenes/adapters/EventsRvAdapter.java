@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.model.Event;
+import com.donbosco.android.porlosjovenes.util.ConversionUtils;
 
 public class EventsRvAdapter extends ArrayRvAdapter<Event, EventsRvAdapter.EventViewHolder>
 {
@@ -62,7 +63,7 @@ public class EventsRvAdapter extends ArrayRvAdapter<Event, EventsRvAdapter.Event
     {
         Event event = getItems().get(position);
         holder.tvEliTitle.setText(event.getTitle());
-        holder.tvEliDate.setText(event.getStartDate());
+        holder.tvEliDate.setText(ConversionUtils.net2JavaDate(event.getStartDate()));
         holder.tvEliLocation.setText(event.getLocation());
         Glide.with(holder.ivEliImage.getContext()).load(event.getImage()).into(holder.ivEliImage);
     }
