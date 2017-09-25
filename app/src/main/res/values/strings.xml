@@ -22,7 +22,8 @@
     <string name="nav_activity">Actividad</string>
     <string name="nav_events">Eventos</string>
     <string name="nav_sponsors">Alianzas</string>
-    <string name="nav_profile">Mi perfil</string>
+    <string name="nav_profile">Perfil</string>
+    <string name="nav_initiatives">Iniciativas</string>
     <string name="sure_logout">¿Esta seguro que desea cerrar sesión?</string>
     <string name="current_distance_tracked">DISTANCIA ACTUAL RECORRIDA</string>
     <string name="current_amount_collected">DONACIÓN TOTAL</string>

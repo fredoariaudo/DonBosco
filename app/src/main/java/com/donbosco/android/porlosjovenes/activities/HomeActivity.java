@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
+import com.donbosco.android.porlosjovenes.fragments.InitiativesFragment;
 import com.donbosco.android.porlosjovenes.fragments.WorkoutHomeFragment;
 import com.donbosco.android.porlosjovenes.fragments.EventsFragment;
 import com.donbosco.android.porlosjovenes.fragments.SponsorsFragment;
@@ -91,6 +92,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_events:
                 fragment = Fragment.instantiate(this, EventsFragment.class.getName());
+                break;
+
+            case R.id.nav_initiatives:
+                fragment = Fragment.instantiate(this, InitiativesFragment.class.getName());
                 break;
 
             case R.id.nav_profile:
