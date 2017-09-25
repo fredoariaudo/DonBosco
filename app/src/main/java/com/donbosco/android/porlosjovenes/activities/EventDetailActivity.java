@@ -51,7 +51,7 @@ public class EventDetailActivity extends NavUpActivity
         user = UserSerializer.getInstance().load(this);
 
         ImageView ivEventDetailImage = findViewById(R.id.iv_event_detail_image);
-        Glide.with(this).load("http://clubdecorredores.com/carreras/2016/c508/e705/flyer.jpg").into(ivEventDetailImage);
+        Glide.with(this).load(event.getImage()).into(ivEventDetailImage);
 
         fabEventDetailSignInOut = findViewById(R.id.fab_event_detail_sign_in_out);
         fabEventDetailSignInOut.setOnClickListener(new View.OnClickListener() {

@@ -19,6 +19,9 @@ public class Event implements Serializable
     @SerializedName("Ubicacion")
     private String location;
     private String description;
+    @SerializedName("UrlLogo")
+    private String logo;
+    @SerializedName("UrlImagen")
     private String image;
 
     public long getId() {
@@ -67,6 +70,14 @@ public class Event implements Serializable
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public String getImage() {
