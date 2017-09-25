@@ -64,7 +64,7 @@ public class EventDetailActivity extends NavUpActivity
 
         //Set remove icon if the user is already signed
         if(user.getActiveEvents().contains(event.getId()))
-            fabEventDetailSignInOut.setImageResource(R.drawable.ic_close_black_24dp);
+            fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_black_24dp);
 
         pbEventDetailSignInOut = findViewById(R.id.pb_event_detail_signing_in_out);
 
@@ -166,7 +166,7 @@ public class EventDetailActivity extends NavUpActivity
             {
                 user.getActiveEvents().add(event.getId());
                 UserSerializer.getInstance().save(EventDetailActivity.this, user);
-                fabEventDetailSignInOut.setImageResource(R.drawable.ic_close_black_24dp);
+                fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_black_24dp);
             }
             else
             {
@@ -200,7 +200,7 @@ public class EventDetailActivity extends NavUpActivity
             {
                 user.getActiveEvents().remove(event.getId());
                 UserSerializer.getInstance().save(EventDetailActivity.this, user);
-                fabEventDetailSignInOut.setImageResource(R.drawable.ic_check_black_24dp);
+                fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_border_black_18dp);
             }
             else
             {
