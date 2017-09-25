@@ -47,6 +47,8 @@
     <string name="change_password">Cambiar contraseña</string>
     <string name="want_sing_in_event">¿Desea inscribirse en el evento?</string>
     <string name="want_sing_out_event">¿Desea abandonar el evento?</string>
+    <string name="error_signing_in_event">Ocurrio un error al inscribirse al evento</string>
+    <string name="error_signing_out_event">Ocurrio un error al abandonar el evento</string>
 
     <string name="hint_user">Usuario</string>
     <string name="hint_password">Contraseña</string>

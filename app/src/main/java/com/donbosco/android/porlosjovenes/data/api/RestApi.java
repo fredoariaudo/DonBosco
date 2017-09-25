@@ -186,7 +186,7 @@ public class RestApi
         return events;
     }
 
-    private GenericResponse signInEvent(HashMap<String, String> user, long eventId)
+    public GenericResponse signInEvent(HashMap<String, String> user, long eventId)
     {
         GenericResponse genericResponse = null;
 
@@ -205,7 +205,7 @@ public class RestApi
         return genericResponse;
     }
 
-    private GenericResponse signOutEvent(HashMap<String, String> user, long eventId)
+    public GenericResponse signOutEvent(HashMap<String, String> user, long eventId)
     {
         GenericResponse genericResponse = null;
 

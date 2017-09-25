@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
@@ -154,9 +155,16 @@ public class EventDetailActivity extends NavUpActivity
         {
             pbEventDetailSignInOut.setVisibility(View.INVISIBLE);
 
-            user.getActiveEvents().add(event.getId());
-            UserSerializer.getInstance().save(EventDetailActivity.this, user);
-            fabEventDetailSignInOut.setImageResource(R.drawable.ic_close_black_24dp);
+            if(genericResponse != null && genericResponse.getCode() == 0)
+            {
+                user.getActiveEvents().add(event.getId());
+                UserSerializer.getInstance().save(EventDetailActivity.this, user);
+                fabEventDetailSignInOut.setImageResource(R.drawable.ic_close_black_24dp);
+            }
+            else
+            {
+                Snackbar.make(findViewById(android.R.id.content), R.string.error_signing_in_event, Snackbar.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -181,9 +189,16 @@ public class EventDetailActivity extends NavUpActivity
         {
             pbEventDetailSignInOut.setVisibility(View.INVISIBLE);
 
-            user.getActiveEvents().remove(event.getId());
-            UserSerializer.getInstance().save(EventDetailActivity.this, user);
-            fabEventDetailSignInOut.setImageResource(R.drawable.ic_check_black_24dp);
+            if(genericResponse != null && genericResponse.getCode() == 0)
+            {
+                user.getActiveEvents().remove(event.getId());
+                UserSerializer.getInstance().save(EventDetailActivity.this, user);
+                fabEventDetailSignInOut.setImageResource(R.drawable.ic_check_black_24dp);
+            }
+            else
+            {
+                Snackbar.make(findViewById(android.R.id.content), R.string.error_signing_out_event, Snackbar.LENGTH_SHORT).show();
+            }
         }
     }
 }
