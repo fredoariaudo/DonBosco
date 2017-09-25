@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ import com.donbosco.android.porlosjovenes.model.Event;
 import com.donbosco.android.porlosjovenes.model.GenericResponse;
 import com.donbosco.android.porlosjovenes.model.User;
 import com.donbosco.android.porlosjovenes.util.ConversionUtils;
+import com.donbosco.android.porlosjovenes.util.ResourceUtil;
 
 import java.util.HashMap;
 
@@ -69,6 +71,10 @@ public class EventDetailActivity extends NavUpActivity
         TextView tvEventDetailDate = findViewById(R.id.tv_event_detail_date);
         TextView tvEventDetailLocation = findViewById(R.id.tv_event_detail_location);
         TextView tvEventDetailDescription = findViewById(R.id.tv_event_detail_description);
+
+        //Set icons to event date and location
+        ResourceUtil.setCompoundDrawableLeftDp(this, tvEventDetailDate, ContextCompat.getColor(this, R.color.colorPrimary), R.drawable.ic_event_black_24dp, 18);
+        ResourceUtil.setCompoundDrawableLeftDp(this, tvEventDetailLocation, ContextCompat.getColor(this, R.color.colorPrimary), R.drawable.ic_place_black_24dp, 18);
 
         tvEventDetailDate.setText(ConversionUtils.net2JavaDate(event.getStartDate()));
         tvEventDetailLocation.setText(event.getLocation());
