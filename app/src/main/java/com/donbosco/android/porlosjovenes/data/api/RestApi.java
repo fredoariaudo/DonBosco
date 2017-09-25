@@ -1,7 +1,7 @@
 package com.donbosco.android.porlosjovenes.data.api;
 
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
-import com.donbosco.android.porlosjovenes.model.Event;
+import com.donbosco.android.porlosjovenes.model.EventsResponse;
 import com.donbosco.android.porlosjovenes.model.GenericResponse;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.model.WorkoutResultResponse;
@@ -167,23 +167,23 @@ public class RestApi
         return sponsors;
     }
 
-    public ArrayList<Event> getEvents()
+    public EventsResponse getEvents(String email)
     {
-        ArrayList<Event> events = new ArrayList<>();
+        EventsResponse eventsResponse = null;
 
         try
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<ArrayList<Event>> eventsCall = apiService.getEvents();
-            events = eventsCall.execute().body();
+            Call<EventsResponse> eventsCall = apiService.getEvents(email);
+            eventsResponse = eventsCall.execute().body();
         }
         catch(Exception e)
         {
 
         }
 
-        return events;
+        return eventsResponse;
     }
 
     public GenericResponse signInEvent(HashMap<String, String> user, long eventId)

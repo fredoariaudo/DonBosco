@@ -22,12 +22,13 @@ import com.donbosco.android.porlosjovenes.adapters.EventsRvAdapter;
 import com.donbosco.android.porlosjovenes.adapters.RvAdapterListener;
 import com.donbosco.android.porlosjovenes.application.AppInfo;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
+import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
 import com.donbosco.android.porlosjovenes.model.Event;
+import com.donbosco.android.porlosjovenes.model.EventsResponse;
+import com.donbosco.android.porlosjovenes.model.User;
 
-import java.util.ArrayList;
-
-public class EventsFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<Event>>, RvAdapterListener
+public class EventsFragment extends Fragment implements LoaderManager.LoaderCallbacks<EventsResponse>, RvAdapterListener
 {
     private static final int EVENTS_LOADER_ID = 1;
 
@@ -55,16 +56,16 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
     }
 
     @Override
-    public Loader<ArrayList<Event>> onCreateLoader(int id, Bundle args)
+    public Loader<EventsResponse> onCreateLoader(int id, Bundle args)
     {
         return new EventsLoader(getContext(), pbEvents);
     }
 
     @Override
-    public void onLoadFinished(Loader<ArrayList<Event>> loader, ArrayList<Event> data)
+    public void onLoadFinished(Loader<EventsResponse> loader, EventsResponse data)
     {
-        if(data != null)
-            adapter.setItems(data);
+        if(data != null && data.getEvents() != null)
+            adapter.setItems(data.getEvents());
 
         pbEvents.setVisibility(View.GONE);
 
@@ -73,7 +74,7 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
     }
 
     @Override
-    public void onLoaderReset(Loader<ArrayList<Event>> loader)
+    public void onLoaderReset(Loader<EventsResponse> loader)
     {
         adapter.clear();
     }
@@ -93,10 +94,10 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
         return false;
     }
 
-    private static class EventsLoader extends AsyncTaskLoader<ArrayList<Event>>
+    private static class EventsLoader extends AsyncTaskLoader<EventsResponse>
     {
         private ProgressBar progressBar;
-        private ArrayList<Event> events;
+        private EventsResponse eventsResponse;
 
         public EventsLoader(Context context, ProgressBar progressBar)
         {
@@ -107,9 +108,9 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
         @Override
         protected void onStartLoading()
         {
-            if(events != null)
+            if(eventsResponse != null)
             {
-                deliverResult(events);
+                deliverResult(eventsResponse);
             }
             else
             {
@@ -119,28 +120,16 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
         }
 
         @Override
-        public ArrayList<Event> loadInBackground()
+        public EventsResponse loadInBackground()
         {
-            ArrayList<Event> events = RestApi.getInstance().getEvents();
-
-            if(events != null)
-            {
-                for(Event event: events)
-                {
-                    event.setTitle("BUENOS AIRES CORRE POR LOS JÓVENES");
-                    event.setLocation("Obelisco");
-                    event.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
-                    event.setImage("http://clubdecorredores.com/carreras/2016/c508/logo.jpg");
-                }
-            }
-
-            return events;
+            User user = UserSerializer.getInstance().load(getContext());
+            return RestApi.getInstance().getEvents(user.getEmail());
         }
 
         @Override
-        public void deliverResult(ArrayList<Event> data)
+        public void deliverResult(EventsResponse data)
         {
-            this.events = data;
+            this.eventsResponse = data;
             super.deliverResult(data);
         }
     }
