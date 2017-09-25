@@ -14,8 +14,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.activities.EventDetailActivity;
 import com.donbosco.android.porlosjovenes.adapters.EventsRvAdapter;
@@ -41,6 +44,11 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         rootView = inflater.inflate(R.layout.fragment_events, container, false);
+
+        ImageView ivDbImageHeaderBackground = rootView.findViewById(R.id.iv_db_image_header_background);
+        TextView tvDbImageHeaderTitle = rootView.findViewById(R.id.tv_db_image_header_title);
+        Glide.with(getContext()).load("https://porlosjovenes.com/site/wp-content/uploads/2017/08/lunapark_extra2.jpg").into(ivDbImageHeaderBackground);
+        tvDbImageHeaderTitle.setText(R.string.header_title_events);
 
         RecyclerView rvEvents = rootView.findViewById(R.id.rv_events);
         rvEvents.setLayoutManager(new LinearLayoutManager(getContext()));
