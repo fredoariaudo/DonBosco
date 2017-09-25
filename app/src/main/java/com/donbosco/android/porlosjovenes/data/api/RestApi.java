@@ -3,6 +3,7 @@ package com.donbosco.android.porlosjovenes.data.api;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.model.EventsResponse;
 import com.donbosco.android.porlosjovenes.model.GenericResponse;
+import com.donbosco.android.porlosjovenes.model.Initiative;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.model.WorkoutResultResponse;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
@@ -222,6 +223,25 @@ public class RestApi
         }
 
         return genericResponse;
+    }
+
+    public ArrayList<Initiative> getInititatives()
+    {
+        ArrayList<Initiative> initiatives = new ArrayList<>();
+
+        try
+        {
+            Retrofit retrofit = buildRetrofit();
+            ApiService apiService = retrofit.create(ApiService.class);
+            Call<ArrayList<Initiative>> getInitiativesCall = apiService.getInitiatives();
+            initiatives = getInitiativesCall.execute().body();
+        }
+        catch(Exception e)
+        {
+
+        }
+
+        return initiatives;
     }
 
     private Retrofit buildRetrofit()

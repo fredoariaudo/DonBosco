@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.adapters.InitiativesRvAdapter;
 import com.donbosco.android.porlosjovenes.application.AppInfo;
+import com.donbosco.android.porlosjovenes.data.api.RestApi;
 import com.donbosco.android.porlosjovenes.model.Initiative;
 
 import java.util.ArrayList;
@@ -100,17 +101,7 @@ public class InitiativesFragment extends Fragment implements LoaderManager.Loade
         @Override
         public ArrayList<Initiative> loadInBackground()
         {
-            ArrayList<Initiative> initiatives = new ArrayList<>();
-
-            for(int i=1; i<4; i++)
-            {
-                Initiative initiative = new Initiative();
-                initiative.setTitle("Iniciativa "+i);
-                initiative.setDescription("Iniciativa "+i);
-                initiatives.add(initiative);
-            }
-
-            return initiatives;
+            return RestApi.getInstance().getInititatives();
         }
 
         @Override

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.model.Initiative;
 
@@ -41,5 +42,6 @@ public class InitiativesRvAdapter extends ArrayRvAdapter<Initiative, Initiatives
         Initiative initiative = getItems().get(position);
         holder.tvIliTitle.setText(initiative.getTitle());
         holder.tvIliDescription.setText(initiative.getDescription());
+        Glide.with(holder.ivIliImage.getContext()).load(initiative.getImage()).into(holder.ivIliImage);
     }
 }

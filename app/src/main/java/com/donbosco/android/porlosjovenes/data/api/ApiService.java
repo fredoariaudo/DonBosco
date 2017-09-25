@@ -2,6 +2,7 @@ package com.donbosco.android.porlosjovenes.data.api;
 
 import com.donbosco.android.porlosjovenes.model.EventsResponse;
 import com.donbosco.android.porlosjovenes.model.GenericResponse;
+import com.donbosco.android.porlosjovenes.model.Initiative;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.model.WorkoutResultResponse;
 import com.donbosco.android.porlosjovenes.model.Sponsor;
@@ -40,6 +41,9 @@ public interface ApiService
 
     @HTTP(method = "POST", path = "Usuario/BajaEvento", hasBody = true)
     Call<GenericResponse> signOutEvent(@Body HashMap<String, String> user, @Query("pIdEvento") long eventId);
+
+    @HTTP(method = "GET", path = "Iniciativa")
+    Call<ArrayList<Initiative>> getInitiatives();
 
     @HTTP(method = "GET", path = "Configuracion/GetConfiguracionIni")
     Call<WorkoutConfig> getWorkoutConfig();
