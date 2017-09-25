@@ -7,16 +7,16 @@ import java.util.ArrayList;
 public class EventsResponse
 {
     @SerializedName("EventoInscripto")
-    private long singedEvent;
+    private long signedEvent;
     @SerializedName("Eventos")
     private ArrayList<Event> events = new ArrayList<>();
 
-    public long getSingedEvent() {
-        return singedEvent;
+    public long getSignedEvent() {
+        return signedEvent;
     }
 
-    public void setSingedEvent(long singedEvent) {
-        this.singedEvent = singedEvent;
+    public void setSignedEvent(long signedEvent) {
+        this.signedEvent = signedEvent;
     }
 
     public ArrayList<Event> getEvents() {

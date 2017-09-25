@@ -123,7 +123,18 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
         public EventsResponse loadInBackground()
         {
             User user = UserSerializer.getInstance().load(getContext());
-            return RestApi.getInstance().getEvents(user.getEmail());
+            EventsResponse eventsResponse = RestApi.getInstance().getEvents(user.getEmail());
+
+            if(eventsResponse != null)
+            {
+                if(!user.getActiveEvents().contains(eventsResponse.getSignedEvent()))
+                {
+                    user.getActiveEvents().add(eventsResponse.getSignedEvent());
+                    UserSerializer.getInstance().save(getContext(), user);
+                }
+            }
+
+            return eventsResponse;
         }
 
         @Override
