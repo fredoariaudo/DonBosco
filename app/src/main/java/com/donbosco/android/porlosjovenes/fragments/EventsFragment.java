@@ -47,7 +47,7 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
 
         ImageView ivDbImageHeaderBackground = rootView.findViewById(R.id.iv_db_image_header_background);
         TextView tvDbImageHeaderTitle = rootView.findViewById(R.id.tv_db_image_header_title);
-        Glide.with(getContext()).load("https://porlosjovenes.com/site/wp-content/uploads/2017/08/lunapark_extra2.jpg").into(ivDbImageHeaderBackground);
+        Glide.with(getContext()).load(R.drawable.header_eventos).into(ivDbImageHeaderBackground);
         tvDbImageHeaderTitle.setText(R.string.header_title_events);
 
         RecyclerView rvEvents = rootView.findViewById(R.id.rv_events);

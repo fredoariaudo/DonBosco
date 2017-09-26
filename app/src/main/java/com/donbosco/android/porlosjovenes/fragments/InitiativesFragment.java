@@ -42,7 +42,7 @@ public class InitiativesFragment extends Fragment implements LoaderManager.Loade
 
         ImageView ivDbImageHeaderBackground = rootView.findViewById(R.id.iv_db_image_header_background);
         TextView tvDbImageHeaderTitle = rootView.findViewById(R.id.tv_db_image_header_title);
-        Glide.with(getContext()).load("https://porlosjovenes.com/site/wp-content/uploads/2017/08/lunapark_extra2.jpg").into(ivDbImageHeaderBackground);
+        Glide.with(getContext()).load(R.drawable.header_iniciativas).into(ivDbImageHeaderBackground);
         tvDbImageHeaderTitle.setText(R.string.header_title_initiatives);
 
         RecyclerView rvInitiatives = rootView.findViewById(R.id.rv_initiatives);
