@@ -63,8 +63,16 @@ public class EventsRvAdapter extends ArrayRvAdapter<Event, EventsRvAdapter.Event
     {
         Event event = getItems().get(position);
         holder.tvEliTitle.setText(event.getTitle());
-        holder.tvEliDate.setText(ConversionUtils.net2JavaDate(event.getStartDate()));
-        holder.tvEliLocation.setText(event.getLocation());
+        if(!event.isStandardEvent())
+        {
+            holder.tvEliDate.setText(ConversionUtils.net2JavaDate(event.getStartDate()));
+            holder.tvEliLocation.setText(event.getLocation());
+        }
+        else
+        {
+            holder.tvEliDate.setVisibility(View.GONE);
+            holder.tvEliLocation.setVisibility(View.GONE);
+        }
         Glide.with(holder.ivEliImage.getContext()).load(event.getImage()).into(holder.ivEliImage);
     }
 }

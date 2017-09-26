@@ -68,7 +68,7 @@
                 android:id="@+id/tv_event_detail_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/event_rv_item_subtitle"/>
+                style="@style/event_detail_title"/>
 
             <View
                 android:layout_width="match_parent"
@@ -83,6 +83,7 @@
                 style="@style/event_rv_item_subtitle"/>
 
             <View
+                android:id="@+id/v_date_separator"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorGreyDb"/>
@@ -95,6 +96,7 @@
                 style="@style/event_rv_item_subtitle"/>
 
             <View
+                android:id="@+id/v_location_separator"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorGreyDb"/>
@@ -103,8 +105,7 @@
                 android:id="@+id/tv_event_detail_description"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/colorGreyDb"/>
+                style="@style/event_rv_item_subtitle"/>
 
         </android.support.v7.widget.LinearLayoutCompat>
 

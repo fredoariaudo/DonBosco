@@ -74,9 +74,20 @@ public class EventDetailActivity extends NavUpActivity
         ResourceUtil.setCompoundDrawableLeft(this, tvEventDetailLocation, ContextCompat.getColor(this, R.color.colorGreyDb), R.drawable.ic_place_black_24dp);
 
         tvEventDetailTitle.setText(event.getTitle());
-        tvEventDetailDate.setText(ConversionUtils.net2JavaDate(event.getStartDate()));
-        tvEventDetailLocation.setText(event.getLocation());
         tvEventDetailDescription.setText(event.getDescription());
+
+        if(event.isStandardEvent())
+        {
+            tvEventDetailDate.setVisibility(View.GONE);
+            findViewById(R.id.v_date_separator).setVisibility(View.GONE);
+            tvEventDetailLocation.setVisibility(View.GONE);
+            findViewById(R.id.v_location_separator).setVisibility(View.GONE);
+        }
+        else
+        {
+            tvEventDetailDate.setText(ConversionUtils.net2JavaDate(event.getStartDate()));
+            tvEventDetailLocation.setText(event.getLocation());
+        }
 
         //If event is a standard event disable sign in/out fab
         //If event is a exclusive event, verify is user is signed

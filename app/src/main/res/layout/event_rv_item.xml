@@ -49,6 +49,7 @@
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
             android:layout_marginLeft="@dimen/activity_margin"/>
 
     </LinearLayout>
