@@ -88,6 +88,7 @@
     <style name="rv_item_title">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body2</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorGreyDb60</item>
     </style>
 
     <style name="event_rv_item_title">
