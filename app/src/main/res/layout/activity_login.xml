@@ -20,8 +20,8 @@
             android:layout_width="@dimen/login_logo_size"
             android:layout_height="@dimen/login_logo_size"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/login_logo_vertical_spacing"
-            android:src="@drawable/logo_1kplj_blanco" />
+            android:layout_marginBottom="0dp"
+            android:src="@drawable/logo_1kplj_blanco"/> <!--@dimen/login_logo_vertical_spacing-->
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -35,6 +35,15 @@
                 android:orientation="vertical"
                 app:divider="@drawable/login_divider"
                 app:showDividers="middle">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_login_guest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:layout_gravity="center_horizontal"
+                    android:tint="@android:color/white"
+                    android:src="@drawable/ic_play_arrow_black_24dp"/>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -95,7 +104,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/login_guest"
-                        android:theme="@style/accent_color_button"/>
+                        android:theme="@style/accent_color_button"
+                        android:visibility="gone"/>
 
                 </LinearLayout>
 

@@ -3,6 +3,7 @@ package com.donbosco.android.porlosjovenes.activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -70,6 +71,15 @@ public class LoginActivity extends AppCompatActivity
 
         Button btnLoginGuest = findViewById(R.id.btn_login_guest);
         btnLoginGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                continueAsGuest();
+            }
+        });
+
+        FloatingActionButton fabLoginGuest = findViewById(R.id.fab_login_guest);
+        fabLoginGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
