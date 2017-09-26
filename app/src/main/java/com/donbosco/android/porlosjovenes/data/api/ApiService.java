@@ -30,7 +30,7 @@ public interface ApiService
     @HTTP(method = "POST", path = "Usuario/ActualizarPassword", hasBody = true)
     Call<GenericResponse> changePassword(@Body HashMap<String, String> user, @Query("nuevaPass") String newPassword, @Query("confirmarPass") String confirmNewPassword);
 
-    @HTTP(method = "GET", path = "Empresa")
+    @HTTP(method = "GET", path = "EventoBasico/GetEmpresasEventoBasico")
     Call<ArrayList<Sponsor>> getSponsors();
 
     @HTTP(method = "GET", path = "Evento/GetEventosVigentes")
