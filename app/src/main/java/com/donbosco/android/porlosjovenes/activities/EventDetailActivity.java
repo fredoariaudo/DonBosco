@@ -80,6 +80,7 @@ public class EventDetailActivity extends NavUpActivity
 
         //If event is a standard event disable sign in/out fab
         //If event is a exclusive event, verify is user is signed
+        //Disable event sign in/out for guests
         if(event.isStandardEvent())
         {
             fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_black_24dp);
@@ -87,14 +88,21 @@ public class EventDetailActivity extends NavUpActivity
         }
         else
         {
-            if(event.isActive())
+            if(user.isGuest())
             {
-                if (user.getActiveEvents().contains(event.getId()))
-                    fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_black_24dp);
+                fabEventDetailSignInOut.setVisibility(View.GONE);
             }
             else
             {
-                fabEventDetailSignInOut.setVisibility(View.GONE);
+                if(event.isActive())
+                {
+                    if (user.getActiveEvents().contains(event.getId()))
+                        fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_black_24dp);
+                }
+                else
+                {
+                    fabEventDetailSignInOut.setVisibility(View.GONE);
+                }
             }
         }
     }

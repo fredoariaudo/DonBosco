@@ -14,6 +14,7 @@ public class User implements Serializable
     @SerializedName("Email")
     private String email;
     private String password;
+    private boolean guest;
     private ArrayList<Long> activeEvents = new ArrayList<>();
 
     public String getUserName() {
@@ -38,6 +39,14 @@ public class User implements Serializable
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isGuest() {
+        return guest;
+    }
+
+    public void setGuest(boolean guest) {
+        this.guest = guest;
     }
 
     public ArrayList<Long> getActiveEvents() {

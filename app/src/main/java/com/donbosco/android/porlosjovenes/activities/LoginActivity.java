@@ -130,6 +130,7 @@ public class LoginActivity extends AppCompatActivity
         User user = new User();
         user.setUserName(RestApiConstants.GUEST_USER_DEFAULT_USER_NAME);
         user.setEmail(RestApiConstants.GUEST_USER_DEFAULT_EMAIL);
+        user.setGuest(true);
         UserSerializer.getInstance().save(this, user);
         startHomeActivity();
     }
