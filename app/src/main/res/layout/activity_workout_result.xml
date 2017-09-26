@@ -42,6 +42,13 @@
                 android:layout_marginBottom="32dp"/>
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/thanks"
+                style="@style/workout_result_together_collected"/>
+
+            <TextView
                 android:id="@+id/tv_workout_result_together_collected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

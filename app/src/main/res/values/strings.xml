@@ -27,6 +27,7 @@
     <string name="sure_logout">¿Esta seguro que desea cerrar sesión?</string>
     <string name="current_distance_tracked">DISTANCIA ACTUAL RECORRIDA</string>
     <string name="current_amount_collected">DONACIÓN TOTAL</string>
+    <string name="thanks">¡GRACIAS!</string>
     <string name="together_collected">JUNTOS DONAMOS</string>
     <string name="finish_run">Finalizar actividad</string>
     <string name="want_finish_run">¿Desea finalizar la actividad?</string>
