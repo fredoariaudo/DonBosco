@@ -64,14 +64,16 @@ public class EventDetailActivity extends NavUpActivity
 
         pbEventDetailSignInOut = findViewById(R.id.pb_event_detail_signing_in_out);
 
+        TextView tvEventDetailTitle = findViewById(R.id.tv_event_detail_title);
         TextView tvEventDetailDate = findViewById(R.id.tv_event_detail_date);
         TextView tvEventDetailLocation = findViewById(R.id.tv_event_detail_location);
         TextView tvEventDetailDescription = findViewById(R.id.tv_event_detail_description);
 
         //Set icons to event date and location
-        ResourceUtil.setCompoundDrawableLeftDp(this, tvEventDetailDate, ContextCompat.getColor(this, R.color.colorPrimary), R.drawable.ic_event_black_24dp, 18);
-        ResourceUtil.setCompoundDrawableLeftDp(this, tvEventDetailLocation, ContextCompat.getColor(this, R.color.colorPrimary), R.drawable.ic_place_black_24dp, 18);
+        ResourceUtil.setCompoundDrawableLeft(this, tvEventDetailDate, ContextCompat.getColor(this, R.color.colorGreyDb), R.drawable.ic_event_black_24dp);
+        ResourceUtil.setCompoundDrawableLeft(this, tvEventDetailLocation, ContextCompat.getColor(this, R.color.colorGreyDb), R.drawable.ic_place_black_24dp);
 
+        tvEventDetailTitle.setText(event.getTitle());
         tvEventDetailDate.setText(ConversionUtils.net2JavaDate(event.getStartDate()));
         tvEventDetailLocation.setText(event.getLocation());
         tvEventDetailDescription.setText(event.getDescription());

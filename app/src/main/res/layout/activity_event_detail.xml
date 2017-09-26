@@ -57,9 +57,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="@dimen/activity_margin"
+            android:paddingTop="@dimen/login_margin"
+            android:paddingBottom="@dimen/activity_margin"
+            android:paddingLeft="@dimen/activity_margin"
+            android:paddingRight="@dimen/activity_margin"
             app:divider="@drawable/login_divider"
             app:showDividers="middle">
+
+            <TextView
+                android:id="@+id/tv_event_detail_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/event_rv_item_subtitle"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGreyDb"/>
 
             <TextView
                 android:id="@+id/tv_event_detail_date"
@@ -68,6 +82,11 @@
                 android:drawablePadding="16dp"
                 style="@style/event_rv_item_subtitle"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGreyDb"/>
+
             <TextView
                 android:id="@+id/tv_event_detail_location"
                 android:layout_width="match_parent"
@@ -75,11 +94,17 @@
                 android:drawablePadding="16dp"
                 style="@style/event_rv_item_subtitle"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGreyDb"/>
+
             <TextView
                 android:id="@+id/tv_event_detail_description"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorGreyDb"/>
 
         </android.support.v7.widget.LinearLayoutCompat>
 
