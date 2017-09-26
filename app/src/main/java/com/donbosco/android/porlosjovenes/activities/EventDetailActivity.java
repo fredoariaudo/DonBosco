@@ -70,8 +70,8 @@ public class EventDetailActivity extends NavUpActivity
         TextView tvEventDetailDescription = findViewById(R.id.tv_event_detail_description);
 
         //Set icons to event date and location
-        ResourceUtil.setCompoundDrawableLeft(this, tvEventDetailDate, ContextCompat.getColor(this, R.color.colorGreyDb), R.drawable.ic_event_black_24dp);
-        ResourceUtil.setCompoundDrawableLeft(this, tvEventDetailLocation, ContextCompat.getColor(this, R.color.colorGreyDb), R.drawable.ic_place_black_24dp);
+        ResourceUtil.setCompoundDrawableLeft(this, tvEventDetailDate, ContextCompat.getColor(this, R.color.colorGreyDb60), R.drawable.ic_event_black_24dp);
+        ResourceUtil.setCompoundDrawableLeft(this, tvEventDetailLocation, ContextCompat.getColor(this, R.color.colorGreyDb60), R.drawable.ic_place_black_24dp);
 
         tvEventDetailTitle.setText(event.getTitle());
         tvEventDetailDescription.setText(event.getDescription());

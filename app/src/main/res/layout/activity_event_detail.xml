@@ -73,7 +73,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorGreyDb"/>
+                android:background="@color/colorGreyDb20"/>
 
             <TextView
                 android:id="@+id/tv_event_detail_date"
@@ -86,7 +86,7 @@
                 android:id="@+id/v_date_separator"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorGreyDb"/>
+                android:background="@color/colorGreyDb20"/>
 
             <TextView
                 android:id="@+id/tv_event_detail_location"
@@ -99,7 +99,7 @@
                 android:id="@+id/v_location_separator"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorGreyDb"/>
+                android:background="@color/colorGreyDb20"/>
 
             <TextView
                 android:id="@+id/tv_event_detail_description"
