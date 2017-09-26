@@ -62,10 +62,6 @@ public class EventDetailActivity extends NavUpActivity
             }
         });
 
-        //Set remove icon if the user is already signed
-        if(user.getActiveEvents().contains(event.getId()))
-            fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_black_24dp);
-
         pbEventDetailSignInOut = findViewById(R.id.pb_event_detail_signing_in_out);
 
         TextView tvEventDetailDate = findViewById(R.id.tv_event_detail_date);
@@ -79,6 +75,26 @@ public class EventDetailActivity extends NavUpActivity
         tvEventDetailDate.setText(ConversionUtils.net2JavaDate(event.getStartDate()));
         tvEventDetailLocation.setText(event.getLocation());
         tvEventDetailDescription.setText(event.getDescription());
+
+        //If event is a standard event disable sign in/out fab
+        //If event is a exclusive event, verify is user is signed
+        if(event.isStandardEvent())
+        {
+            fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_black_24dp);
+            fabEventDetailSignInOut.setClickable(false);
+        }
+        else
+        {
+            if(event.isActive())
+            {
+                if (user.getActiveEvents().contains(event.getId()))
+                    fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_black_24dp);
+            }
+            else
+            {
+                fabEventDetailSignInOut.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void signInOut()

@@ -18,11 +18,16 @@ public class Event implements Serializable
     private String endDate;
     @SerializedName("Ubicacion")
     private String location;
+    @SerializedName("Descripcion")
     private String description;
     @SerializedName("UrlLogo")
     private String logo;
     @SerializedName("UrlImagen")
     private String image;
+    @SerializedName("EsEventoEstandar")
+    private boolean standardEvent;
+    @SerializedName("EventoEnCurso")
+    private boolean active;
 
     public long getId() {
         return id;
@@ -86,5 +91,21 @@ public class Event implements Serializable
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public boolean isStandardEvent() {
+        return standardEvent;
+    }
+
+    public void setStandardEvent(boolean standardEvent) {
+        this.standardEvent = standardEvent;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
