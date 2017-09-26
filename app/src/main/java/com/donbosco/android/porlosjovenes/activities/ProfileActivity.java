@@ -40,7 +40,8 @@ public class ProfileActivity extends NavUpActivity implements RvAdapterListener
         if(user != null)
         {
             tvProfileUserName.setText(user.getUserName());
-            tvProfileEmail.setText(user.getEmail());
+            if(!user.isGuest())
+                tvProfileEmail.setText(user.getEmail());
         }
 
         RecyclerView rvProfileOptions = findViewById(R.id.rv_profile_options);
@@ -52,7 +53,7 @@ public class ProfileActivity extends NavUpActivity implements RvAdapterListener
 
         //Initialize options adapter
         //Do not show change password option to guest user
-        if(user != null && !TextUtils.isEmpty(user.getEmail()) && !user.getEmail().equalsIgnoreCase(RestApiConstants.GUEST_USER_DEFAULT_EMAIL))
+        if(user != null && !user.isGuest())
             adapter.add(new ProfileOption(ProfileOption.CHANGE_PASSWORD_ID, getString(R.string.change_password)));
 
         adapter.add(new ProfileOption(ProfileOption.LOGOUT, getString(R.string.logout)));

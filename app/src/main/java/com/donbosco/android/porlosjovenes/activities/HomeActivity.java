@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.donbosco.android.porlosjovenes.R;
-import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.fragments.InitiativesFragment;
 import com.donbosco.android.porlosjovenes.fragments.WorkoutHomeFragment;
@@ -49,7 +48,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         {
             tvNavUserName.setText(user.getUserName());
 
-            if(!RestApiConstants.GUEST_USER_DEFAULT_EMAIL.equals(user.getEmail()))
+            if(!user.isGuest())
                 tvNavEmail.setText(user.getEmail());
         }
 

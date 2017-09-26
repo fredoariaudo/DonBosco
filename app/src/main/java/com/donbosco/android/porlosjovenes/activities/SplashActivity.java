@@ -66,7 +66,7 @@ public class SplashActivity extends AppCompatActivity
         User user = UserSerializer.getInstance().load(this);
         Intent intent;
 
-        if(user == null)
+        if(user == null || user.isGuest())
             intent = new Intent(this, LoginActivity.class);
         else
             intent = new Intent(this, HomeActivity.class);
