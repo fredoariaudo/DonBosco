@@ -23,7 +23,7 @@ public class ConversionUtils
         String formattedDate = "";
         try
         {
-            formattedDate = new SimpleDateFormat("dd/MM/YYYY").format(new SimpleDateFormat("yyyy-MM-dd").parse(netDate));
+            formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(netDate));
         }
         catch (Exception e)
         {
