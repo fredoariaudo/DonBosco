@@ -19,6 +19,7 @@ public class RestApiConstants
     public static final String PARAM_SPONSOR_ID = "IdEmpresa";
     public static final String PARAM_DEVICE_ID = "IdDispositivo";
     public static final String PARAM_EVENT_ID = "IdEvento";
+    public static final String PARAM_WORKOUT_TYPE = "TipoActividad";
 
     //Guest constants
     public static final String GUEST_USER_DEFAULT_USER_NAME = "Invitado";

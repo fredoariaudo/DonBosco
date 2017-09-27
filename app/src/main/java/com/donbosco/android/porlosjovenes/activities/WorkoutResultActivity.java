@@ -23,6 +23,7 @@ import com.donbosco.android.porlosjovenes.model.User;
 import com.donbosco.android.porlosjovenes.util.ConversionUtils;
 import com.donbosco.android.porlosjovenes.util.ResourceUtil;
 import com.donbosco.android.porlosjovenes.util.WorkoutUtils;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 
@@ -64,6 +65,7 @@ public class WorkoutResultActivity extends CloseActivity
         });
 
         User user = UserSerializer.getInstance().load(this);
+        String token = FirebaseInstanceId.getInstance().getToken();
 
         HashMap<String, String> workoutData = new HashMap<>();
         workoutData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
@@ -71,8 +73,9 @@ public class WorkoutResultActivity extends CloseActivity
         workoutData.put(RestApiConstants.PARAM_END_LAT, String.valueOf(0));
         workoutData.put(RestApiConstants.PARAM_END_LNG, String.valueOf(0));
         workoutData.put(RestApiConstants.PARAM_SPONSOR_ID, String.valueOf(workoutConfig.getSponsorId()));
-        workoutData.put(RestApiConstants.PARAM_DEVICE_ID, String.valueOf(0));
+        workoutData.put(RestApiConstants.PARAM_DEVICE_ID, token);
         workoutData.put(RestApiConstants.PARAM_EVENT_ID, String.valueOf(workoutConfig.getEventId()));
+        workoutData.put(RestApiConstants.PARAM_WORKOUT_TYPE, String.valueOf(workoutConfig.getWorkoutType()));
 
         RestApi.getInstance().sendWorkoutResult(workoutData, new Callback<WorkoutResultResponse>() {
             @Override
