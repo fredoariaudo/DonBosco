@@ -98,8 +98,15 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
 
         if(data != null)
         {
-            fabWorkoutHomeBegin.show();
-            workoutConfig = data;
+            if(data.getCode() == 0)
+            {
+                fabWorkoutHomeBegin.show();
+                workoutConfig = data;
+            }
+            else if(data.getMessage() != null)
+            {
+                Snackbar.make(rootView, data.getMessage(), Snackbar.LENGTH_LONG).show();
+            }
         }
 
         if(!AppInfo.connected)
