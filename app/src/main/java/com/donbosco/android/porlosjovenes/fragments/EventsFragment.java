@@ -135,11 +135,12 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
 
             if(eventsResponse != null)
             {
-                if(!user.getActiveEvents().contains(eventsResponse.getSignedEvent()))
-                {
+                user.getActiveEvents().clear();
+
+                if(eventsResponse.getSignedEvent() > 0)
                     user.getActiveEvents().add(eventsResponse.getSignedEvent());
-                    UserSerializer.getInstance().save(getContext(), user);
-                }
+
+                UserSerializer.getInstance().save(getContext(), user);
             }
 
             return eventsResponse;

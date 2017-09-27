@@ -130,8 +130,10 @@ public class EventDetailActivity extends NavUpActivity
     {
         if(signInEventTask == null || !signInEventTask.getStatus().equals(AsyncTask.Status.RUNNING))
         {
+            int message = user.getActiveEvents().size() > 0 ? R.string.want_sing_in_event_already_singed : R.string.want_sing_in_event;
+
             AlertDialog.Builder builder = new AlertDialog.Builder(EventDetailActivity.this);
-            builder.setMessage(R.string.want_sing_in_event);
+            builder.setMessage(message);
             builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i)
@@ -201,6 +203,7 @@ public class EventDetailActivity extends NavUpActivity
 
             if(genericResponse != null && genericResponse.getCode() == 0)
             {
+                user.getActiveEvents().clear();
                 user.getActiveEvents().add(event.getId());
                 UserSerializer.getInstance().save(EventDetailActivity.this, user);
                 fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_black_24dp);
