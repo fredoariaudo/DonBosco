@@ -2,7 +2,6 @@ package com.donbosco.android.porlosjovenes.util;
 
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class ConversionUtils
@@ -16,6 +15,11 @@ public class ConversionUtils
     {
         float valuePerDistance = workoutConfig.getAmountPerDistance() / workoutConfig.getDistance();
         return meterToKm(meters) * valuePerDistance;
+    }
+
+    public static float foundsFromInitialAndDistance(float meters, WorkoutConfig workoutConfig)
+    {
+        return workoutConfig.getInitialAmount() + foundsFromDistance(meters, workoutConfig);
     }
 
     public static String net2JavaDate(String netDate)

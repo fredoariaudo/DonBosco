@@ -335,7 +335,7 @@ public class RunActivity extends AppCompatActivity
         {
             float distance = locationService.distanceCovered();
             setDistanceText(ConversionUtils.meterToKm(distance));
-            setCollectedText(ConversionUtils.foundsFromDistance(distance, workoutConfig));
+            setCollectedText(ConversionUtils.foundsFromInitialAndDistance(distance, workoutConfig));
         }
     }
 
@@ -355,7 +355,7 @@ public class RunActivity extends AppCompatActivity
     private void showFinishAlert()
     {
         float distance = locationService.distanceCovered();
-        float collected = ConversionUtils.foundsFromDistance(distance, workoutConfig);
+        float collected = ConversionUtils.foundsFromInitialAndDistance(distance, workoutConfig);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.finish_run);
@@ -418,7 +418,7 @@ public class RunActivity extends AppCompatActivity
         Workout workout = new Workout();
         workout.setDistance(distance);
         workout.setTime(SystemClock.elapsedRealtime() - crRunTime.getBase());
-        workout.setCollected(ConversionUtils.foundsFromDistance(distance, workoutConfig));
+        workout.setCollected(ConversionUtils.foundsFromInitialAndDistance(distance, workoutConfig));
 
         Intent intent = new Intent(RunActivity.this, WorkoutResultActivity.class);
         intent.putExtra(ExtraKeys.WORKOUT, workout);

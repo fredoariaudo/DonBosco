@@ -26,6 +26,10 @@ public class WorkoutConfig implements Serializable
     private float amountPerDistance;
     @SerializedName("Kms")
     private float distance;
+    @SerializedName("ValorParticipacion")
+    private float initialAmount;
+    @SerializedName("DonarPorKms")
+    private boolean donateByDistance;
     private int workoutType;
 
     public long getSponsorId() {
@@ -82,6 +86,22 @@ public class WorkoutConfig implements Serializable
 
     public void setDistance(float distance) {
         this.distance = distance;
+    }
+
+    public float getInitialAmount() {
+        return initialAmount;
+    }
+
+    public void setInitialAmount(float initialAmount) {
+        this.initialAmount = initialAmount;
+    }
+
+    public boolean isDonateByDistance() {
+        return donateByDistance;
+    }
+
+    public void setDonateByDistance(boolean donateByDistance) {
+        this.donateByDistance = donateByDistance;
     }
 
     public int getWorkoutType() {
