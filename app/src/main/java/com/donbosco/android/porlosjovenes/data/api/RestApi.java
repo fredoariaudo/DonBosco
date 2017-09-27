@@ -111,7 +111,7 @@ public class RestApi
         return genericResponse;
     }
 
-    public WorkoutConfig getWorkoutConfig()
+    public WorkoutConfig getWorkoutConfig(String email)
     {
         WorkoutConfig workoutConfig = null;
 
@@ -119,7 +119,7 @@ public class RestApi
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<WorkoutConfig> workoutConfigCall = apiService.getWorkoutConfig();
+            Call<WorkoutConfig> workoutConfigCall = apiService.getWorkoutConfig(email);
             workoutConfig = workoutConfigCall.execute().body();
         }
         catch(Exception e)

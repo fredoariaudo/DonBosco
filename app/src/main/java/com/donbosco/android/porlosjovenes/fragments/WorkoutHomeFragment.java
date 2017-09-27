@@ -25,7 +25,9 @@ import com.donbosco.android.porlosjovenes.activities.RunActivity;
 import com.donbosco.android.porlosjovenes.adapters.WorkoutTypePagerAdapter;
 import com.donbosco.android.porlosjovenes.application.AppInfo;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
+import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
+import com.donbosco.android.porlosjovenes.model.User;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 
 public class WorkoutHomeFragment extends Fragment implements LoaderManager.LoaderCallbacks<WorkoutConfig>
@@ -156,7 +158,8 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
         @Override
         public WorkoutConfig loadInBackground()
         {
-            return RestApi.getInstance().getWorkoutConfig();
+            User user = UserSerializer.getInstance().load(getContext());
+            return RestApi.getInstance().getWorkoutConfig(user.getEmail());
         }
     }
 }

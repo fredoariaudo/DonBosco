@@ -46,7 +46,7 @@ public interface ApiService
     Call<ArrayList<Initiative>> getInitiatives();
 
     @HTTP(method = "GET", path = "Configuracion/GetConfiguracionIni")
-    Call<WorkoutConfig> getWorkoutConfig();
+    Call<WorkoutConfig> getWorkoutConfig(@Query("pEmail") String email);
 
     @HTTP(method = "POST", path = "Actividad", hasBody = true)
     Call<WorkoutResultResponse> sendWorkoutResult(@Body HashMap<String, String> workoutData);
