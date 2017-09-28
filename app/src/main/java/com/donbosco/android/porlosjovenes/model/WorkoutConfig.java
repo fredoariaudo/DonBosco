@@ -12,9 +12,9 @@ public class WorkoutConfig extends GenericResponse implements Serializable
     public static final int WORKOUT_TYPE_RUN = 1;
     public static final int WORKOUT_TYPE_BIKE = 2;
 
-    @SerializedName("IdSponsor")
+    @SerializedName("IdEmpresa")
     private long sponsorId;
-    @SerializedName("Sponsor")
+    @SerializedName("Empresa")
     private String sponsorName;
     @SerializedName("UrlImagen")
     private String sponsorImage;
