@@ -60,7 +60,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.EventDetailActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/EventDetailTheme"/>
 
         <service android:name=".services.LocationService" />
         <service android:name=".services.PljFirebaseInstanceIdService">
