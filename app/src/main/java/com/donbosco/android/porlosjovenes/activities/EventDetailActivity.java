@@ -92,36 +92,36 @@ public class EventDetailActivity extends NavUpActivity
         //If event is a standard event disable sign in/out fab
         //If event is a exclusive event, verify is user is signed
         //Disable event sign in/out for guests
-        if(event.isStandardEvent())
+        if(user.isGuest())
         {
-            buttonEventDetailSignInOut.setText(R.string.joined);
-            buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, R.color.colorSecondary));
-            buttonEventDetailSignInOut.setClickable(false);
+            buttonEventDetailSignInOut.setVisibility(View.GONE);
         }
         else
         {
-            if(user.isGuest())
+            if(event.isActive() || event.isStandardEvent())
             {
-                buttonEventDetailSignInOut.setVisibility(View.GONE);
+                if (user.getActiveEvents().contains(event.getId())) {
+                    if(event.isStandardEvent())
+                    {
+                        buttonEventDetailSignInOut.setText(R.string.joined);
+                        buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, R.color.colorSecondary));
+                        buttonEventDetailSignInOut.setClickable(false);
+                    } else {
+                        buttonEventDetailSignInOut.setText(R.string.exit);
+                        buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, android.R.color.holo_red_dark));
+                    }
+
+                } else {
+                    buttonEventDetailSignInOut.setText(R.string.join);
+                    buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, R.color.colorSecondary));
+                }
             }
             else
             {
-                if(event.isActive())
-                {
-                    if (user.getActiveEvents().contains(event.getId())) {
-                        buttonEventDetailSignInOut.setText(R.string.exit);
-                        buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, android.R.color.holo_red_dark));
-                    } else {
-                        buttonEventDetailSignInOut.setText(R.string.join);
-                        buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, R.color.colorSecondary));
-                    }
-                }
-                else
-                {
-                    buttonEventDetailSignInOut.setVisibility(View.GONE);
-                }
+                buttonEventDetailSignInOut.setVisibility(View.GONE);
             }
         }
+
     }
 
     private void signInOut()
@@ -212,8 +212,16 @@ public class EventDetailActivity extends NavUpActivity
                 user.getActiveEvents().clear();
                 user.getActiveEvents().add(event.getId());
                 UserSerializer.getInstance().save(EventDetailActivity.this, user);
-                buttonEventDetailSignInOut.setText(R.string.exit);
-                buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, android.R.color.holo_red_dark));
+
+                if(event.isStandardEvent())
+                {
+                    buttonEventDetailSignInOut.setText(R.string.joined);
+                    buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, R.color.colorSecondary));
+                    buttonEventDetailSignInOut.setClickable(false);
+                } else {
+                    buttonEventDetailSignInOut.setText(R.string.exit);
+                    buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, android.R.color.holo_red_dark));
+                }
             }
             else
             {
