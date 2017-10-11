@@ -77,15 +77,7 @@ public class LoginActivity extends AppCompatActivity
                 continueAsGuest();
             }
         });
-
-        FloatingActionButton fabLoginGuest = findViewById(R.id.fab_login_guest);
-        fabLoginGuest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                continueAsGuest();
-            }
-        });
+        
     }
 
     @Override
