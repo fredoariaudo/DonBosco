@@ -1,6 +1,7 @@
 package com.donbosco.android.porlosjovenes.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.fragments.InitiativesFragment;
 import com.donbosco.android.porlosjovenes.fragments.WorkoutHomeFragment;
@@ -100,6 +102,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_profile:
                 openProfile();
                 break;
+
+
+            case R.id.donate_more:
+                donateMore();
+                break;
         }
 
         if(fragment != null)
@@ -123,4 +130,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
+
+    private void donateMore()
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(RestApiConstants.DONATE_MORE_URL));
+        if(intent.resolveActivity(getPackageManager()) != null)
+            startActivity(intent);
+    }
+
 }

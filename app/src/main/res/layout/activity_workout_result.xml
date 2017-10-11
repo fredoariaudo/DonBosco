@@ -73,12 +73,6 @@
                 android:paddingBottom="32dp"
                 style="@style/workout_result_together_collected"/>
 
-            <Button
-                android:id="@+id/btn_workout_result_donate_more"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/donate_more"
-                android:theme="@style/secondary_color_button"/>
 
         </LinearLayout>
 

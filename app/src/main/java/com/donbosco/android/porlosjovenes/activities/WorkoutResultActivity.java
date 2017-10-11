@@ -55,15 +55,6 @@ public class WorkoutResultActivity extends CloseActivity
         tvWorkoutResultDistanceTraveled.setText(getString(R.string.distance_format, ConversionUtils.meterToKm(workout.getDistance())));
         ResourceUtil.setCompoundDrawableLeftDp(this, tvWorkoutResultDistanceTraveled, ContextCompat.getColor(this, R.color.colorPrimary), WorkoutUtils.getWorkoutIcon(workoutConfig.getWorkoutType()), 36);
 
-        Button btnWorkoutResultDonateMore = findViewById(R.id.btn_workout_result_donate_more);
-        btnWorkoutResultDonateMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                donateMore();
-            }
-        });
-
         User user = UserSerializer.getInstance().load(this);
         String token = FirebaseInstanceId.getInstance().getToken();
 
@@ -90,10 +81,4 @@ public class WorkoutResultActivity extends CloseActivity
         });
     }
 
-    private void donateMore()
-    {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(RestApiConstants.DONATE_MORE_URL));
-        if(intent.resolveActivity(getPackageManager()) != null)
-            startActivity(intent);
-    }
 }
