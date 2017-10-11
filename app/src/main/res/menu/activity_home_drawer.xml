@@ -28,7 +28,7 @@
     </group>
 
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none">
         <item
             android:id="@+id/donate_more"
             android:icon="@drawable/ic_favorite_black_24dp"
