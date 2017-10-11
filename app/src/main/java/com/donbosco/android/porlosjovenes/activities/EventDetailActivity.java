@@ -3,11 +3,11 @@ package com.donbosco.android.porlosjovenes.activities;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,7 +31,7 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 public class EventDetailActivity extends NavUpActivity
 {
     private MaterialProgressBar pbEventDetailSignInOut;
-    private FloatingActionButton fabEventDetailSignInOut;
+    private Button buttonEventDetailSignInOut;
 
     private SignInEventTask signInEventTask;
     private SignOutEventTask signOutEventTask;
@@ -53,8 +53,8 @@ public class EventDetailActivity extends NavUpActivity
         ImageView ivEventDetailImage = findViewById(R.id.iv_event_detail_image);
         Glide.with(this).load(event.getImage()).into(ivEventDetailImage);
 
-        fabEventDetailSignInOut = findViewById(R.id.fab_event_detail_sign_in_out);
-        fabEventDetailSignInOut.setOnClickListener(new View.OnClickListener() {
+        buttonEventDetailSignInOut = findViewById(R.id.fab_event_detail_sign_in_out);
+        buttonEventDetailSignInOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
@@ -94,25 +94,31 @@ public class EventDetailActivity extends NavUpActivity
         //Disable event sign in/out for guests
         if(event.isStandardEvent())
         {
-            fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_black_24dp);
-            fabEventDetailSignInOut.setClickable(false);
+            buttonEventDetailSignInOut.setText(R.string.joined);
+            buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, R.color.colorSecondary));
+            buttonEventDetailSignInOut.setClickable(false);
         }
         else
         {
             if(user.isGuest())
             {
-                fabEventDetailSignInOut.setVisibility(View.GONE);
+                buttonEventDetailSignInOut.setVisibility(View.GONE);
             }
             else
             {
                 if(event.isActive())
                 {
-                    if (user.getActiveEvents().contains(event.getId()))
-                        fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_black_24dp);
+                    if (user.getActiveEvents().contains(event.getId())) {
+                        buttonEventDetailSignInOut.setText(R.string.exit);
+                        buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, android.R.color.holo_red_dark));
+                    } else {
+                        buttonEventDetailSignInOut.setText(R.string.join);
+                        buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, R.color.colorSecondary));
+                    }
                 }
                 else
                 {
-                    fabEventDetailSignInOut.setVisibility(View.GONE);
+                    buttonEventDetailSignInOut.setVisibility(View.GONE);
                 }
             }
         }
@@ -206,7 +212,8 @@ public class EventDetailActivity extends NavUpActivity
                 user.getActiveEvents().clear();
                 user.getActiveEvents().add(event.getId());
                 UserSerializer.getInstance().save(EventDetailActivity.this, user);
-                fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_black_24dp);
+                buttonEventDetailSignInOut.setText(R.string.exit);
+                buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, android.R.color.holo_red_dark));
             }
             else
             {
@@ -240,7 +247,8 @@ public class EventDetailActivity extends NavUpActivity
             {
                 user.getActiveEvents().remove(event.getId());
                 UserSerializer.getInstance().save(EventDetailActivity.this, user);
-                fabEventDetailSignInOut.setImageResource(R.drawable.ic_favorite_border_black_18dp);
+                buttonEventDetailSignInOut.setText(R.string.join);
+                buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, R.color.colorSecondary));
             }
             else
             {

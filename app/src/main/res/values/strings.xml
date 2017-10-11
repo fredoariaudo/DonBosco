@@ -65,5 +65,8 @@
     <string name="header_title_initiatives">MOVETE CON EL CORAZÓN, TRANSFORMÁ TUS PASOS EN EDUCACIÓN</string>
     <string name="header_title_events">CADA PASO QUE DAS\nUN JOVEN LO DA CON VOS</string>
     <string name="nav_donate_more">Doná</string>
+    <string name="joined">Inscripto</string>
+    <string name="exit">Salir</string>
+    <string name="join">Inscribir</string>
 
 </resources>

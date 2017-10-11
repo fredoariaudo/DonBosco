@@ -116,14 +116,12 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-    <android.support.design.widget.FloatingActionButton
+    <Button
         android:id="@+id/fab_event_detail_sign_in_out"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_margin"
-        android:src="@drawable/ic_favorite_border_black_18dp"
-        android:tint="@android:color/white"
-        app:layout_anchor="@id/abl_event_detail"
-        app:layout_anchorGravity="bottom|end"/>
+        android:textColor="@android:color/white"
+        android:layout_gravity="bottom"/>
 
 </android.support.design.widget.CoordinatorLayout>
