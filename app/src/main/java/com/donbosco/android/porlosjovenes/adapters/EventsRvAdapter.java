@@ -73,6 +73,6 @@ public class EventsRvAdapter extends ArrayRvAdapter<Event, EventsRvAdapter.Event
             holder.tvEliDate.setVisibility(View.GONE);
             holder.tvEliLocation.setVisibility(View.GONE);
         }
-        Glide.with(holder.ivEliImage.getContext()).load(event.getImage()).into(holder.ivEliImage);
+        Glide.with(holder.ivEliImage.getContext()).load(event.getLogo()).into(holder.ivEliImage);
     }
 }
