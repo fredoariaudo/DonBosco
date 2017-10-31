@@ -32,7 +32,7 @@
     <string name="finish_run">Finalizar actividad</string>
     <string name="want_finish_run">¿Desea finalizar la actividad?</string>
     <string name="want_finish_run_no_internet">¿Desea finalizar la actividad?\nEn este momento no hay conexión a internet. Los datos no serán enviados</string>
-    <string name="want_discard_run">¿Desea descartar la actividad?</string>
+    <string name="want_discard_run">La donación debe ser mayor a cero. ¿Deseas descartar esta actividad?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="donate_more">Donar más</string>
@@ -68,5 +68,8 @@
     <string name="joined">Inscripto</string>
     <string name="exit">Salir</string>
     <string name="join">Inscribir</string>
+    <string name="discard">Descartar</string>
+    <string name="to_continue">Continuar</string>
+    <string name="donation">Donación</string>
 
 </resources>

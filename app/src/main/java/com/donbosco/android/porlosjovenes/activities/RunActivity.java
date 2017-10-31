@@ -358,10 +358,11 @@ public class RunActivity extends AppCompatActivity
         float collected = ConversionUtils.foundsFromInitialAndDistance(distance, workoutConfig);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.finish_run);
+
 
         if(collected > 0)
         {
+            builder.setTitle(R.string.finish_run);
             if(AppInfo.connected)
             {
                 builder.setMessage(R.string.want_finish_run);
@@ -384,20 +385,23 @@ public class RunActivity extends AppCompatActivity
                     }
                 });
             }
+            builder.setNegativeButton(R.string.no, null);
         }
         else
         {
+            builder.setTitle(R.string.donation);
             builder.setMessage(R.string.want_discard_run);
-            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.discard, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i)
                 {
                     discardRun();
                 }
             });
+            builder.setNegativeButton(R.string.to_continue, null);
         }
 
-        builder.setNegativeButton(R.string.no, null);
+
         builder.show();
     }
 
