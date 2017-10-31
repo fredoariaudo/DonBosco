@@ -51,7 +51,7 @@ public class EventDetailActivity extends NavUpActivity
         user = UserSerializer.getInstance().load(this);
 
         ImageView ivEventDetailImage = findViewById(R.id.iv_event_detail_image);
-        Glide.with(this).load(event.getImage()).into(ivEventDetailImage);
+        Glide.with(this).load(event.getImage().replace(" ","%20")).into(ivEventDetailImage);
 
         buttonEventDetailSignInOut = findViewById(R.id.fab_event_detail_sign_in_out);
         buttonEventDetailSignInOut.setOnClickListener(new View.OnClickListener() {
