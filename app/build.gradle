@@ -7,8 +7,8 @@ android {
         applicationId "com.donbosco.android.porlosjovenes"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 4
-        versionName "1.1.1"
+        versionCode 22
+        versionName "1.1.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -98,20 +98,13 @@ public class EventDetailActivity extends NavUpActivity
         {
             if(event.isActive() || event.isStandardEvent())
             {
-                if (event.isStandardEvent() && (user.getActiveEvents().size() == 0 ||  user.getActiveEvents().contains(event.getId()))) {
+                if ((user.getActiveEvents().size() == 0 && event.isStandardEvent()) ||  user.getActiveEvents().contains(event.getId())) {
                     buttonEventDetailSignInOut.setText(R.string.joined);
                     buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, R.color.colorSecondary));
-                    if (event.isStandardEvent()) {
-                        buttonEventDetailSignInOut.setClickable(false);
-                    }
+                    buttonEventDetailSignInOut.setClickable(false);
                 } else {
-                    if (event.isStandardEvent() || !user.getActiveEvents().contains(event.getId())) {
-                        buttonEventDetailSignInOut.setText(R.string.join);
-                        buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, R.color.colorSecondary));
-                    } else {
-                        buttonEventDetailSignInOut.setText(R.string.exit);
-                        buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, android.R.color.holo_red_dark));
-                    }
+                    buttonEventDetailSignInOut.setText(R.string.join);
+                    buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, R.color.colorSecondary));
                 }
             }
             else
@@ -219,8 +212,9 @@ public class EventDetailActivity extends NavUpActivity
                     buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, R.color.colorSecondary));
                     buttonEventDetailSignInOut.setClickable(false);
                 } else {
-                    buttonEventDetailSignInOut.setText(R.string.exit);
-                    buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, android.R.color.holo_red_dark));
+                    buttonEventDetailSignInOut.setText(R.string.joined);
+                    buttonEventDetailSignInOut.setBackgroundColor(ContextCompat.getColor(EventDetailActivity.this, R.color.colorSecondary));
+                    buttonEventDetailSignInOut.setClickable(false);
                 }
             }
             else

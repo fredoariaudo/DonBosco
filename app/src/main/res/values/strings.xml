@@ -62,7 +62,7 @@
     <string name="distance_format">%.03f km</string>
     <string name="founds_collected_format">$ %.02f</string>
 
-    <string name="header_title_initiatives">MOVETE CON EL CORAZÓN, TRANSFORMÁ TUS PASOS EN EDUCACIÓN</string>
+    <string name="header_title_initiatives">TRANSFORMÁ TUS PASOS EN\nEDUCACIÓN</string>
     <string name="header_title_events">TRANSFORMÁ TUS PASOS EN\nEDUCACIÓN</string>
     <string name="nav_donate_more">Doná</string>
     <string name="joined">Inscripto</string>0
