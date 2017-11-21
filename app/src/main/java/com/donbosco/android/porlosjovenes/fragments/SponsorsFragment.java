@@ -87,7 +87,7 @@ public class SponsorsFragment extends Fragment implements LoaderManager.LoaderCa
         Sponsor sponsor = adapter.getItems().get(itemPosition);
         String url = sponsor.getUrl();
 
-        if(!TextUtils.isEmpty(url) && (url.startsWith("http://") || url.startsWith("https://")))
+        if(url != null && !TextUtils.isEmpty(url) && (url.startsWith("http://") || url.startsWith("https://")))
         {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             if(intent.resolveActivity(getContext().getPackageManager()) != null)
