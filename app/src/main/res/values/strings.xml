@@ -71,5 +71,8 @@
     <string name="discard">Descartar</string>
     <string name="to_continue">Continuar</string>
     <string name="donation">Donación</string>
+    <string name="retry">Reintentar</string>
+    <string name="error_initial_config">La calidad de tu conexión no es buena.</string>
+    <string name="error_connection">Verifique su conexión y vuelva a intentarlo</string>
 
 </resources>

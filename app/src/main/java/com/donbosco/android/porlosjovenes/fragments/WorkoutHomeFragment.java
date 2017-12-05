@@ -41,6 +41,8 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
     private FloatingActionButton fabWorkoutHomeBegin;
 
     private WorkoutConfig workoutConfig;
+    private Snackbar snackbarError;
+    private Snackbar snackbarNoConnection;
 
     @Nullable
     @Override
@@ -62,6 +64,7 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
                 startWorkout();
             }
         });
+
 
         return rootView;
     }
@@ -96,6 +99,7 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
     {
         pbWorkoutHome.setVisibility(View.GONE);
 
+
         if(data != null)
         {
             if(data.getCode() == 0)
@@ -103,14 +107,60 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
                 fabWorkoutHomeBegin.show();
                 workoutConfig = data;
             }
-            else if(data.getMessage() != null)
+            else
             {
-                Snackbar.make(rootView, data.getMessage(), Snackbar.LENGTH_LONG).show();
+                if(data.getMessage() != null)
+                {
+                    Snackbar.make(rootView, data.getMessage(), Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.retry, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
+                                    getLoaderManager().restartLoader(WORKOUT_CONFIG_LOADER_ID, null, WorkoutHomeFragment.this);
+                                }
+                            }).show();
+                }
+                else
+                {
+                    Snackbar.make(rootView, R.string.error_initial_config, Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.retry, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
+                                    getLoaderManager().restartLoader(WORKOUT_CONFIG_LOADER_ID, null, WorkoutHomeFragment.this);
+                                }
+                            }).show();
+
+                }
             }
         }
+        else
+        {
+            if (AppInfo.connected)
+            {
+                Snackbar.make(rootView, R.string.error_initial_config, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.retry, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
+                                getLoaderManager().restartLoader(WORKOUT_CONFIG_LOADER_ID, null, WorkoutHomeFragment.this);
+                            }
+                        }).show();
+            }
+            else
+            {
+                Snackbar.make(rootView, R.string.error_connection, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.retry, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
+                                getLoaderManager().restartLoader(WORKOUT_CONFIG_LOADER_ID, null, WorkoutHomeFragment.this);
+                            }
+                        }).show();
+            }
 
-        if(!AppInfo.connected)
-            Snackbar.make(rootView, R.string.api_generic_error, Snackbar.LENGTH_LONG).show();
+
+        }
     }
 
     @Override
