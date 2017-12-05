@@ -1,8 +1,10 @@
 package com.donbosco.android.porlosjovenes.activities;
 
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.components.NavUpActivity;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
