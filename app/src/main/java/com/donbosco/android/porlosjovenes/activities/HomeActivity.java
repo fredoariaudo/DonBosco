@@ -57,7 +57,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         if(savedInstanceState == null)
-            selectNavItem(R.id.nav_events);
+            selectNavItem(R.id.nav_activity);
     }
 
     @Override
