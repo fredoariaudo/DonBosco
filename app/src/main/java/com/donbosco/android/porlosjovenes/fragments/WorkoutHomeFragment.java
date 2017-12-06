@@ -43,6 +43,7 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
     private WorkoutConfig workoutConfig;
     private Snackbar snackbarError;
     private Snackbar snackbarNoConnection;
+    private Snackbar snackbarServerError;
 
     @Nullable
     @Override
@@ -89,6 +90,17 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
     }
 
     @Override
+    public void onDestroy() {
+        if (snackbarError != null)
+            snackbarError.dismiss();
+        if (snackbarNoConnection != null)
+            snackbarNoConnection.dismiss();
+        if (snackbarServerError != null)
+            snackbarServerError.dismiss();
+        super.onDestroy();
+    }
+
+    @Override
     public Loader<WorkoutConfig> onCreateLoader(int id, Bundle args)
     {
         return new WorkoutConfigLoader(getContext(), pbWorkoutHome);
@@ -111,25 +123,27 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
             {
                 if(data.getMessage() != null)
                 {
-                    Snackbar.make(rootView, data.getMessage(), Snackbar.LENGTH_INDEFINITE)
+                    snackbarServerError = Snackbar.make(rootView, data.getMessage(), Snackbar.LENGTH_INDEFINITE)
                             .setAction(R.string.retry, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
                                     getLoaderManager().restartLoader(WORKOUT_CONFIG_LOADER_ID, null, WorkoutHomeFragment.this);
                                 }
-                            }).show();
+                            });
+                    snackbarServerError.show();
                 }
                 else
                 {
-                    Snackbar.make(rootView, R.string.error_initial_config, Snackbar.LENGTH_INDEFINITE)
+                    snackbarError = Snackbar.make(rootView, R.string.error_initial_config, Snackbar.LENGTH_INDEFINITE)
                             .setAction(R.string.retry, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
                                     getLoaderManager().restartLoader(WORKOUT_CONFIG_LOADER_ID, null, WorkoutHomeFragment.this);
                                 }
-                            }).show();
+                            });
+                    snackbarError.show();
 
                 }
             }
@@ -138,25 +152,27 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
         {
             if (AppInfo.connected)
             {
-                Snackbar.make(rootView, R.string.error_initial_config, Snackbar.LENGTH_INDEFINITE)
+                snackbarError = Snackbar.make(rootView, R.string.error_initial_config, Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.retry, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
                                 getLoaderManager().restartLoader(WORKOUT_CONFIG_LOADER_ID, null, WorkoutHomeFragment.this);
                             }
-                        }).show();
+                        });
+                snackbarError.show();
             }
             else
             {
-                Snackbar.make(rootView, R.string.error_connection, Snackbar.LENGTH_INDEFINITE)
+                snackbarNoConnection = Snackbar.make(rootView, R.string.error_connection, Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.retry, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
                                 getLoaderManager().restartLoader(WORKOUT_CONFIG_LOADER_ID, null, WorkoutHomeFragment.this);
                             }
-                        }).show();
+                        });
+                snackbarNoConnection.show();
             }
 
 
