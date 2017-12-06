@@ -13,6 +13,8 @@ public class User implements Serializable
     private String userName;
     @SerializedName("Email")
     private String email;
+    @SerializedName("Code")
+    private int code;
     private String password;
     private boolean guest;
     private ArrayList<Long> activeEvents = new ArrayList<>();
@@ -55,5 +57,13 @@ public class User implements Serializable
 
     public void setActiveEvents(ArrayList<Long> activeEvents) {
         this.activeEvents = activeEvents;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

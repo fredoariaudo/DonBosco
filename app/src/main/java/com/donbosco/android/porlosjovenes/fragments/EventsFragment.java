@@ -38,6 +38,10 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
     private View rootView;
     private ProgressBar pbEvents;
     private EventsRvAdapter adapter;
+    private Snackbar snackbarError;
+    private Snackbar snackbarNoConnection;
+    private Snackbar snackbarServerError;
+
 
     @Nullable
     @Override
@@ -64,6 +68,17 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
     }
 
     @Override
+    public void onDestroy() {
+        if (snackbarError != null)
+            snackbarError.dismiss();
+        if (snackbarNoConnection != null)
+            snackbarNoConnection.dismiss();
+        if (snackbarServerError != null)
+            snackbarServerError.dismiss();
+        super.onDestroy();
+    }
+
+    @Override
     public Loader<EventsResponse> onCreateLoader(int id, Bundle args)
     {
         return new EventsLoader(getContext(), pbEvents);
@@ -79,6 +94,55 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
 
         if(!AppInfo.connected)
             Snackbar.make(rootView, R.string.api_generic_error, Snackbar.LENGTH_LONG).show();
+
+
+
+        if(data != null)
+        {
+            if(data.getEvents() != null)
+            {
+                adapter.setItems(data.getEvents());
+            }
+            else
+            {
+                snackbarNoConnection = Snackbar.make(rootView, R.string.error_connection, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.retry, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                getLoaderManager().restartLoader(EVENTS_LOADER_ID, null, EventsFragment.this);
+                            }
+                        });
+                snackbarNoConnection.show();
+            }
+        }
+        else
+        {
+            if (AppInfo.connected)
+            {
+                snackbarError = Snackbar.make(rootView, R.string.error_initial_config, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.retry, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                getLoaderManager().restartLoader(EVENTS_LOADER_ID, null, EventsFragment.this);
+                            }
+                        });
+                snackbarError.show();
+            }
+            else
+            {
+                snackbarNoConnection = Snackbar.make(rootView, R.string.error_connection, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.retry, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                getLoaderManager().restartLoader(EVENTS_LOADER_ID, null, EventsFragment.this);
+                            }
+                        });
+                snackbarNoConnection.show();
+            }
+
+
+        }
+
     }
 
     @Override
