@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.application.AppInfo;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
@@ -188,7 +189,14 @@ public class LoginActivity extends AppCompatActivity
             else
             {
                 llLoginData.setVisibility(View.VISIBLE);
-                Snackbar.make(findViewById(android.R.id.content), R.string.wrong_email_or_password, Snackbar.LENGTH_SHORT).show();
+                if (AppInfo.connected)
+                {
+                    Snackbar.make(findViewById(android.R.id.content), R.string.wrong_email_or_password, Snackbar.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Snackbar.make(findViewById(android.R.id.content), R.string.error_connection, Snackbar.LENGTH_SHORT).show();
+                }
             }
         }
     }
