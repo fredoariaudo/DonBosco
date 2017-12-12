@@ -182,21 +182,28 @@ public class LoginActivity extends AppCompatActivity
         {
             pbLogin.setVisibility(View.GONE);
 
-            if(user != null)
+            if(user != null && user.getCode() == 0)
             {
                 startHomeActivity();
             }
             else
             {
                 llLoginData.setVisibility(View.VISIBLE);
-                if (AppInfo.connected)
+
+                if(user != null)
                 {
                     Snackbar.make(findViewById(android.R.id.content), R.string.wrong_email_or_password, Snackbar.LENGTH_SHORT).show();
+                } else {
+                    if (AppInfo.connected)
+                    {
+                        Snackbar.make(findViewById(android.R.id.content), R.string.error_initial_config, Snackbar.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Snackbar.make(findViewById(android.R.id.content), R.string.error_connection, Snackbar.LENGTH_SHORT).show();
+                    }
                 }
-                else
-                {
-                    Snackbar.make(findViewById(android.R.id.content), R.string.error_connection, Snackbar.LENGTH_SHORT).show();
-                }
+
             }
         }
     }
