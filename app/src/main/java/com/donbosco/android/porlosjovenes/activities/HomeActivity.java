@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
+import com.donbosco.android.porlosjovenes.fragments.HistoryFragment;
 import com.donbosco.android.porlosjovenes.fragments.InitiativesFragment;
 import com.donbosco.android.porlosjovenes.fragments.WorkoutHomeFragment;
 import com.donbosco.android.porlosjovenes.fragments.EventsFragment;
@@ -103,9 +104,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 openProfile();
                 break;
 
+            case R.id.nav_history:
+                fragment = Fragment.instantiate(this, HistoryFragment.class.getName());
+                break;
+
 
             case R.id.donate_more:
-                donateMore();
+                fragment = Fragment.instantiate(this, InitiativesFragment.class.getName());
                 break;
         }
 

@@ -2,6 +2,7 @@ package com.donbosco.android.porlosjovenes.data.api;
 
 import com.donbosco.android.porlosjovenes.model.EventsResponse;
 import com.donbosco.android.porlosjovenes.model.GenericResponse;
+import com.donbosco.android.porlosjovenes.model.HistoryResponse;
 import com.donbosco.android.porlosjovenes.model.Initiative;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.model.WorkoutResultResponse;
@@ -35,6 +36,10 @@ public interface ApiService
 
     @HTTP(method = "GET", path = "Evento/GetEventosVigentes")
     Call<EventsResponse> getEvents(@Query("pEmail") String email);
+
+
+    @HTTP(method = "GET", path = "Evento/GetEventosVigentes")
+    Call<HistoryResponse> getHistory(@Query("pEmail") String email);
 
     @HTTP(method = "POST", path = "Usuario/AltaEvento", hasBody = true)
     Call<GenericResponse> signInEvent(@Body HashMap<String, String> user, @Query("pIdEvento") long eventId);

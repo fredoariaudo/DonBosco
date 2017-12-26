@@ -74,5 +74,6 @@
     <string name="retry">Reintentar</string>
     <string name="error_initial_config">La calidad de tu conexión no es buena.</string>
     <string name="error_connection">Verifique su conexión y vuelva a intentarlo.</string>
+    <string name="nav_history">Historial</string>
 
 </resources>
