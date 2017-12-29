@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.donbosco.android.porlosjovenes.R;
@@ -41,8 +42,8 @@ public class WorkoutResultActivity extends CloseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_result);
 
-        Workout workout = (Workout) getIntent().getSerializableExtra(ExtraKeys.WORKOUT);
-        WorkoutConfig workoutConfig = (WorkoutConfig) getIntent().getSerializableExtra(ExtraKeys.WORKOUT_CONFIG);
+        final Workout workout = (Workout) getIntent().getSerializableExtra(ExtraKeys.WORKOUT);
+        final WorkoutConfig workoutConfig = (WorkoutConfig) getIntent().getSerializableExtra(ExtraKeys.WORKOUT_CONFIG);
 
         ImageView ivWorkoutResultLogo = findViewById(R.id.iv_workout_result_logo);
         Glide.with(this).load(workoutConfig.getSponsorLogo()).into(ivWorkoutResultLogo);
@@ -57,11 +58,12 @@ public class WorkoutResultActivity extends CloseActivity
         tvWorkoutResultDistanceTraveled.setText(getString(R.string.distance_format, ConversionUtils.meterToKm(workout.getDistance())));
         ResourceUtil.setCompoundDrawableLeftDp(this, tvWorkoutResultDistanceTraveled, ContextCompat.getColor(this, R.color.colorPrimary), WorkoutUtils.getWorkoutIcon(workoutConfig.getWorkoutType()), 36);
 
-        User user = UserSerializer.getInstance().load(this);
+        final User user = UserSerializer.getInstance().load(this);
         String token = FirebaseInstanceId.getInstance().getToken();
 
 
         if(savedInstanceState == null || !savedInstanceState.getBoolean(SAVED)){
+
             HashMap<String, String> workoutData = new HashMap<>();
             workoutData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
             workoutData.put(RestApiConstants.PARAM_DISTANCE,String.valueOf(ConversionUtils.meterToKm(workout.getDistance())));
@@ -81,6 +83,14 @@ public class WorkoutResultActivity extends CloseActivity
                 @Override
                 public void onFailure(Call<WorkoutResultResponse> call, Throwable t)
                 {
+                    workout.setEndLatitude(0);
+                    workout.setEndLongitude(0);
+                    workout.setSponsor(workoutConfig.getSponsorId());
+                    workout.setEmail(user.getEmail());
+                    workout.setType(workoutConfig.getWorkoutType());
+                    workout.setEvent(workoutConfig.getEventId());
+                    workout.save();
+                    Toast.makeText(WorkoutResultActivity.this,R.string.pending_workout,Toast.LENGTH_SHORT).show();
                 }
             });
         }

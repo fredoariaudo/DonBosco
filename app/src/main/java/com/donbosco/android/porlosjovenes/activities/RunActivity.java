@@ -363,28 +363,14 @@ public class RunActivity extends AppCompatActivity
         if(collected > 0)
         {
             builder.setTitle(R.string.finish_run);
-            if(AppInfo.connected)
-            {
-                builder.setMessage(R.string.want_finish_run);
-                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-                        finishRun();
-                    }
-                });
-            }
-            else
-            {
-                builder.setMessage(R.string.want_finish_run_no_internet);
-                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-                        discardRun();
-                    }
-                });
-            }
+            builder.setMessage(R.string.want_finish_run);
+            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+                    finishRun();
+                }
+            });
             builder.setNegativeButton(R.string.no, null);
         }
         else

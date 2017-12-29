@@ -16,6 +16,26 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+
+
+        <service android:name=".services.WorkoutService" />
+
+        <meta-data
+            android:name="DATABASE"
+            android:value="donbosco.db" />
+
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="false" />
+
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.donbosco.android.porlosjovenes.model"/>
+
         <activity
             android:name=".activities.SplashActivity"
             android:screenOrientation="portrait"

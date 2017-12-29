@@ -23,6 +23,7 @@ import com.donbosco.android.porlosjovenes.fragments.WorkoutHomeFragment;
 import com.donbosco.android.porlosjovenes.fragments.EventsFragment;
 import com.donbosco.android.porlosjovenes.fragments.SponsorsFragment;
 import com.donbosco.android.porlosjovenes.model.User;
+import com.donbosco.android.porlosjovenes.services.WorkoutService;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -59,6 +60,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         if(savedInstanceState == null)
             selectNavItem(R.id.nav_activity);
+
+        startService(new Intent(this,WorkoutService.class));
     }
 
     @Override
