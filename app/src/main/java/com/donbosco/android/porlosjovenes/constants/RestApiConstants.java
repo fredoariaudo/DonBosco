@@ -3,9 +3,10 @@ package com.donbosco.android.porlosjovenes.constants;
 public class RestApiConstants
 {
     //Api base URL
-    public static final String API_BASE_URL = "http://demosweb02.grupoprominente.com/DonBoscoWebAPI-v2/api/";
+    //public static final String API_BASE_URL = "http://demosweb02.grupoprominente.com/DonBoscoWebAPI-v2/api/";
     //public static final String API_BASE_URL = "http://172.16.129.80/DonBoscoWebAPI/api/";
-    //public static final String API_BASE_URL = "http://45.40.139.16/1Kporlosjoveneswebapi/api/";
+    public static final String API_BASE_URL = "http://45.40.139.16/1Kporlosjoveneswebapi/api/";
+    //public static final String API_BASE_URL = "http://172.16.129.171/DonBoscoWebAPI/api/";
 
     //Donate more URL
     public static final String DONATE_MORE_URL = "https://porlosjovenes.com/dona/";
@@ -27,4 +28,9 @@ public class RestApiConstants
     //Guest constants
     public static final String GUEST_USER_DEFAULT_USER_NAME = "Invitado";
     public static final String GUEST_USER_DEFAULT_EMAIL = "invitado";
+    public static final String PARAM_PLATFORM = "Plataforma";
+    public static final String PARAM_OS_VERSION = "VersionSO";
+    public static final String PARAM_OS_APP = "VersionApp";
+
+    public static final String ANDROID = "Android";
 }
