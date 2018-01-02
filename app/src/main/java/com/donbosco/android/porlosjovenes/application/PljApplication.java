@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 
 import com.donbosco.android.porlosjovenes.receivers.NetworkStateReceiver;
+import com.orm.SugarContext;
 
 import java.util.Locale;
 
@@ -28,6 +29,13 @@ public class PljApplication extends Application
         Locale.setDefault(locale);
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+
+
+
+        //Initialize Sugar DB
+        SugarContext.init(this);
+
     }
 
 

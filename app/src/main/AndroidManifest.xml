@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.donbosco.android.porlosjovenes">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,10 +11,31 @@
     <application
         android:name=".application.PljApplication"
         android:allowBackup="true"
+        tools:replace="android:icon"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+
+
+        <service android:name=".services.WorkoutService" />
+
+        <meta-data
+            android:name="DATABASE"
+            android:value="donbosco.db" />
+
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="false" />
+
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.donbosco.android.porlosjovenes.model"/>
+
         <activity
             android:name=".activities.SplashActivity"
             android:screenOrientation="portrait"
