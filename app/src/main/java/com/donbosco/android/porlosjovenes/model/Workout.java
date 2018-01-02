@@ -19,6 +19,8 @@ public class Workout extends SugarRecord implements Serializable
     private int type;
     private long event;
     private String email;
+    private int date = 4564564;
+    private float donation = 2.50f;
 
 
     public int getSyncing() {
@@ -107,5 +109,13 @@ public class Workout extends SugarRecord implements Serializable
 
     public void setSynced(int synced) {
         this.synced = synced;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public float getDonation() {
+        return donation;
     }
 }

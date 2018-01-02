@@ -25,6 +25,9 @@ import com.donbosco.android.porlosjovenes.data.api.RestApi;
 import com.donbosco.android.porlosjovenes.model.EventsResponse;
 import com.donbosco.android.porlosjovenes.model.HistoryResponse;
 import com.donbosco.android.porlosjovenes.model.User;
+import com.donbosco.android.porlosjovenes.model.Workout;
+
+import java.util.List;
 
 public class HistoryFragment extends Fragment implements LoaderManager.LoaderCallbacks<HistoryResponse>, RvAdapterListener
 {
@@ -49,9 +52,13 @@ public class HistoryFragment extends Fragment implements LoaderManager.LoaderCal
         RecyclerView rvEvents = rootView.findViewById(R.id.rv_history);
         rvEvents.setLayoutManager(new LinearLayoutManager(getContext()));
         pbEvents = rootView.findViewById(R.id.pb_history);
-        adapter = new HistoryRvAdapter(this);
+
+        adapter = new HistoryRvAdapter<Workout>(getContext(),this);
         rvEvents.setAdapter(adapter);
 
+
+        List<Workout> workouts = Workout.find(Workout.class, "");
+        adapter.setPending(workouts);
         getLoaderManager().initLoader(HISTORY_LOADER_ID, null, this);
 
         return rootView;
@@ -78,7 +85,7 @@ public class HistoryFragment extends Fragment implements LoaderManager.LoaderCal
     public void onLoadFinished(Loader<HistoryResponse> loader, HistoryResponse data)
     {
         if(data != null && data.getEvents() != null)
-            adapter.setItems(data.getEvents());
+            adapter.setSent(data.getEvents());
 
         pbEvents.setVisibility(View.GONE);
 
@@ -91,7 +98,7 @@ public class HistoryFragment extends Fragment implements LoaderManager.LoaderCal
         {
             if(data.getEvents() != null)
             {
-                adapter.setItems(data.getEvents());
+                adapter.setSent(data.getEvents());
             }
             else
             {
@@ -138,7 +145,7 @@ public class HistoryFragment extends Fragment implements LoaderManager.LoaderCal
     @Override
     public void onLoaderReset(Loader<HistoryResponse> loader)
     {
-        adapter.clear();
+
     }
 
     @Override

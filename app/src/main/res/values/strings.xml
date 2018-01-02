@@ -76,5 +76,7 @@
     <string name="error_connection">Verifique su conexión y vuelva a intentarlo.</string>
     <string name="nav_history">Historial</string>
     <string name="pending_workout">Actividad pendiente de envio.</string>
+    <string name="pending_workouts">Actividades pendiente de envio.</string>
+    <string name="sent_workouts">Actividades enviadas.</string>
 
 </resources>
