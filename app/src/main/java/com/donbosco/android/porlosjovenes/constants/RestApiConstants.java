@@ -1,12 +1,14 @@
 package com.donbosco.android.porlosjovenes.constants;
 
+import com.donbosco.android.porlosjovenes.BuildConfig;
+
 public class RestApiConstants
 {
     //Api base URL
     //public static final String API_BASE_URL = "http://demosweb02.grupoprominente.com/DonBoscoWebAPI-v2/api/";
     //public static final String API_BASE_URL = "http://172.16.129.80/DonBoscoWebAPI/api/";
-    public static final String API_BASE_URL = "http://45.40.139.16/1Kporlosjoveneswebapi/api/";
     //public static final String API_BASE_URL = "http://172.16.129.171/DonBoscoWebAPI/api/";
+    public static final String API_BASE_URL = BuildConfig.SERVER_URL;
 
     //Donate more URL
     public static final String DONATE_MORE_URL = "https://porlosjovenes.com/dona/";

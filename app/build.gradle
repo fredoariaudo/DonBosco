@@ -3,24 +3,35 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
+    def code = 33;
+    def name = "1.1.8";
     defaultConfig {
         applicationId "com.donbosco.android.porlosjovenes"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 33
-        versionName "1.1.8"
+        versionCode code
+        versionName name
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "SERVER_URL", '"http://demosweb02.grupoprominente.com/DonBoscoWebAPI-v2/api/"'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "SERVER_URL", '"http://45.40.139.16/1Kporlosjoveneswebapi/api/"'
+        }
+        qa {
+            buildConfigField "String", "SERVER_URL", '"http://45.40.139.16/1Kporlosjoveneswebapi/api/qa/"'
+            signingConfig signingConfigs.debug
+            debuggable true
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
