@@ -9,5 +9,6 @@ public class ExtraKeys
     public final static String WORKOUT_CONFIG = "workoutConfig";
     public final static String EVENT = "event";
     public final static String USER = "user";
+    public static final String WORKOUT_LOCAL_ID = "workoutLocalId";
 }
 

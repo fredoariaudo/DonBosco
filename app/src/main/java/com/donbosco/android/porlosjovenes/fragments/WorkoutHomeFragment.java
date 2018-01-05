@@ -29,6 +29,7 @@ import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
 import com.donbosco.android.porlosjovenes.model.User;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
+import com.donbosco.android.porlosjovenes.util.LocalIdManager;
 
 public class WorkoutHomeFragment extends Fragment implements LoaderManager.LoaderCallbacks<WorkoutConfig>
 {
@@ -193,6 +194,7 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
             workoutConfig.setWorkoutType(selectedWorkout);
             Intent intent = new Intent(getContext(), RunActivity.class);
             intent.putExtra(ExtraKeys.WORKOUT_CONFIG, workoutConfig);
+            intent.putExtra(ExtraKeys.WORKOUT_LOCAL_ID, LocalIdManager.generateNextId());
             startActivity(intent);
         }
         else

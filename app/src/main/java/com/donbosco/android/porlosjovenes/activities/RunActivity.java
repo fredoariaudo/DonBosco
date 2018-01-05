@@ -69,6 +69,8 @@ public class RunActivity extends AppCompatActivity
 
     private WorkoutConfig workoutConfig;
 
+    private int localId;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState)
     {
@@ -86,6 +88,8 @@ public class RunActivity extends AppCompatActivity
             ImageView ivRunWorkoutType = findViewById(R.id.iv_run_workout_type);
             ivRunWorkoutType.setImageResource(WorkoutUtils.getWorkoutIcon(workoutConfig.getWorkoutType()));
         }
+
+        localId = getIntent().getIntExtra(ExtraKeys.WORKOUT_LOCAL_ID,0);
 
         crRunTime = findViewById(R.id.cr_run_time);
 
@@ -420,6 +424,7 @@ public class RunActivity extends AppCompatActivity
         float distance = locationService.distanceCovered();
 
         Workout workout = new Workout();
+        workout.setLocalId(localId);
         workout.setDistance(distance);
         workout.setTime(SystemClock.elapsedRealtime() - crRunTime.getBase());
         workout.setCollected(ConversionUtils.foundsFromInitialAndDistance(distance, workoutConfig));

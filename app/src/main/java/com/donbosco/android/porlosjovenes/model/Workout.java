@@ -9,6 +9,15 @@ public class Workout implements Serializable
     private float distance;
     private long time;
     private float collected;
+    private int localId;
+
+    public int getLocalId() {
+        return localId;
+    }
+
+    public void setLocalId(int localId) {
+        this.localId = localId;
+    }
 
     public float getDistance() {
         return distance;

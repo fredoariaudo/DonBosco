@@ -33,4 +33,5 @@ public class RestApiConstants
     public static final String PARAM_OS_APP = "VersionApp";
 
     public static final String ANDROID = "Android";
+    public static final String PARAM_LOCAL_ID = "IdLocal";
 }

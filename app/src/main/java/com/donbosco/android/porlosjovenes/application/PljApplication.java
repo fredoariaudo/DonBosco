@@ -1,6 +1,7 @@
 package com.donbosco.android.porlosjovenes.application;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
@@ -14,10 +15,15 @@ public class PljApplication extends Application
     private Locale locale;
     private Configuration config;
 
-    @Override
-    public void onCreate()
-    {
+    private static Context context;
+
+    public static Context getAppContext() {
+        return context;
+    }
+
+    public void onCreate() {
         super.onCreate();
+        PljApplication.context = getApplicationContext();
 
         NetworkStateReceiver networkStateReceiver = new NetworkStateReceiver();
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);

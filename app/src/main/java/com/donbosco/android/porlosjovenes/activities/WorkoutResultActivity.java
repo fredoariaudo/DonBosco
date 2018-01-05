@@ -23,6 +23,7 @@ import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.model.WorkoutResultResponse;
 import com.donbosco.android.porlosjovenes.model.User;
 import com.donbosco.android.porlosjovenes.util.ConversionUtils;
+import com.donbosco.android.porlosjovenes.util.LocalIdManager;
 import com.donbosco.android.porlosjovenes.util.ResourceUtil;
 import com.donbosco.android.porlosjovenes.util.WorkoutUtils;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -35,6 +36,10 @@ import retrofit2.Response;
 
 public class WorkoutResultActivity extends CloseActivity
 {
+
+    private static final String SAVED = "SAVED";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -57,33 +62,46 @@ public class WorkoutResultActivity extends CloseActivity
         tvWorkoutResultDistanceTraveled.setText(getString(R.string.distance_format, ConversionUtils.meterToKm(workout.getDistance())));
         ResourceUtil.setCompoundDrawableLeftDp(this, tvWorkoutResultDistanceTraveled, ContextCompat.getColor(this, R.color.colorPrimary), WorkoutUtils.getWorkoutIcon(workoutConfig.getWorkoutType()), 36);
 
-        User user = UserSerializer.getInstance().load(this);
-        String token = FirebaseInstanceId.getInstance().getToken();
 
-        HashMap<String, String> workoutData = new HashMap<>();
-        workoutData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
-        workoutData.put(RestApiConstants.PARAM_DISTANCE, String.valueOf(ConversionUtils.meterToKm(workout.getDistance())));
-        workoutData.put(RestApiConstants.PARAM_END_LAT, String.valueOf(0));
-        workoutData.put(RestApiConstants.PARAM_END_LNG, String.valueOf(0));
-        workoutData.put(RestApiConstants.PARAM_SPONSOR_ID, String.valueOf(workoutConfig.getSponsorId()));
-        workoutData.put(RestApiConstants.PARAM_DEVICE_ID, token);
-        workoutData.put(RestApiConstants.PARAM_EVENT_ID, String.valueOf(workoutConfig.getEventId()));
-        workoutData.put(RestApiConstants.PARAM_WORKOUT_TYPE, String.valueOf(workoutConfig.getWorkoutType()));
-        workoutData.put(RestApiConstants.PARAM_PLATFORM, RestApiConstants.ANDROID);
-        workoutData.put(RestApiConstants.PARAM_OS_VERSION, Build.VERSION.RELEASE);
-        workoutData.put(RestApiConstants.PARAM_OS_APP, BuildConfig.VERSION_NAME);
 
-        RestApi.getInstance().sendWorkoutResult(workoutData, new Callback<WorkoutResultResponse>() {
-            @Override
-            public void onResponse(Call<WorkoutResultResponse> call, Response<WorkoutResultResponse> response)
-            {
-            }
+        if(savedInstanceState == null || !savedInstanceState.getBoolean(SAVED) && LocalIdManager.getLastSent() < workout.getLocalId()) {
 
-            @Override
-            public void onFailure(Call<WorkoutResultResponse> call, Throwable t)
-            {
-            }
-        });
+            LocalIdManager.setLastSent(workout.getLocalId());
+
+            User user = UserSerializer.getInstance().load(this);
+            String token = FirebaseInstanceId.getInstance().getToken();
+
+            HashMap<String, String> workoutData = new HashMap<>();
+            workoutData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
+            workoutData.put(RestApiConstants.PARAM_DISTANCE, String.valueOf(ConversionUtils.meterToKm(workout.getDistance())));
+            workoutData.put(RestApiConstants.PARAM_END_LAT, String.valueOf(0));
+            workoutData.put(RestApiConstants.PARAM_END_LNG, String.valueOf(0));
+            workoutData.put(RestApiConstants.PARAM_SPONSOR_ID, String.valueOf(workoutConfig.getSponsorId()));
+            workoutData.put(RestApiConstants.PARAM_DEVICE_ID, token);
+            workoutData.put(RestApiConstants.PARAM_EVENT_ID, String.valueOf(workoutConfig.getEventId()));
+            workoutData.put(RestApiConstants.PARAM_WORKOUT_TYPE, String.valueOf(workoutConfig.getWorkoutType()));
+            workoutData.put(RestApiConstants.PARAM_PLATFORM, RestApiConstants.ANDROID);
+            workoutData.put(RestApiConstants.PARAM_OS_VERSION, Build.VERSION.RELEASE);
+            workoutData.put(RestApiConstants.PARAM_OS_APP, BuildConfig.VERSION_NAME);
+            workoutData.put(RestApiConstants.PARAM_LOCAL_ID, String.valueOf(workout.getLocalId()));
+
+
+            RestApi.getInstance().sendWorkoutResult(workoutData, new Callback<WorkoutResultResponse>() {
+                @Override
+                public void onResponse(Call<WorkoutResultResponse> call, Response<WorkoutResultResponse> response) {
+                }
+
+                @Override
+                public void onFailure(Call<WorkoutResultResponse> call, Throwable t) {
+                }
+            });
+        }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(SAVED,true);
+    }
 }
