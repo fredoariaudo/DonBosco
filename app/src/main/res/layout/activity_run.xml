@@ -70,13 +70,27 @@
             android:layout_height="wrap_content"
             style="@style/run_values"/>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_run_finish"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_marginTop="@dimen/activity_margin"
-            android:tint="@android:color/white"
-            android:src="@drawable/ic_stop_black_24dp"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="104dp"
+            android:layout_marginTop="@dimen/activity_margin">
+
+            <ProgressBar
+                android:id="@+id/pb_run"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_run_finish"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center"
+                android:tint="@android:color/white"
+                android:src="@drawable/ic_stop_black_24dp"/>
+
+        </FrameLayout>
 
     </LinearLayout>
 

@@ -16,15 +16,15 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/logo_1kplj_blanco"/>
+            android:layout_weight="1"
+            android:src="@drawable/logo_1kplj_blanco" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/login_margin"
             android:layout_marginBottom="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/login_margin"
             android:clipChildren="false"
             android:orientation="vertical">
 
@@ -32,13 +32,13 @@
                 android:id="@+id/vp_workout_home_type"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_marginBottom="@dimen/activity_margin"/>
+                android:layout_marginBottom="@dimen/activity_margin" />
 
             <com.rd.PageIndicatorView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                app:piv_viewPager="@id/vp_workout_home_type"/>
+                app:piv_viewPager="@id/vp_workout_home_type" />
 
         </LinearLayout>
 
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_workout_home_begin"

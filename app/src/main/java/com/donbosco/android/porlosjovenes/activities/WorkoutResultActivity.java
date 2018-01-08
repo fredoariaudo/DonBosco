@@ -57,33 +57,6 @@ public class WorkoutResultActivity extends CloseActivity
         tvWorkoutResultDistanceTraveled.setText(getString(R.string.distance_format, ConversionUtils.meterToKm(workout.getDistance())));
         ResourceUtil.setCompoundDrawableLeftDp(this, tvWorkoutResultDistanceTraveled, ContextCompat.getColor(this, R.color.colorPrimary), WorkoutUtils.getWorkoutIcon(workoutConfig.getWorkoutType()), 36);
 
-        User user = UserSerializer.getInstance().load(this);
-        String token = FirebaseInstanceId.getInstance().getToken();
-
-        HashMap<String, String> workoutData = new HashMap<>();
-        workoutData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
-        workoutData.put(RestApiConstants.PARAM_DISTANCE, String.valueOf(ConversionUtils.meterToKm(workout.getDistance())));
-        workoutData.put(RestApiConstants.PARAM_END_LAT, String.valueOf(0));
-        workoutData.put(RestApiConstants.PARAM_END_LNG, String.valueOf(0));
-        workoutData.put(RestApiConstants.PARAM_SPONSOR_ID, String.valueOf(workoutConfig.getSponsorId()));
-        workoutData.put(RestApiConstants.PARAM_DEVICE_ID, token);
-        workoutData.put(RestApiConstants.PARAM_EVENT_ID, String.valueOf(workoutConfig.getEventId()));
-        workoutData.put(RestApiConstants.PARAM_WORKOUT_TYPE, String.valueOf(workoutConfig.getWorkoutType()));
-        workoutData.put(RestApiConstants.PARAM_PLATFORM, RestApiConstants.ANDROID);
-        workoutData.put(RestApiConstants.PARAM_OS_VERSION, Build.VERSION.RELEASE);
-        workoutData.put(RestApiConstants.PARAM_OS_APP, BuildConfig.VERSION_NAME);
-
-        RestApi.getInstance().sendWorkoutResult(workoutData, new Callback<WorkoutResultResponse>() {
-            @Override
-            public void onResponse(Call<WorkoutResultResponse> call, Response<WorkoutResultResponse> response)
-            {
-            }
-
-            @Override
-            public void onFailure(Call<WorkoutResultResponse> call, Throwable t)
-            {
-            }
-        });
     }
 
 }

@@ -11,6 +11,7 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -29,7 +30,9 @@ import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.donbosco.android.porlosjovenes.BuildConfig;
@@ -37,14 +40,25 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.application.AppInfo;
 import com.donbosco.android.porlosjovenes.components.SmartChronometer;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
+import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
+import com.donbosco.android.porlosjovenes.data.UserSerializer;
+import com.donbosco.android.porlosjovenes.data.api.RestApi;
+import com.donbosco.android.porlosjovenes.model.User;
 import com.donbosco.android.porlosjovenes.model.Workout;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
+import com.donbosco.android.porlosjovenes.model.WorkoutResultResponse;
 import com.donbosco.android.porlosjovenes.services.LocationService;
 import com.donbosco.android.porlosjovenes.util.ConversionUtils;
 import com.donbosco.android.porlosjovenes.util.ResourceUtil;
 import com.donbosco.android.porlosjovenes.util.WorkoutUtils;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RunActivity extends AppCompatActivity
 {
@@ -68,6 +82,7 @@ public class RunActivity extends AppCompatActivity
     private TextView tvRunFoundsCollected;
 
     private WorkoutConfig workoutConfig;
+    private ProgressBar pbRun;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -76,6 +91,7 @@ public class RunActivity extends AppCompatActivity
         setContentView(R.layout.activity_run);
 
         clRunContainer = findViewById(R.id.cl_run_container);
+        pbRun = findViewById(R.id.pb_run);
 
         workoutConfig = (WorkoutConfig) getIntent().getSerializableExtra(ExtraKeys.WORKOUT_CONFIG);
         if(workoutConfig != null)
@@ -419,16 +435,51 @@ public class RunActivity extends AppCompatActivity
 
         float distance = locationService.distanceCovered();
 
-        Workout workout = new Workout();
+        final Workout workout = new Workout();
         workout.setDistance(distance);
         workout.setTime(SystemClock.elapsedRealtime() - crRunTime.getBase());
         workout.setCollected(ConversionUtils.foundsFromInitialAndDistance(distance, workoutConfig));
 
-        Intent intent = new Intent(RunActivity.this, WorkoutResultActivity.class);
-        intent.putExtra(ExtraKeys.WORKOUT, workout);
-        intent.putExtra(ExtraKeys.WORKOUT_CONFIG, workoutConfig);
-        startActivity(intent);
-        finish();
+
+        pbRun.setVisibility(View.VISIBLE);
+        fabRunStartFinish.setVisibility(View.GONE);
+
+        User user = UserSerializer.getInstance().load(this);
+        String token = FirebaseInstanceId.getInstance().getToken();
+        HashMap<String, String> workoutData = new HashMap<>();
+        workoutData.put(RestApiConstants.PARAM_EMAIL, user.getEmail());
+        workoutData.put(RestApiConstants.PARAM_DISTANCE, String.valueOf(ConversionUtils.meterToKm(workout.getDistance())));
+        workoutData.put(RestApiConstants.PARAM_END_LAT, String.valueOf(0));
+        workoutData.put(RestApiConstants.PARAM_END_LNG, String.valueOf(0));
+        workoutData.put(RestApiConstants.PARAM_SPONSOR_ID, String.valueOf(workoutConfig.getSponsorId()));
+        workoutData.put(RestApiConstants.PARAM_DEVICE_ID, token);
+        workoutData.put(RestApiConstants.PARAM_EVENT_ID, String.valueOf(workoutConfig.getEventId()));
+        workoutData.put(RestApiConstants.PARAM_WORKOUT_TYPE, String.valueOf(workoutConfig.getWorkoutType()));
+        workoutData.put(RestApiConstants.PARAM_PLATFORM, RestApiConstants.ANDROID);
+        workoutData.put(RestApiConstants.PARAM_OS_VERSION, Build.VERSION.RELEASE);
+        workoutData.put(RestApiConstants.PARAM_OS_APP, BuildConfig.VERSION_NAME);
+
+        RestApi.getInstance().sendWorkoutResult(workoutData, new Callback<WorkoutResultResponse>() {
+            @Override
+            public void onResponse(Call<WorkoutResultResponse> call, Response<WorkoutResultResponse> response)
+            {
+                Intent intent = new Intent(RunActivity.this, WorkoutResultActivity.class);
+                intent.putExtra(ExtraKeys.WORKOUT, workout);
+                intent.putExtra(ExtraKeys.WORKOUT_CONFIG, workoutConfig);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<WorkoutResultResponse> call, Throwable t)
+            {
+                pbRun.setVisibility(View.GONE);
+                fabRunStartFinish.setVisibility(View.VISIBLE);
+                Toast.makeText(RunActivity.this,R.string.error_connection,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     private static class UIUpdateHandler extends Handler
