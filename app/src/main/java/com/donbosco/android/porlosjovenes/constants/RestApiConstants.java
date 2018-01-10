@@ -3,9 +3,9 @@ package com.donbosco.android.porlosjovenes.constants;
 public class RestApiConstants
 {
     //Api base URL
-    //public static final String API_BASE_URL = "http://demosweb02.grupoprominente.com/DonBoscoWebAPI-v2/api/";
+    public static final String API_BASE_URL = "http://demosweb02.grupoprominente.com/DonBoscoWebAPI-v2/api/";
     //public static final String API_BASE_URL = "http://172.16.129.80/DonBoscoWebAPI/api/";
-    public static final String API_BASE_URL = "http://45.40.139.16/1Kporlosjoveneswebapi/api/";
+    //public static final String API_BASE_URL = "http://45.40.139.16/1Kporlosjoveneswebapi/api/";
     //public static final String API_BASE_URL = "http://172.16.129.171/DonBoscoWebAPI/api/";
 
     //Donate more URL
