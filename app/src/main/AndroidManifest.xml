@@ -19,6 +19,7 @@
 
 
         <service android:name=".services.WorkoutService" />
+        <service android:name=".services.OfflineWorkoutConfigurationService" />
 
         <meta-data
             android:name="DATABASE"

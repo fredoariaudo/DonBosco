@@ -232,7 +232,7 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
         public WorkoutConfig loadInBackground()
         {
             User user = UserSerializer.getInstance().load(getContext());
-            return RestApi.getInstance().getWorkoutConfig(user.getEmail());
+            return RestApi.getInstance().getWorkoutConfig(user.getEmail(),false);
         }
     }
 }

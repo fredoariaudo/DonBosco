@@ -112,7 +112,7 @@ public class RestApi
         return genericResponse;
     }
 
-    public WorkoutConfig getWorkoutConfig(String email)
+    public WorkoutConfig getWorkoutConfig(String email,boolean offline)
     {
         WorkoutConfig workoutConfig = null;
 
@@ -120,7 +120,7 @@ public class RestApi
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<WorkoutConfig> workoutConfigCall = apiService.getWorkoutConfig(email);
+            Call<WorkoutConfig> workoutConfigCall = apiService.getWorkoutConfig(email,offline);
             workoutConfig = workoutConfigCall.execute().body();
         }
         catch(Exception e)
