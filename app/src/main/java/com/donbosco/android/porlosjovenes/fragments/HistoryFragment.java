@@ -84,8 +84,8 @@ public class HistoryFragment extends Fragment implements LoaderManager.LoaderCal
     @Override
     public void onLoadFinished(Loader<HistoryResponse> loader, HistoryResponse data)
     {
-        if(data != null && data.getEvents() != null)
-            adapter.setSent(data.getEvents());
+        if(data != null && data.size() > 0)
+            adapter.setSent(data);
 
         pbEvents.setVisibility(View.GONE);
 
@@ -96,21 +96,7 @@ public class HistoryFragment extends Fragment implements LoaderManager.LoaderCal
 
         if(data != null)
         {
-            if(data.getEvents() != null)
-            {
-                adapter.setSent(data.getEvents());
-            }
-            else
-            {
-                snackbarNoConnection = Snackbar.make(rootView, R.string.error_connection, Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.retry, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                getLoaderManager().restartLoader(HISTORY_LOADER_ID, null, HistoryFragment.this);
-                            }
-                        });
-                snackbarNoConnection.show();
-            }
+            adapter.setSent(data);
         }
         else
         {
@@ -189,17 +175,6 @@ public class HistoryFragment extends Fragment implements LoaderManager.LoaderCal
         {
             User user = UserSerializer.getInstance().load(getContext());
             HistoryResponse historyResponse = RestApi.getInstance().getHistory(user.getEmail());
-
-            if(historyResponse != null)
-            {
-                user.getActiveEvents().clear();
-
-                if(historyResponse.getSignedEvent() > 0)
-                    user.getActiveEvents().add(historyResponse.getSignedEvent());
-
-                UserSerializer.getInstance().save(getContext(), user);
-            }
-
             return historyResponse;
         }
 

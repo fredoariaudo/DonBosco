@@ -37,9 +37,8 @@ public interface ApiService
     @HTTP(method = "GET", path = "Evento/GetEventosVigentes")
     Call<EventsResponse> getEvents(@Query("pEmail") String email);
 
-
-    @HTTP(method = "GET", path = "Evento/GetEventosVigentes")
-    Call<HistoryResponse> getHistory(@Query("pEmail") String email);
+    @HTTP(method = "GET", path = "Actividad/GetByEmail")
+    Call<HistoryResponse> getHistory(@Query("Email") String email);
 
     @HTTP(method = "POST", path = "Usuario/AltaEvento", hasBody = true)
     Call<GenericResponse> signInEvent(@Body HashMap<String, String> user, @Query("pIdEvento") long eventId);

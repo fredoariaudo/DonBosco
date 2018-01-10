@@ -1,5 +1,6 @@
 package com.donbosco.android.porlosjovenes.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 
 import java.io.Serializable;
@@ -8,19 +9,24 @@ public class Workout extends SugarRecord implements Serializable
 {
     private static final long serialVersionUID = 1951151032906319932L;
 
+
+    @SerializedName("KmsDistancia")
     private float distance;
     private long time;
+    @SerializedName("MontoRecaudado")
     private float collected;
     private int synced;
     private int syncing;
     private float endLatitude;
     private float endLongitude;
     private long sponsor;
+    @SerializedName("TipoActividad")
     private int type;
     private long event;
     private String email;
+    @SerializedName("Fecha")
+    private String serverDate;
     private int date = 4564564;
-    private float donation = 2.50f;
 
 
     public int getSyncing() {
@@ -115,7 +121,11 @@ public class Workout extends SugarRecord implements Serializable
         return date;
     }
 
-    public float getDonation() {
-        return donation;
+    public String getServerDate() {
+        return serverDate;
+    }
+
+    public void setServerDate(String serverDate) {
+        this.serverDate = serverDate;
     }
 }

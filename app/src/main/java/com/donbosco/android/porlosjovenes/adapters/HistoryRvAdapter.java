@@ -13,6 +13,7 @@ import com.donbosco.android.porlosjovenes.R;
 import com.donbosco.android.porlosjovenes.model.Event;
 import com.donbosco.android.porlosjovenes.model.Workout;
 import com.donbosco.android.porlosjovenes.util.ConversionUtils;
+import com.donbosco.android.porlosjovenes.util.WorkoutUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,10 @@ public class HistoryRvAdapter<T> extends SectionedRecyclerViewAdapter<SectionedV
     private RvAdapterListener rvAdapterListener;
     private ArrayList<T> items;
     private List<Workout> pending;
-    private List<Event> sent;
+    private List<Workout> sent;
     private Context context;
 
-    public void setSent(ArrayList<Event> sent) {
+    public void setSent(ArrayList<Workout> sent) {
         this.sent = sent;
         notifyDataSetChanged();
     }
@@ -42,6 +43,7 @@ public class HistoryRvAdapter<T> extends SectionedRecyclerViewAdapter<SectionedV
         TextView tvHliDistance;
         TextView tvHliDate;
         TextView tvHliDonation;
+        ImageView ivHliImage;
 
         public HitoryViewHolder(View itemView, RvAdapterListener rvAdapterListener)
         {
@@ -53,6 +55,7 @@ public class HistoryRvAdapter<T> extends SectionedRecyclerViewAdapter<SectionedV
             tvHliDate = itemView.findViewById(R.id.tv_hli_date);
             tvHliDonation = itemView.findViewById(R.id.tv_hli_dontation);
             tvHliDistance = itemView.findViewById(R.id.tv_hli_distance);
+            ivHliImage = itemView.findViewById(R.id.iv_hli_image);
         }
 
         @Override
@@ -137,17 +140,23 @@ public class HistoryRvAdapter<T> extends SectionedRecyclerViewAdapter<SectionedV
     public void onBindViewHolder(SectionedViewHolder holder, int section, int relativePosition, int absolutePosition) {
 
         HitoryViewHolder history = (HitoryViewHolder) holder;
-        TextView distance = history.itemView.findViewById(R.id.tv_hli_distance);
+        Workout workout = null;
         if (section == 0)
         {
-            history.tvHliDistance.setText(context.getString(R.string.distance_format, ConversionUtils.meterToKm(pending.get(relativePosition).getDistance())));
-            history.tvHliDate.setText(pending.get(relativePosition).getDate() + "");
-            history.tvHliDonation.setText(context.getString(R.string.founds_collected_format,pending.get(relativePosition).getDonation()));
+            workout = pending.get(relativePosition);
+            history.tvHliDate.setText(workout.getDate() + "");
         }
         else
         {
-            history.tvHliDistance.setText(sent.get(relativePosition).getDescription());
+            workout = sent.get(relativePosition);
+            history.tvHliDate.setText(workout.getServerDate());
+
         }
+
+
+        history.tvHliDistance.setText(context.getString(R.string.distance_format, ConversionUtils.meterToKm(workout.getDistance())));
+        history.tvHliDonation.setText(context.getString(R.string.founds_collected_format,workout.getCollected()));
+        history.ivHliImage.setImageResource(WorkoutUtils.getWorkoutIcon(workout.getType()));
     }
 
 
