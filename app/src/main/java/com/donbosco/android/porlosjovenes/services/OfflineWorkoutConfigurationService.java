@@ -66,14 +66,20 @@ public class OfflineWorkoutConfigurationService extends Service {
         }
     }
 
-    private void downloadOfflineWorkoutConfiguration(String email)
+    private void downloadOfflineWorkoutConfiguration(final String email)
     {
-        WorkoutConfig workoutConfig = RestApi.getInstance().getWorkoutConfig(email, true);
-        //Send broadcast to tell masters are updated
-        Intent broadcastIntent = new Intent();
-        broadcastIntent.putExtra(ExtraKeys.WORKOUT_CONFIG,workoutConfig);
-        broadcastIntent.setAction(IntentActions.ACTION_OFFLINE_CONFIGUARION_WORKOUT);
-        sendBroadcast(broadcastIntent);
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                WorkoutConfig workoutConfig = RestApi.getInstance().getWorkoutConfig(email, true);
+                //Send broadcast to tell masters are updated
+                Intent broadcastIntent = new Intent();
+                broadcastIntent.putExtra(ExtraKeys.WORKOUT_CONFIG,workoutConfig);
+                broadcastIntent.setAction(IntentActions.ACTION_OFFLINE_CONFIGUARION_WORKOUT);
+                sendBroadcast(broadcastIntent);
+            }
+        });
+
     }
 
 }
