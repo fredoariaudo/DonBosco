@@ -27,6 +27,7 @@ import com.donbosco.android.porlosjovenes.application.AppInfo;
 import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
 import com.donbosco.android.porlosjovenes.data.api.RestApi;
+import com.donbosco.android.porlosjovenes.data.api.WorkoutConfigurationSerializer;
 import com.donbosco.android.porlosjovenes.model.User;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 
@@ -112,28 +113,22 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
         pbWorkoutHome.setVisibility(View.GONE);
 
 
-        if(data != null)
+        if(data != null && data.getCode() == 0)
         {
-            if(data.getCode() == 0)
+            fabWorkoutHomeBegin.show();
+            workoutConfig = data;
+        }
+        else
+        {
+            WorkoutConfig offileWorkoutConfig = WorkoutConfigurationSerializer.getInstance().load(getContext());
+            if (offileWorkoutConfig != null)
             {
                 fabWorkoutHomeBegin.show();
-                workoutConfig = data;
+                workoutConfig = offileWorkoutConfig;
             }
             else
             {
-                if(data.getMessage() != null)
-                {
-                    snackbarServerError = Snackbar.make(rootView, data.getMessage(), Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.retry, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
-                                    getLoaderManager().restartLoader(WORKOUT_CONFIG_LOADER_ID, null, WorkoutHomeFragment.this);
-                                }
-                            });
-                    snackbarServerError.show();
-                }
-                else
+                if (AppInfo.connected)
                 {
                     snackbarError = Snackbar.make(rootView, R.string.error_initial_config, Snackbar.LENGTH_INDEFINITE)
                             .setAction(R.string.retry, new View.OnClickListener() {
@@ -144,37 +139,20 @@ public class WorkoutHomeFragment extends Fragment implements LoaderManager.Loade
                                 }
                             });
                     snackbarError.show();
-
+                }
+                else
+                {
+                    snackbarNoConnection = Snackbar.make(rootView, R.string.error_connection, Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.retry, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
+                                    getLoaderManager().restartLoader(WORKOUT_CONFIG_LOADER_ID, null, WorkoutHomeFragment.this);
+                                }
+                            });
+                    snackbarNoConnection.show();
                 }
             }
-        }
-        else
-        {
-            if (AppInfo.connected)
-            {
-                snackbarError = Snackbar.make(rootView, R.string.error_initial_config, Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.retry, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
-                                getLoaderManager().restartLoader(WORKOUT_CONFIG_LOADER_ID, null, WorkoutHomeFragment.this);
-                            }
-                        });
-                snackbarError.show();
-            }
-            else
-            {
-                snackbarNoConnection = Snackbar.make(rootView, R.string.error_connection, Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.retry, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                fabWorkoutHomeBegin.setVisibility(View.INVISIBLE);
-                                getLoaderManager().restartLoader(WORKOUT_CONFIG_LOADER_ID, null, WorkoutHomeFragment.this);
-                            }
-                        });
-                snackbarNoConnection.show();
-            }
-
 
         }
     }
