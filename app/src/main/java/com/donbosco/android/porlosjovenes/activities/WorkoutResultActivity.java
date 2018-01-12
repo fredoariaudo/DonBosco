@@ -1,14 +1,11 @@
 package com.donbosco.android.porlosjovenes.activities;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.donbosco.android.porlosjovenes.BuildConfig;
@@ -35,14 +32,18 @@ import retrofit2.Response;
 
 public class WorkoutResultActivity extends CloseActivity
 {
+
+    private static final String SAVED = "SAVED";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_result);
 
-        Workout workout = (Workout) getIntent().getSerializableExtra(ExtraKeys.WORKOUT);
-        WorkoutConfig workoutConfig = (WorkoutConfig) getIntent().getSerializableExtra(ExtraKeys.WORKOUT_CONFIG);
+        final Workout workout = (Workout) getIntent().getSerializableExtra(ExtraKeys.WORKOUT);
+        final WorkoutConfig workoutConfig = (WorkoutConfig) getIntent().getSerializableExtra(ExtraKeys.WORKOUT_CONFIG);
 
         ImageView ivWorkoutResultLogo = findViewById(R.id.iv_workout_result_logo);
         Glide.with(this).load(workoutConfig.getSponsorLogo()).into(ivWorkoutResultLogo);
@@ -58,5 +59,7 @@ public class WorkoutResultActivity extends CloseActivity
         ResourceUtil.setCompoundDrawableLeftDp(this, tvWorkoutResultDistanceTraveled, ContextCompat.getColor(this, R.color.colorPrimary), WorkoutUtils.getWorkoutIcon(workoutConfig.getWorkoutType()), 36);
 
     }
+
+
 
 }

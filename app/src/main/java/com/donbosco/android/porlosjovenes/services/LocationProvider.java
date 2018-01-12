@@ -26,7 +26,7 @@ public class LocationProvider implements GoogleApiClient.ConnectionCallbacks, Go
     public static final String TAG = LocationProvider.class.getSimpleName();
 
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-    private final static int MIN_ACCURACY = 20;
+    private final static int MIN_ACCURACY = 200;
 
     public interface LocationCallback
     {

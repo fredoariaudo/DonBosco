@@ -3,6 +3,7 @@ package com.donbosco.android.porlosjovenes.data.api;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.model.EventsResponse;
 import com.donbosco.android.porlosjovenes.model.GenericResponse;
+import com.donbosco.android.porlosjovenes.model.HistoryResponse;
 import com.donbosco.android.porlosjovenes.model.Initiative;
 import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
 import com.donbosco.android.porlosjovenes.model.WorkoutResultResponse;
@@ -111,7 +112,7 @@ public class RestApi
         return genericResponse;
     }
 
-    public WorkoutConfig getWorkoutConfig(String email)
+    public WorkoutConfig getWorkoutConfig(String email,boolean offline)
     {
         WorkoutConfig workoutConfig = null;
 
@@ -119,7 +120,7 @@ public class RestApi
         {
             Retrofit retrofit = buildRetrofit();
             ApiService apiService = retrofit.create(ApiService.class);
-            Call<WorkoutConfig> workoutConfigCall = apiService.getWorkoutConfig(email);
+            Call<WorkoutConfig> workoutConfigCall = apiService.getWorkoutConfig(email,offline);
             workoutConfig = workoutConfigCall.execute().body();
         }
         catch(Exception e)
@@ -185,6 +186,25 @@ public class RestApi
         }
 
         return eventsResponse;
+    }
+
+    public HistoryResponse getHistory(String email)
+    {
+        HistoryResponse historyResponse = null;
+
+        try
+        {
+            Retrofit retrofit = buildRetrofit();
+            ApiService apiService = retrofit.create(ApiService.class);
+            Call<HistoryResponse> eventsCall = apiService.getHistory(email);
+            historyResponse = eventsCall.execute().body();
+        }
+        catch(Exception e)
+        {
+
+        }
+
+        return historyResponse;
     }
 
     public GenericResponse signInEvent(HashMap<String, String> user, long eventId)

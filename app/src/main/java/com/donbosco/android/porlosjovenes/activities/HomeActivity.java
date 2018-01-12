@@ -1,6 +1,9 @@
 package com.donbosco.android.porlosjovenes.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -15,17 +18,27 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.donbosco.android.porlosjovenes.R;
+import com.donbosco.android.porlosjovenes.constants.ExtraKeys;
+import com.donbosco.android.porlosjovenes.constants.IntentActions;
 import com.donbosco.android.porlosjovenes.constants.RestApiConstants;
 import com.donbosco.android.porlosjovenes.data.UserSerializer;
+import com.donbosco.android.porlosjovenes.data.api.WorkoutConfigurationSerializer;
+import com.donbosco.android.porlosjovenes.fragments.HistoryFragment;
 import com.donbosco.android.porlosjovenes.fragments.InitiativesFragment;
 import com.donbosco.android.porlosjovenes.fragments.WorkoutHomeFragment;
 import com.donbosco.android.porlosjovenes.fragments.EventsFragment;
 import com.donbosco.android.porlosjovenes.fragments.SponsorsFragment;
 import com.donbosco.android.porlosjovenes.model.User;
+import com.donbosco.android.porlosjovenes.model.WorkoutConfig;
+import com.donbosco.android.porlosjovenes.services.OfflineWorkoutConfigurationService;
+import com.donbosco.android.porlosjovenes.services.WorkoutService;
+
+import java.io.Serializable;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     private NavigationView navigationView;
+    private BroadcastReceiver offlineWorkoutConfigurationServiceReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -58,6 +71,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         if(savedInstanceState == null)
             selectNavItem(R.id.nav_activity);
+
+        startService(new Intent(this,WorkoutService.class));
+        Intent offlineWorkoutConfigurationServiceIntent = new Intent(this,OfflineWorkoutConfigurationService.class);
+        offlineWorkoutConfigurationServiceIntent.putExtra(ExtraKeys.EMAIL,user.getEmail());
+        startService(offlineWorkoutConfigurationServiceIntent);
+
+
+        offlineWorkoutConfigurationServiceReceiver= new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent)
+            {
+                WorkoutConfig workoutConfig = (WorkoutConfig) intent.getSerializableExtra(ExtraKeys.WORKOUT_CONFIG);
+                WorkoutConfigurationSerializer.getInstance().save(HomeActivity.this,workoutConfig);
+            }
+        };
+        registerReceiver(offlineWorkoutConfigurationServiceReceiver, new IntentFilter(IntentActions.ACTION_OFFLINE_CONFIGUARION_WORKOUT));
     }
 
     @Override
@@ -103,9 +132,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 openProfile();
                 break;
 
+            case R.id.nav_history:
+                fragment = Fragment.instantiate(this, HistoryFragment.class.getName());
+                break;
+
 
             case R.id.donate_more:
-                donateMore();
+                fragment = Fragment.instantiate(this, InitiativesFragment.class.getName());
                 break;
         }
 

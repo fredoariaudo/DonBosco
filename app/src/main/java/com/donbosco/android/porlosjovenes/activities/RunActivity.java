@@ -379,28 +379,14 @@ public class RunActivity extends AppCompatActivity
         if(collected > 0)
         {
             builder.setTitle(R.string.finish_run);
-            if(AppInfo.connected)
-            {
-                builder.setMessage(R.string.want_finish_run);
-                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-                        finishRun();
-                    }
-                });
-            }
-            else
-            {
-                builder.setMessage(R.string.want_finish_run_no_internet);
-                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-                        discardRun();
-                    }
-                });
-            }
+            builder.setMessage(R.string.want_finish_run);
+            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
+                    finishRun();
+                }
+            });
             builder.setNegativeButton(R.string.no, null);
         }
         else
@@ -473,9 +459,20 @@ public class RunActivity extends AppCompatActivity
             @Override
             public void onFailure(Call<WorkoutResultResponse> call, Throwable t)
             {
+
+                User user = UserSerializer.getInstance().load(RunActivity.this);
+
+                workout.setEndLatitude(0);
+                workout.setEndLongitude(0);
+                workout.setSponsor(workoutConfig.getSponsorId());
+                workout.setEmail(user.getEmail());
+                workout.setType(workoutConfig.getWorkoutType());
+                workout.setEvent(workoutConfig.getEventId());
+                workout.save();
+                Toast.makeText(RunActivity.this,R.string.pending_workout,Toast.LENGTH_SHORT).show();
+
                 pbRun.setVisibility(View.GONE);
                 fabRunStartFinish.setVisibility(View.VISIBLE);
-                Toast.makeText(RunActivity.this,R.string.error_connection,Toast.LENGTH_SHORT).show();
             }
         });
 
